@@ -38,6 +38,10 @@ public class Utility {
 		return isValid;
 	}
 
+	public static void log(String message,Logger logger) {
+		logger.info(message);
+		System.out.println(message);
+	}
 	
 
 }

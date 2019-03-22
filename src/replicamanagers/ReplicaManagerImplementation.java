@@ -27,6 +27,7 @@ import models.ItemModel;
 import models.ServerType;
 import models.UserModel;
 import utilities.ApplicationConstant;
+import utilities.Utility;
 
 /**
  * @author Rohit Gupta
@@ -49,7 +50,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 		userHashMap = new HashMap<>();
 		waitList = new HashMap<>();
 		currentServer = serverType;
-		log("Starting " + serverType + " server.");
+		Utility.log("Starting " + serverType + " server.", logger);
 		dataSet(currentServer);
 	}
 
@@ -63,7 +64,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 	public synchronized boolean addItem(String managerId, String itemId, String itemName, int quantity) {
 		// TODO Auto-generated method stub
 		boolean isItemAdded = false;
-		log("Accessing Add Item. ");
+		Utility.log("Accessing Add Item. ", logger);
 		ItemModel itemModel = new ItemModel(itemId, itemName, quantity);
 		UserModel userModel = userHashMap.get(managerId);
 		if (userModel != null)
@@ -81,10 +82,10 @@ public class ReplicaManagerImplementation implements RMInterface {
 	public synchronized boolean removeItem(String managerId, String itemId, int quantity) {
 		// TODO Auto-generated method stub
 		boolean isRemoved = false;
-		log("Accessing Remove Item.");
+		Utility.log("Accessing Remove Item.", logger);
 		UserModel userModel = userHashMap.get(managerId);
 		if (quantity < 0) {
-			log("Quantity is less than zero.");
+			Utility.log("Quantity is less than zero.", logger);
 			if (itemHashMap.containsKey(itemId)) {
 				ItemModel itemModel = itemHashMap.remove(itemId);
 				for (String key : userHashMap.keySet()) {
@@ -92,23 +93,23 @@ public class ReplicaManagerImplementation implements RMInterface {
 					userModel1.removeItem(itemModel.getItemId());
 					userHashMap.put(userModel1.getUserId(), userModel1);
 				}
-				log("Item has been removed successfully !!");
+				Utility.log("Item has been removed successfully !!", logger);
 				isRemoved = true;
 			}
 		} else {
-			log("Quantity is greater than zero.");
+			Utility.log("Quantity is greater than zero.", logger);
 			if (itemHashMap.containsKey(itemId)) {
 				ItemModel itemModel = itemHashMap.get(itemId);
 				int oldQuantity = itemModel.getQuantity();
 				if (oldQuantity < quantity) {
-					log("Item quantity cannot be reduced.");
+					Utility.log("Item quantity cannot be reduced.", logger);
 					return false;
 				} else {
-					log("Old quantity of the item: " + oldQuantity);
-					log("Quantity to be reduce : " + quantity);
+					Utility.log("Old quantity of the item: " + oldQuantity, logger);
+					Utility.log("Quantity to be reduce : " + quantity, logger);
 					int value = oldQuantity - quantity;
 					itemModel.setQuantity(value);
-					log("Item quantity has been reduced to : " + value);
+					Utility.log("Item quantity has been reduced to : " + value, logger);
 					isRemoved = true;
 				}
 			}
@@ -186,7 +187,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 					replyMessage = sendUDPRequest(ApplicationConstant.UDP_CONCORDIA_PORT,
 							"Borrow" + "," + userId + "," + itemId + "," + noOfDays + "," + true);
 				} else if (itemValue.equalsIgnoreCase(ApplicationConstant.MACGILL_SERVER)) {
-					replyMessage = sendUDPRequest(ApplicationConstant.UDP_MACGILL_PORT,
+					replyMessage = sendUDPRequest(ApplicationConstant.UDP_MCGILL_PORT,
 							"Borrow" + "," + userId + "," + itemId + "," + noOfDays + "," + true);
 				} else {
 					replyMessage = sendUDPRequest(ApplicationConstant.UDP_MONTREAL_PORT,
@@ -223,7 +224,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 		}
 		// Make UDP Request to both the servers.
 		if (currentServer == ServerType.CONCORDIA) {
-			String reply1 = sendUDPRequest(ApplicationConstant.UDP_MACGILL_PORT,
+			String reply1 = sendUDPRequest(ApplicationConstant.UDP_MCGILL_PORT,
 					"Find Item" + "," + userId + "," + itemName).trim();
 			itemModels.addAll(fetchItemsFromReply(reply1));
 			String reply2 = sendUDPRequest(ApplicationConstant.UDP_MONTREAL_PORT,
@@ -240,7 +241,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 			String reply5 = sendUDPRequest(ApplicationConstant.UDP_CONCORDIA_PORT,
 					"Find Item" + "," + userId + "," + itemName).trim();
 			itemModels.addAll(fetchItemsFromReply(reply5));
-			String reply6 = sendUDPRequest(ApplicationConstant.UDP_MACGILL_PORT,
+			String reply6 = sendUDPRequest(ApplicationConstant.UDP_MCGILL_PORT,
 					"Find Item" + "," + userId + "," + itemName).trim();
 			itemModels.addAll(fetchItemsFromReply(reply6));
 		}
@@ -267,7 +268,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 					reply = sendUDPRequest(ApplicationConstant.UDP_CONCORDIA_PORT,
 							"Return Item" + "," + userId + "," + itemId).trim();
 				} else if (str.equalsIgnoreCase("MCG")) {
-					reply = sendUDPRequest(ApplicationConstant.UDP_MACGILL_PORT,
+					reply = sendUDPRequest(ApplicationConstant.UDP_MCGILL_PORT,
 							"Return Item" + "," + userId + "," + itemId).trim();
 				} else
 					reply = sendUDPRequest(ApplicationConstant.UDP_MONTREAL_PORT,
@@ -323,7 +324,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 					replyMessage = sendUDPRequest(ApplicationConstant.UDP_CONCORDIA_PORT,
 							"Borrow" + "," + userId + "," + newItemId + "," + noOfDays + "," + false);
 				} else if (newItemValue.equalsIgnoreCase(ApplicationConstant.MACGILL_SERVER)) {
-					replyMessage = sendUDPRequest(ApplicationConstant.UDP_MACGILL_PORT,
+					replyMessage = sendUDPRequest(ApplicationConstant.UDP_MCGILL_PORT,
 							"Borrow" + "," + userId + "," + newItemId + "," + noOfDays + "," + false);
 				} else {
 					replyMessage = sendUDPRequest(ApplicationConstant.UDP_MONTREAL_PORT,
@@ -404,7 +405,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 							replyMessage = sendUDPRequest(ApplicationConstant.UDP_CONCORDIA_PORT,
 									"Assign" + "," + userId + "," + itemId + "," + 5);
 						} else if (userValue.equalsIgnoreCase(ApplicationConstant.MACGILL_SERVER)) {
-							replyMessage = sendUDPRequest(ApplicationConstant.UDP_MACGILL_PORT,
+							replyMessage = sendUDPRequest(ApplicationConstant.UDP_MCGILL_PORT,
 									"Assign" + "," + userId + "," + itemId + "," + 5);
 						} else {
 							replyMessage = sendUDPRequest(ApplicationConstant.UDP_MONTREAL_PORT,
@@ -427,11 +428,11 @@ public class ReplicaManagerImplementation implements RMInterface {
 	private synchronized boolean addItemToHashMap(ItemModel itemModel) {
 		boolean isAdded = false;
 		if (itemHashMap.containsKey(itemModel.getItemId())) {
-			log("Item already present in concordia hash map.");
+			Utility.log("Item already present in concordia hash map.", logger);
 			ItemModel itemModel1 = itemHashMap.get(itemModel.getItemId());
-			log("Previous Quantity: " + itemModel1.getQuantity());
+			Utility.log("Previous Quantity: " + itemModel1.getQuantity(), logger);
 			itemModel1.setQuantity(itemModel1.getQuantity() + itemModel.getQuantity());
-			log("Final Quantity: " + itemModel1.getQuantity());
+			Utility.log("Final Quantity: " + itemModel1.getQuantity(), logger);
 			boolean isAssigned = assignItemToWaitListUser(itemModel1);
 			if (isAssigned) {
 				int quantityValue = itemModel1.getQuantity() - 1;
@@ -441,14 +442,14 @@ public class ReplicaManagerImplementation implements RMInterface {
 			isAdded = true;
 		} else {
 			itemHashMap.put(itemModel.getItemId(), itemModel);
-			log("Item successfully added to concordia hashmap.");
+			Utility.log("Item successfully added to concordia hashmap.", logger);
 			isAdded = true;
 		}
 		return isAdded;
 	}
 
 	private synchronized void dataSet(ServerType serverType) {
-		log("Accessing the Data Set");
+		Utility.log("Accessing the Data Set", logger);
 		switch (serverType) {
 		case CONCORDIA:
 			ItemModel itemModel = new ItemModel("CON1011", "ITEM 11", 10);
@@ -507,8 +508,8 @@ public class ReplicaManagerImplementation implements RMInterface {
 	}
 
 	private synchronized String sendUDPRequest(int serverPort, String requestMessage) {
-		log("Accessing UDP Request");
-		log("Requesting Port " + serverPort + " message: " + requestMessage);
+		Utility.log("Accessing UDP Request", logger);
+		Utility.log("Requesting Port " + serverPort + " message: " + requestMessage, logger);
 		DatagramSocket aSocket = null;
 		String messageReceived = null;
 		try {
@@ -520,7 +521,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 			byte[] buffer = new byte[1000];
 			DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
 			aSocket.receive(reply);
-			log("Received reply" + reply);
+			Utility.log("Received reply" + reply, logger);
 			messageReceived = new String(reply.getData());
 		} catch (SocketException e) {
 			System.out.println("Socket: " + e.getMessage());
@@ -532,11 +533,6 @@ public class ReplicaManagerImplementation implements RMInterface {
 				aSocket.close();
 		}
 		return messageReceived;
-	}
-
-	private void log(String message) {
-		logger.info(message);
-		System.out.println(message);
 	}
 
 	public synchronized List<ItemModel> findItemUsingUDP(String itemName) {

@@ -3,7 +3,10 @@
  */
 package frontends;
 
+import java.io.IOException;
+import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.SocketException;
 
 import org.omg.CORBA.ORB;
 import org.omg.CosNaming.NameComponent;
@@ -14,6 +17,7 @@ import org.omg.PortableServer.POAHelper;
 
 import dlms.FrontEndOperations;
 import dlms.FrontEndOperationsHelper;
+import utilities.ApplicationConstant;
 
 /**
  * @author Rohit Gupta
@@ -39,7 +43,7 @@ public class FrontEnd {
 
 			NameComponent path[] = ncRef.to_name("frontend");
 			ncRef.rebind(path, frontEndOperations);
-			System.out.println("Concordia Server Running...");
+			System.out.println("Front End Running...");
 			Runnable task = () -> {
 				receive(frontEndImplementation);
 			};
@@ -64,5 +68,33 @@ public class FrontEnd {
 	 */
 	private static void receive(FrontEndImplementation libraryImplementation) {
 		DatagramSocket aSocket = null;
+		try {
+			aSocket = new DatagramSocket(ApplicationConstant.UDP_FRONT_END_PORT);
+			byte[] buffer = new byte[1000];// to stored the received data from
+											// the client.
+			System.out.println("Server Started............");
+			while (true) {// non-terminating loop as the server is always in listening mode.
+				DatagramPacket request = new DatagramPacket(buffer, buffer.length);
+
+				// Server waits for the request to come
+				aSocket.receive(request);// request received
+				String requestData = new String(request.getData());
+				System.out.println("Request received from client: " + requestData.trim());
+
+				System.out.println("Request received from client: " + new String(request.getData()));
+
+				DatagramPacket reply = new DatagramPacket(request.getData(), request.getLength(), request.getAddress(),
+						request.getPort());// reply packet ready
+
+				aSocket.send(reply);// reply sent
+			}
+		} catch (SocketException e) {
+			System.out.println("Socket: " + e.getMessage());
+		} catch (IOException e) {
+			System.out.println("IO: " + e.getMessage());
+		} finally {
+			if (aSocket != null)
+				aSocket.close();
+		}
 	}
 }
