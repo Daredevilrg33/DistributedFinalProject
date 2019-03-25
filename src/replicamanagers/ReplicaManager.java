@@ -70,6 +70,7 @@ public class ReplicaManager {
 			String itemId = requestParams[3].trim();
 			String itemName = requestParams[4].trim();
 			String quantity = requestParams[5].trim();
+			
 		}
 		if (action.equalsIgnoreCase("RemoveItem")) {
 			String managerId = requestParams[2].trim();
