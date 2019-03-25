@@ -42,13 +42,14 @@ public class DLMSSequencer {
 				// Server waits for the request to come
 				aSocket.receive(request);// request received
 				String requestData = new String(request.getData());
-				System.out.println("Request received from client: " + requestData.trim());
-
-				multicastUDPRequest(request.getData().toString());
-				DatagramPacket reply = new DatagramPacket(request.getData(), request.getLength(), request.getAddress(),
-						request.getPort());// reply packet ready
-
-				aSocket.send(reply);// reply sent
+				System.out.println("Request received from Front End: " + requestData.trim());
+				String multicastMessage = String.valueOf(SequenceNumber) + "," + requestData;
+				multicastUDPRequest(multicastMessage);
+				SequenceNumber++;
+//				DatagramPacket reply = new DatagramPacket(request.getData(), request.getLength(), request.getAddress(),
+//						request.getPort());// reply packet ready
+//
+//				aSocket.send(reply);// reply sent
 			}
 		} catch (SocketException e) {
 			System.out.println("Socket: " + e.getMessage());
@@ -89,8 +90,8 @@ public class DLMSSequencer {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				sendUDPRequest(ApplicationConstant.IP_ADDRESS_ROHIT, ApplicationConstant.UDP_REPLICA_MANAGER_PORT,
-						requestMessage);
+//				ApplicationConstant.IP_ADDRESS_ROHIT
+				sendUDPRequest("localhost", ApplicationConstant.UDP_REPLICA_MANAGER_PORT, requestMessage);
 
 			}
 		}).start();
@@ -117,6 +118,7 @@ public class DLMSSequencer {
 			aSocket = new DatagramSocket();
 			byte[] mes = requestMessage.getBytes();
 			InetAddress aHost = InetAddress.getByName(ipAddress);
+			System.out.println("sendUDPRequest Message: " + requestMessage);
 			DatagramPacket request = new DatagramPacket(mes, mes.length, aHost, serverPort);
 			aSocket.send(request);
 			byte[] buffer = new byte[1000];

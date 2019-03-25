@@ -28,6 +28,7 @@ import utilities.Utility;
  */
 public class FrontEndImplementation extends FrontEndOperationsPOA {
 	public Logger logger = Logger.getLogger(FrontEndImplementation.class.getName());
+	String outputResult = "";
 
 	/**
 	 * @param orb
@@ -48,9 +49,8 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		// TODO Auto-generated method stub
 		String udpMessage = "AddItem," + managerId + "," + itemId + "," + itemName + "," + String.valueOf(quantity);
 		System.out.println("Add ITEM " + udpMessage);
-		sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
-
-		return false;
+		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
+		return true;
 
 	}
 
@@ -66,8 +66,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		String udpMessage = "RemoveItem," + managerId + "," + itemId + "," + String.valueOf(quantity);
 		System.out.println("Remove ITEM " + udpMessage);
 
-		sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
-
+		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
 		return false;
 	}
 
@@ -82,7 +81,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		String udpMessage = "ListItem," + managerId;
 		System.out.println("List ITEM " + udpMessage);
 
-		sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
+		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
 
 		return null;
 	}
@@ -99,7 +98,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		String udpMessage = "BorrowItem," + userId + "," + itemId + "," + String.valueOf(noOfDays);
 		System.out.println("Borrow ITEM " + udpMessage);
 
-		sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
+		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
 		return null;
 	}
 
@@ -115,7 +114,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		String udpMessage = "FindItem," + userId + "," + itemName;
 		System.out.println("FIND ITEM " + udpMessage);
 
-		sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
+		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
 		return null;
 	}
 
@@ -131,7 +130,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		String udpMessage = "ReturnItem," + userId + "," + itemId;
 		System.out.println("Return ITEM " + udpMessage);
 
-		sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
+		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
 		return false;
 	}
 
@@ -148,7 +147,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		String udpMessage = "ExchangeItem," + userId + "," + newItemId + "," + oldItemId;
 		System.out.println("Exchange ITEM " + udpMessage);
 
-		sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
+		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
 		return false;
 	}
 
@@ -189,20 +188,29 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		DatagramSocket aSocket = null;
 		String messageReceived = null;
 		try {
-			aSocket = new DatagramSocket();
+			aSocket = new DatagramSocket(ApplicationConstant.UDP_FRONT_END_PORT);
+//			aSocket.setSoTimeout(30000);
 			byte[] mes = requestMessage.getBytes();
 			InetAddress aHost = InetAddress.getByName("localhost");
 
 			DatagramPacket request = new DatagramPacket(mes, mes.length, aHost, serverPort);
+
 			aSocket.send(request);
-			String requestData = new String(request.getData());
-			System.out.println("Request received from client: " + requestData.trim());
+//			String requestData = new String(request.getData());
+//			System.out.println("Request received from client: " + requestData.trim());
 
 			byte[] buffer = new byte[1000];
-			DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
-			aSocket.receive(reply);
-			Utility.log("Received reply" + reply, logger);
-			messageReceived = new String(reply.getData());
+			int resultCount = 0;
+			while (resultCount < 1) {
+				DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
+				aSocket.receive(reply);
+				messageReceived = new String(reply.getData());
+				outputResult = outputResult.concat(messageReceived);
+				Utility.log("Received reply" + outputResult, logger);
+				resultCount++;
+			}
+			if (resultCount == 1)
+				aSocket.close();
 		} catch (SocketException e) {
 			System.out.println("Socket: " + e.getMessage());
 		} catch (IOException e) {

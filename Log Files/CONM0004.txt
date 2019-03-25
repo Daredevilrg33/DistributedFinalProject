@@ -1,0 +1,92 @@
+Mar 25, 2019 2:30:54 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 25, 2019 2:30:55 PM clients.DLMSClient performActionForManager
+INFO:  Accessing add item !!
+Mar 25, 2019 2:30:55 PM clients.DLMSClient log
+INFO: Please enter Item Id, Item Name and quantity using comma seperation.
+Mar 25, 2019 2:46:40 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 25, 2019 2:46:41 PM clients.DLMSClient performActionForManager
+INFO:  Accessing add item !!
+Mar 25, 2019 2:46:41 PM clients.DLMSClient log
+INFO: Please enter Item Id, Item Name and quantity using comma seperation.
+Mar 25, 2019 3:02:08 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 25, 2019 3:02:09 PM clients.DLMSClient performActionForManager
+INFO:  Accessing add item !!
+Mar 25, 2019 3:02:09 PM clients.DLMSClient log
+INFO: Please enter Item Id, Item Name and quantity using comma seperation.
+Mar 25, 2019 3:02:25 PM clients.DLMSClient log
+INFO: Item added successfully
+Mar 25, 2019 3:02:25 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 25, 2019 3:05:40 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 25, 2019 3:05:40 PM clients.DLMSClient performActionForManager
+INFO:  Accessing add item !!
+Mar 25, 2019 3:05:40 PM clients.DLMSClient log
+INFO: Please enter Item Id, Item Name and quantity using comma seperation.
+Mar 25, 2019 3:05:55 PM clients.DLMSClient log
+INFO: Item added successfully
+Mar 25, 2019 3:05:55 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 25, 2019 3:06:33 PM clients.DLMSClient performActionForManager
+INFO:  Accessing add item !!
+Mar 25, 2019 3:06:33 PM clients.DLMSClient log
+INFO: Please enter Item Id, Item Name and quantity using comma seperation.
+Mar 25, 2019 3:06:51 PM clients.DLMSClient log
+INFO: Item added successfully
+Mar 25, 2019 3:06:51 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 25, 2019 3:07:29 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 25, 2019 3:07:29 PM clients.DLMSClient performActionForManager
+INFO:  Accessing add item !!
+Mar 25, 2019 3:07:29 PM clients.DLMSClient log
+INFO: Please enter Item Id, Item Name and quantity using comma seperation.
+Mar 25, 2019 3:08:09 PM clients.DLMSClient log
+INFO: Item added successfully
+Mar 25, 2019 3:08:09 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 25, 2019 3:20:28 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 25, 2019 3:20:29 PM clients.DLMSClient performActionForManager
+INFO:  Accessing add item !!
+Mar 25, 2019 3:20:29 PM clients.DLMSClient log
+INFO: Please enter Item Id, Item Name and quantity using comma seperation.
+Mar 25, 2019 3:21:04 PM clients.DLMSClient log
+INFO: Item added successfully
+Mar 25, 2019 3:21:04 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 25, 2019 3:24:43 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 25, 2019 3:24:44 PM clients.DLMSClient performActionForManager
+INFO:  Accessing add item !!
+Mar 25, 2019 3:24:44 PM clients.DLMSClient log
+INFO: Please enter Item Id, Item Name and quantity using comma seperation.
+Mar 25, 2019 3:25:18 PM clients.DLMSClient log
+INFO: Item added successfully
+Mar 25, 2019 3:25:18 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 25, 2019 3:27:42 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 25, 2019 3:27:43 PM clients.DLMSClient performActionForManager
+INFO:  Accessing add item !!
+Mar 25, 2019 3:27:43 PM clients.DLMSClient log
+INFO: Please enter Item Id, Item Name and quantity using comma seperation.
+Mar 25, 2019 3:34:01 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 25, 2019 3:34:02 PM clients.DLMSClient performActionForManager
+INFO:  Accessing add item !!
+Mar 25, 2019 3:34:02 PM clients.DLMSClient log
+INFO: Please enter Item Id, Item Name and quantity using comma seperation.
+Mar 25, 2019 3:36:06 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 25, 2019 3:36:06 PM clients.DLMSClient performActionForManager
+INFO:  Accessing add item !!
+Mar 25, 2019 3:36:06 PM clients.DLMSClient log
+INFO: Please enter Item Id, Item Name and quantity using comma seperation.
+Mar 25, 2019 3:36:10 PM clients.DLMSClient log
+INFO: Item added successfully
+Mar 25, 2019 3:36:10 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
