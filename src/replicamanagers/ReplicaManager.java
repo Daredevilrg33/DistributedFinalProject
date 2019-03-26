@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.MulticastSocket;
 import java.net.SocketException;
 
 import utilities.ApplicationConstant;
@@ -19,7 +20,8 @@ public class ReplicaManager {
 
 	public static void main(String[] args) {
 		Runnable task = () -> {
-			receive();
+			// receive();
+			recieveMessage();
 		};
 		Thread thread = new Thread(task);
 		thread.start();
@@ -58,6 +60,40 @@ public class ReplicaManager {
 		}
 	}
 
+	private static void recieveMessage() {
+		MulticastSocket aSocket = null;
+		try {
+
+			aSocket = new MulticastSocket(ApplicationConstant.UDP_REPLICA_MANAGER_PORT);
+
+			aSocket.joinGroup(InetAddress.getByName("230.1.1.2"));
+
+			byte[] buffer = new byte[1000];
+			System.out.println("Server Started............");
+
+			while (true) {
+				DatagramPacket request = new DatagramPacket(buffer, buffer.length);
+				aSocket.receive(request);
+				String requestData = new String(request.getData());
+				System.out.println(requestData);
+				InetAddress aHost = InetAddress.getByName("localhost");
+
+				DatagramPacket reply = new DatagramPacket(request.getData(), request.getLength(), aHost,
+						ApplicationConstant.UDP_FRONT_END_PORT);
+				aSocket.send(reply);
+			}
+
+		} catch (SocketException e) {
+			System.out.println("Socket: " + e.getMessage());
+		} catch (IOException e) {
+			System.out.println("IO: " + e.getMessage());
+		} finally {
+			if (aSocket != null)
+				aSocket.close();
+		}
+
+	}
+
 	public static String performAction(String requestData) {
 		String outputMessage = "";
 		String[] requestParams = requestData.split(",");
@@ -70,7 +106,7 @@ public class ReplicaManager {
 			String itemId = requestParams[3].trim();
 			String itemName = requestParams[4].trim();
 			String quantity = requestParams[5].trim();
-			
+
 		}
 		if (action.equalsIgnoreCase("RemoveItem")) {
 			String managerId = requestParams[2].trim();

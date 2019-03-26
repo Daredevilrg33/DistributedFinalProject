@@ -43,13 +43,16 @@ public class DLMSSequencer {
 				aSocket.receive(request);// request received
 				String requestData = new String(request.getData());
 				System.out.println("Request received from Front End: " + requestData.trim());
-				String multicastMessage = String.valueOf(SequenceNumber) + "," + requestData;
+				// String multicastMessage = String.valueOf(SequenceNumber) + "," + requestData;
+				String multicastMessage = requestData;
+
 				multicastUDPRequest(multicastMessage);
 				SequenceNumber++;
-//				DatagramPacket reply = new DatagramPacket(request.getData(), request.getLength(), request.getAddress(),
-//						request.getPort());// reply packet ready
-//
-//				aSocket.send(reply);// reply sent
+				// DatagramPacket reply = new DatagramPacket(request.getData(),
+				// request.getLength(), request.getAddress(),
+				// request.getPort());// reply packet ready
+				//
+				// aSocket.send(reply);// reply sent
 			}
 		} catch (SocketException e) {
 			System.out.println("Socket: " + e.getMessage());
@@ -90,9 +93,10 @@ public class DLMSSequencer {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-//				ApplicationConstant.IP_ADDRESS_ROHIT
-				sendUDPRequest("localhost", ApplicationConstant.UDP_REPLICA_MANAGER_PORT, requestMessage);
-
+				// ApplicationConstant.IP_ADDRESS_ROHIT
+				// sendUDPRequest("localhost", ApplicationConstant.UDP_REPLICA_MANAGER_PORT,
+				// requestMessage);
+				sendMultiCastRequest(requestMessage);
 			}
 		}).start();
 		// new Thread(new Runnable() {
@@ -138,4 +142,23 @@ public class DLMSSequencer {
 		return messageReceived;
 	}
 
+	private static void sendMultiCastRequest(String message) {
+		DatagramSocket datagramSocket = null;
+
+		try {
+			datagramSocket = new DatagramSocket();
+			byte[] by = message.getBytes();
+			InetAddress aHost = InetAddress.getByName("230.1.1.2");
+			DatagramPacket datagramPacket = new DatagramPacket(by, by.length, aHost,
+					ApplicationConstant.UDP_REPLICA_MANAGER_PORT);
+			datagramSocket.send(datagramPacket);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (datagramSocket != null) {
+				datagramSocket.close();
+			}
+		}
+
+	}
 }

@@ -9,6 +9,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.util.HashMap;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -182,26 +183,27 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 
 	}
 
-	private synchronized String sendUDPRequestToSequencer(int serverPort, String requestMessage) {
+	private synchronized String sendUDPRequestToSequencer(int serverPort, String message) {
+
 		Utility.log("Accessing UDP Request", logger);
-		Utility.log("Requesting Port " + serverPort + " message: " + requestMessage, logger);
+		Utility.log("Requesting Port " + serverPort + " message: " + message, logger);
 		DatagramSocket aSocket = null;
 		String messageReceived = null;
 		try {
 			aSocket = new DatagramSocket(ApplicationConstant.UDP_FRONT_END_PORT);
-//			aSocket.setSoTimeout(30000);
-			byte[] mes = requestMessage.getBytes();
+			// aSocket.setSoTimeout(30000);
+			byte[] mes = message.getBytes();
 			InetAddress aHost = InetAddress.getByName("localhost");
 
 			DatagramPacket request = new DatagramPacket(mes, mes.length, aHost, serverPort);
 
 			aSocket.send(request);
-//			String requestData = new String(request.getData());
-//			System.out.println("Request received from client: " + requestData.trim());
+			// String requestData = new String(request.getData());
+			// System.out.println("Request received from client: " + requestData.trim());
 
 			byte[] buffer = new byte[1000];
 			int resultCount = 0;
-			while (resultCount < 1) {
+			while (resultCount < 2) {
 				DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
 				aSocket.receive(reply);
 				messageReceived = new String(reply.getData());
