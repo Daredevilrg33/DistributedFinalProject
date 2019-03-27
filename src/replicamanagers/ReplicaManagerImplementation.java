@@ -186,7 +186,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 				if (itemValue.equalsIgnoreCase(ApplicationConstant.CONCORDIA_SERVER)) {
 					replyMessage = sendUDPRequest(ApplicationConstant.UDP_CONCORDIA_PORT,
 							"Borrow" + "," + userId + "," + itemId + "," + noOfDays + "," + true);
-				} else if (itemValue.equalsIgnoreCase(ApplicationConstant.MACGILL_SERVER)) {
+				} else if (itemValue.equalsIgnoreCase(ApplicationConstant.MCGILL_SERVER)) {
 					replyMessage = sendUDPRequest(ApplicationConstant.UDP_MCGILL_PORT,
 							"Borrow" + "," + userId + "," + itemId + "," + noOfDays + "," + true);
 				} else {
@@ -323,7 +323,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 				if (newItemValue.equalsIgnoreCase(ApplicationConstant.CONCORDIA_SERVER)) {
 					replyMessage = sendUDPRequest(ApplicationConstant.UDP_CONCORDIA_PORT,
 							"Borrow" + "," + userId + "," + newItemId + "," + noOfDays + "," + false);
-				} else if (newItemValue.equalsIgnoreCase(ApplicationConstant.MACGILL_SERVER)) {
+				} else if (newItemValue.equalsIgnoreCase(ApplicationConstant.MCGILL_SERVER)) {
 					replyMessage = sendUDPRequest(ApplicationConstant.UDP_MCGILL_PORT,
 							"Borrow" + "," + userId + "," + newItemId + "," + noOfDays + "," + false);
 				} else {
@@ -404,7 +404,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 						if (userValue.equalsIgnoreCase(ApplicationConstant.CONCORDIA_SERVER)) {
 							replyMessage = sendUDPRequest(ApplicationConstant.UDP_CONCORDIA_PORT,
 									"Assign" + "," + userId + "," + itemId + "," + 5);
-						} else if (userValue.equalsIgnoreCase(ApplicationConstant.MACGILL_SERVER)) {
+						} else if (userValue.equalsIgnoreCase(ApplicationConstant.MCGILL_SERVER)) {
 							replyMessage = sendUDPRequest(ApplicationConstant.UDP_MCGILL_PORT,
 									"Assign" + "," + userId + "," + itemId + "," + 5);
 						} else {

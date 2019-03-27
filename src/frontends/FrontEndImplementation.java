@@ -48,7 +48,8 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 	@Override
 	public boolean addItem(String managerId, String itemId, String itemName, int quantity) {
 		// TODO Auto-generated method stub
-		String udpMessage = "AddItem," + managerId + "," + itemId + "," + itemName + "," + String.valueOf(quantity);
+		String udpMessage = ApplicationConstant.OP_ADD_ITEM + "," + managerId + "," + itemId + "," + itemName + ","
+				+ String.valueOf(quantity);
 		System.out.println("Add ITEM " + udpMessage);
 		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
 		return true;
@@ -64,7 +65,8 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 	@Override
 	public boolean removeItem(String managerId, String itemId, int quantity) {
 		// TODO Auto-generated method stub
-		String udpMessage = "RemoveItem," + managerId + "," + itemId + "," + String.valueOf(quantity);
+		String udpMessage = ApplicationConstant.OP_REMOVE_ITEM + "," + managerId + "," + itemId + ","
+				+ String.valueOf(quantity);
 		System.out.println("Remove ITEM " + udpMessage);
 
 		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
@@ -79,7 +81,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 	@Override
 	public String listItemAvailability(String managerId) {
 		// TODO Auto-generated method stub
-		String udpMessage = "ListItem," + managerId;
+		String udpMessage = ApplicationConstant.OP_LIST_ITEM_AVAILABLILITY + "," + managerId;
 		System.out.println("List ITEM " + udpMessage);
 
 		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
@@ -96,7 +98,8 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 	@Override
 	public String borrowItem(String userId, String itemId, int noOfDays) {
 		// TODO Auto-generated method stub
-		String udpMessage = "BorrowItem," + userId + "," + itemId + "," + String.valueOf(noOfDays);
+		String udpMessage = ApplicationConstant.OP_BORROW_ITEM + "," + userId + "," + itemId + ","
+				+ String.valueOf(noOfDays);
 		System.out.println("Borrow ITEM " + udpMessage);
 
 		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
@@ -112,7 +115,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 	@Override
 	public String findItem(String userId, String itemName) {
 		// TODO Auto-generated method stub
-		String udpMessage = "FindItem," + userId + "," + itemName;
+		String udpMessage = ApplicationConstant.OP_FIND_ITEM + "," + userId + "," + itemName;
 		System.out.println("FIND ITEM " + udpMessage);
 
 		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
@@ -128,7 +131,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 	@Override
 	public boolean returnItem(String userId, String itemId) {
 		// TODO Auto-generated method stub
-		String udpMessage = "ReturnItem," + userId + "," + itemId;
+		String udpMessage = ApplicationConstant.OP_RETURN_ITEM + "," + userId + "," + itemId;
 		System.out.println("Return ITEM " + udpMessage);
 
 		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
@@ -145,7 +148,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 	public boolean exchangeItem(String userId, String newItemId, String oldItemId) {
 		// TODO Auto-generated method stub
 
-		String udpMessage = "ExchangeItem," + userId + "," + newItemId + "," + oldItemId;
+		String udpMessage = ApplicationConstant.OP_EXCHANGE_ITEM + "," + userId + "," + newItemId + "," + oldItemId;
 		System.out.println("Exchange ITEM " + udpMessage);
 
 		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);

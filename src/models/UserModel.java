@@ -49,7 +49,7 @@ public class UserModel {
 		String server = userId.substring(0, 3);
 		if (server.equalsIgnoreCase(ApplicationConstant.CONCORDIA_SERVER))
 			setServerType(ServerType.CONCORDIA);
-		else if (server.equalsIgnoreCase(ApplicationConstant.MACGILL_SERVER))
+		else if (server.equalsIgnoreCase(ApplicationConstant.MCGILL_SERVER))
 			setServerType(ServerType.MCGILL);
 		else
 			setServerType(ServerType.MONTREAL);

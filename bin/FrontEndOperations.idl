@@ -1,0 +1,17 @@
+module dlms{
+	interface FrontEndOperations{
+	string borrowItem(in string userId, in string itemId, in long noOfDays);
+
+	string findItem(in string userId, in string itemName);
+
+	boolean returnItem(in string userId, in string itemId);
+
+	boolean exchangeItem(in string userId, in string newItemId, in string oldItemId);
+
+	boolean addItem(in string managerId, in string itemId, in string itemName, in long quantity) ;
+
+	boolean removeItem(in string managerId,in string itemId, in long quantity);
+
+	string listItemAvailability(in string managerId);
+};
+};
