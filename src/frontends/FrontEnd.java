@@ -3,11 +3,6 @@
  */
 package frontends;
 
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.SocketException;
-
 import org.omg.CORBA.ORB;
 import org.omg.CosNaming.NameComponent;
 import org.omg.CosNaming.NamingContextExt;
@@ -17,7 +12,6 @@ import org.omg.PortableServer.POAHelper;
 
 import dlms.FrontEndOperations;
 import dlms.FrontEndOperationsHelper;
-import utilities.ApplicationConstant;
 
 /**
  * @author Rohit Gupta

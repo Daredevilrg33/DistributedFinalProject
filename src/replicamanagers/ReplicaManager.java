@@ -11,7 +11,6 @@ import java.net.MulticastSocket;
 import java.net.SocketException;
 
 import utilities.ApplicationConstant;
-import utilities.Utility;
 
 /**
  * @author Rohit Gupta
@@ -150,9 +149,7 @@ public class ReplicaManager {
 			String newItemId = requestParams[3].trim();
 			String oldItemId = requestParams[4].trim();
 			outputMessage = sendUDPRequestToServer(getServerPort(userId), requestData);
-
 		}
-
 		return outputMessage;
 	}
 

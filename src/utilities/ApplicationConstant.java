@@ -34,6 +34,9 @@ public class ApplicationConstant {
 	public static final int UDP_CONCORDIA_PORT = 7777;
 	public static final int UDP_MCGILL_PORT = 7778;
 	public static final int UDP_MONTREAL_PORT = 7779;
+	public static final int UDP_CON_SERVER = 6001;
+	public static final int UDP_MCG_SERVER = 6002;
+	public static final int UDP_MON_SERVER = 6003;
 
 	// public static final String PATH =
 	// "G:\\workspace\\DistributedFinalProject\\Log Files";
