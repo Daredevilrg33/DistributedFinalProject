@@ -1,0 +1,38 @@
+Mar 28, 2019 2:47:19 PM servers.ServerMontreal receiveLocalUDP
+INFO: Socket: Address already in use: Cannot bind
+Mar 28, 2019 2:54:12 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 28, 2019 2:54:12 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Mar 28, 2019 2:54:12 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON1030,ITEM 30,8
+Mar 28, 2019 2:57:59 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 28, 2019 2:57:59 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Mar 28, 2019 2:57:59 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON1030,ITEM 30,8
+Mar 28, 2019 4:55:12 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 28, 2019 4:55:12 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Mar 28, 2019 4:55:12 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON1030,ITEM 30,8
+Mar 28, 2019 6:05:25 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 28, 2019 6:05:25 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Mar 28, 2019 6:05:25 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON1030,ITEM 30,8
+Mar 28, 2019 10:05:54 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 28, 2019 10:05:54 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ROHIT
+Mar 28, 2019 10:05:54 PM servers.ServerMontreal receiveLocalUDP
+INFO: unsuccessful
+Mar 28, 2019 10:12:28 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 28, 2019 10:12:28 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0002,ROHIT8787
+Mar 28, 2019 10:12:28 PM servers.ServerMontreal receiveLocalUDP
+INFO: unsuccessful

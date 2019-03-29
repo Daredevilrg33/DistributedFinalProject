@@ -128,7 +128,7 @@ public class ServerMontreal {
 	private static void receiveLocalUDP(ReplicaManagerImplementation replicaManagerImplementation) {
 		DatagramSocket aSocket = null;
 		try {
-			aSocket = new DatagramSocket(ApplicationConstant.UDP_MCG_SERVER);
+			aSocket = new DatagramSocket(ApplicationConstant.UDP_MON_SERVER);
 			while (true) {
 				byte[] buffer = new byte[3000];
 				DatagramPacket request = null;

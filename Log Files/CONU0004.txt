@@ -1,0 +1,4 @@
+Mar 28, 2019 7:43:47 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 28, 2019 7:43:50 PM clients.DLMSClient performActionForUser
+INFO: User has exited!!

@@ -61,15 +61,15 @@ public class ReplicaManagerImplementation implements RMInterface {
 	 * java.lang.String, int)
 	 */
 	@Override
-	public synchronized boolean addItem(String managerId, String itemId, String itemName, int quantity) {
+	public synchronized String addItem(String managerId, String itemId, String itemName, int quantity) {
 		// TODO Auto-generated method stub
-		boolean isItemAdded = false;
+		String reply = "";
 		Utility.log("Accessing Add Item. ", logger);
 		ItemModel itemModel = new ItemModel(itemId, itemName, quantity);
 		UserModel userModel = userHashMap.get(managerId);
 		if (userModel != null)
-			isItemAdded = addItemToHashMap(itemModel);
-		return isItemAdded;
+			reply = addItemToHashMap(itemModel);
+		return reply;
 	}
 
 	/*
@@ -79,9 +79,9 @@ public class ReplicaManagerImplementation implements RMInterface {
 	 * int)
 	 */
 	@Override
-	public synchronized boolean removeItem(String managerId, String itemId, int quantity) {
+	public synchronized String removeItem(String managerId, String itemId, int quantity) {
 		// TODO Auto-generated method stub
-		boolean isRemoved = false;
+		String reply = "";
 		Utility.log("Accessing Remove Item.", logger);
 		UserModel userModel = userHashMap.get(managerId);
 		if (quantity < 0) {
@@ -94,7 +94,8 @@ public class ReplicaManagerImplementation implements RMInterface {
 					userHashMap.put(userModel1.getUserId(), userModel1);
 				}
 				Utility.log("Item has been removed successfully !!", logger);
-				isRemoved = true;
+				reply = ApplicationConstant.MSG_REMOVE_ITEM;
+
 			}
 		} else {
 			Utility.log("Quantity is greater than zero.", logger);
@@ -103,18 +104,18 @@ public class ReplicaManagerImplementation implements RMInterface {
 				int oldQuantity = itemModel.getQuantity();
 				if (oldQuantity < quantity) {
 					Utility.log("Item quantity cannot be reduced.", logger);
-					return false;
+					reply = ApplicationConstant.MSG_REMOVE_ITEM_INSUFFICIENT_QUANTITY;
 				} else {
 					Utility.log("Old quantity of the item: " + oldQuantity, logger);
 					Utility.log("Quantity to be reduce : " + quantity, logger);
 					int value = oldQuantity - quantity;
 					itemModel.setQuantity(value);
 					Utility.log("Item quantity has been reduced to : " + value, logger);
-					isRemoved = true;
+					reply = ApplicationConstant.MSG_REMOVE_ITEM_DECREASED_QUANTITY;
 				}
 			}
 		}
-		return isRemoved;
+		return reply;
 	}
 
 	/*
@@ -129,7 +130,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 		if (userModel != null) {
 			return itemHashMap.toString();
 		} else
-			return null;
+			return "No items available";
 	}
 
 	/*
@@ -184,13 +185,13 @@ public class ReplicaManagerImplementation implements RMInterface {
 				// Make UDP Request to the servers.
 				String itemValue = itemId.substring(0, 3);
 				if (itemValue.equalsIgnoreCase(ApplicationConstant.CONCORDIA_SERVER)) {
-					replyMessage = sendUDPRequest(ApplicationConstant.UDP_CONCORDIA_PORT,
+					replyMessage = sendUDPRequest(ApplicationConstant.UDP_CON_SERVER,
 							"Borrow" + "," + userId + "," + itemId + "," + noOfDays + "," + true);
 				} else if (itemValue.equalsIgnoreCase(ApplicationConstant.MCGILL_SERVER)) {
-					replyMessage = sendUDPRequest(ApplicationConstant.UDP_MCGILL_PORT,
+					replyMessage = sendUDPRequest(ApplicationConstant.UDP_MCG_SERVER,
 							"Borrow" + "," + userId + "," + itemId + "," + noOfDays + "," + true);
 				} else {
-					replyMessage = sendUDPRequest(ApplicationConstant.UDP_MONTREAL_PORT,
+					replyMessage = sendUDPRequest(ApplicationConstant.UDP_MON_SERVER,
 							"Borrow" + "," + userId + "," + itemId + "," + noOfDays + "," + true);
 				}
 				if (replyMessage.trim().equalsIgnoreCase("User has borrowed successfully !!")) {
@@ -224,28 +225,32 @@ public class ReplicaManagerImplementation implements RMInterface {
 		}
 		// Make UDP Request to both the servers.
 		if (currentServer == ServerType.CONCORDIA) {
-			String reply1 = sendUDPRequest(ApplicationConstant.UDP_MCGILL_PORT,
+			String reply1 = sendUDPRequest(ApplicationConstant.UDP_MCG_SERVER,
 					"Find Item" + "," + userId + "," + itemName).trim();
 			itemModels.addAll(fetchItemsFromReply(reply1));
-			String reply2 = sendUDPRequest(ApplicationConstant.UDP_MONTREAL_PORT,
+			String reply2 = sendUDPRequest(ApplicationConstant.UDP_MON_SERVER,
 					"Find Item" + "," + userId + "," + itemName).trim();
 			itemModels.addAll(fetchItemsFromReply(reply2));
 		} else if (currentServer == ServerType.MCGILL) {
-			String reply3 = sendUDPRequest(ApplicationConstant.UDP_CONCORDIA_PORT,
+			String reply3 = sendUDPRequest(ApplicationConstant.UDP_CON_SERVER,
 					"Find Item" + "," + userId + "," + itemName).trim();
 			itemModels.addAll(fetchItemsFromReply(reply3));
-			String reply4 = sendUDPRequest(ApplicationConstant.UDP_MONTREAL_PORT,
+			String reply4 = sendUDPRequest(ApplicationConstant.UDP_MON_SERVER,
 					"Find Item" + "," + userId + "," + itemName).trim();
 			itemModels.addAll(fetchItemsFromReply(reply4));
 		} else {
-			String reply5 = sendUDPRequest(ApplicationConstant.UDP_CONCORDIA_PORT,
+			String reply5 = sendUDPRequest(ApplicationConstant.UDP_CON_SERVER,
 					"Find Item" + "," + userId + "," + itemName).trim();
 			itemModels.addAll(fetchItemsFromReply(reply5));
-			String reply6 = sendUDPRequest(ApplicationConstant.UDP_MCGILL_PORT,
+			String reply6 = sendUDPRequest(ApplicationConstant.UDP_MCG_SERVER,
 					"Find Item" + "," + userId + "," + itemName).trim();
 			itemModels.addAll(fetchItemsFromReply(reply6));
 		}
-		return itemModels.toString();
+		if (itemModels.size() > 0) {
+			return itemModels.toString();
+		} else
+			return "No items available";
+
 	}
 
 	/*
@@ -254,38 +259,44 @@ public class ReplicaManagerImplementation implements RMInterface {
 	 * @see interfaces.RMInterface#returnItem(java.lang.String, java.lang.String)
 	 */
 	@Override
-	public synchronized boolean returnItem(String userId, String itemId) {
+	public synchronized String returnItem(String userId, String itemId) {
 		// TODO Auto-generated method stub
-		boolean isItemReturned = false;
+		String replyMessage = "";
 		UserModel user = userHashMap.get(userId);
 		if (user != null && user.getItemList().contains(itemId)) {
 			if (itemHashMap.containsKey(itemId)) {
-				isItemReturned = returnItemAndAssignToWaitListUser(userId, itemId);
+				boolean isItemReturned = returnItemAndAssignToWaitListUser(userId, itemId);
+				if (isItemReturned)
+					replyMessage = "Item has been returned successfully";
+				else
+					replyMessage = "Item does not exist. You cannot perform this operation";
 			} else {
 				String str = itemId.substring(0, 3);
 				String reply = "";
 				if (str.equalsIgnoreCase("CON")) {
-					reply = sendUDPRequest(ApplicationConstant.UDP_CONCORDIA_PORT,
+					reply = sendUDPRequest(ApplicationConstant.UDP_CON_SERVER,
 							"Return Item" + "," + userId + "," + itemId).trim();
 				} else if (str.equalsIgnoreCase("MCG")) {
-					reply = sendUDPRequest(ApplicationConstant.UDP_MCGILL_PORT,
+					reply = sendUDPRequest(ApplicationConstant.UDP_MCG_SERVER,
 							"Return Item" + "," + userId + "," + itemId).trim();
 				} else
-					reply = sendUDPRequest(ApplicationConstant.UDP_MONTREAL_PORT,
+					reply = sendUDPRequest(ApplicationConstant.UDP_MON_SERVER,
 							"Return Item" + "," + userId + "," + itemId).trim();
 
 				if (reply.trim().equalsIgnoreCase("successful")) {
 					UserModel user1 = userHashMap.get(userId);
 					user1.removeItem(itemId);
 					userHashMap.put(user1.getUserId(), user1);
-					isItemReturned = true;
+					replyMessage = "Item has been returned successfully";
+
 				} else {
-					isItemReturned = false;
+					replyMessage = "Item does not exist. You cannot perform this operation";
+
 				}
 			}
 		} else
-			isItemReturned = false;
-		return isItemReturned;
+			replyMessage = "Item has not been borrowed by this user.";
+		return replyMessage;
 	}
 
 	/*
@@ -295,10 +306,10 @@ public class ReplicaManagerImplementation implements RMInterface {
 	 * java.lang.String)
 	 */
 	@Override
-	public synchronized boolean exchangeItem(String userId, String newItemId, String oldItemId) {
+	public synchronized String exchangeItem(String userId, String newItemId, String oldItemId) {
 		// TODO Auto-generated method stub
-		boolean isItemExchanged = false;
 		String replyMessage = "";
+
 		int noOfDays = 4;
 		UserModel userModel = userHashMap.get(userId);
 		String newItemValue = newItemId.substring(0, 3);
@@ -313,40 +324,40 @@ public class ReplicaManagerImplementation implements RMInterface {
 					itemHashMap.put(itemModel.getItemId(), itemModel);
 					userHashMap.put(userModel.getUserId(), userModel);
 
-					boolean isItemReturned = returnItem(userId, oldItemId);
-					if (isItemReturned)
-						isItemExchanged = true;
+					String itemReturned = returnItem(userId, oldItemId);
+					if (itemReturned.equalsIgnoreCase("Item has been returned successfully"))
+						replyMessage = "Item has been exchanged successfully";
 					else
-						isItemExchanged = false;
+						replyMessage = "Item cannot be per as one of the operations is failed.";
 				}
 			} else {
 				if (newItemValue.equalsIgnoreCase(ApplicationConstant.CONCORDIA_SERVER)) {
-					replyMessage = sendUDPRequest(ApplicationConstant.UDP_CONCORDIA_PORT,
+					replyMessage = sendUDPRequest(ApplicationConstant.UDP_CON_SERVER,
 							"Borrow" + "," + userId + "," + newItemId + "," + noOfDays + "," + false);
 				} else if (newItemValue.equalsIgnoreCase(ApplicationConstant.MCGILL_SERVER)) {
-					replyMessage = sendUDPRequest(ApplicationConstant.UDP_MCGILL_PORT,
+					replyMessage = sendUDPRequest(ApplicationConstant.UDP_MCG_SERVER,
 							"Borrow" + "," + userId + "," + newItemId + "," + noOfDays + "," + false);
 				} else {
-					replyMessage = sendUDPRequest(ApplicationConstant.UDP_MONTREAL_PORT,
+					replyMessage = sendUDPRequest(ApplicationConstant.UDP_MON_SERVER,
 							"Borrow" + "," + userId + "," + newItemId + "," + noOfDays + "," + false);
 				}
 				if (replyMessage.trim().equalsIgnoreCase("User has borrowed successfully !!")) {
 					UserModel user = userHashMap.get(userId);
 					user.addItem(newItemId);
 					userHashMap.put(user.getUserId(), user);
-					boolean isItemReturned = returnItem(userId, oldItemId);
-					if (isItemReturned)
-						isItemExchanged = true;
+					String itemReturned = returnItem(userId, oldItemId);
+					if (itemReturned.equalsIgnoreCase("Item has been returned successfully"))
+						replyMessage = "Item has been exchanged successfully";
 					else
-						isItemExchanged = false;
+						replyMessage = "Item cannot be per as one of the operations is failed.";
 				} else {
 					System.out.println(replyMessage);
-					isItemExchanged = false;
+					replyMessage = "Item cannot be per as one of the operations is failed.";
 				}
 			}
 		} else
-			isItemExchanged = false;
-		return isItemExchanged;
+			replyMessage = "Item cannot be per as one of the operations is failed.";
+		return replyMessage;
 	}
 
 	/**
@@ -402,13 +413,13 @@ public class ReplicaManagerImplementation implements RMInterface {
 						String userValue = userId.substring(0, 3);
 						String itemId = itemModel.getItemId();
 						if (userValue.equalsIgnoreCase(ApplicationConstant.CONCORDIA_SERVER)) {
-							replyMessage = sendUDPRequest(ApplicationConstant.UDP_CONCORDIA_PORT,
+							replyMessage = sendUDPRequest(ApplicationConstant.UDP_CON_SERVER,
 									"Assign" + "," + userId + "," + itemId + "," + 5);
 						} else if (userValue.equalsIgnoreCase(ApplicationConstant.MCGILL_SERVER)) {
-							replyMessage = sendUDPRequest(ApplicationConstant.UDP_MCGILL_PORT,
+							replyMessage = sendUDPRequest(ApplicationConstant.UDP_MCG_SERVER,
 									"Assign" + "," + userId + "," + itemId + "," + 5);
 						} else {
-							replyMessage = sendUDPRequest(ApplicationConstant.UDP_MONTREAL_PORT,
+							replyMessage = sendUDPRequest(ApplicationConstant.UDP_MON_SERVER,
 									"Assign" + "," + userId + "," + itemId + "," + 5);
 						}
 						if (replyMessage.trim().equalsIgnoreCase("successful")) {
@@ -425,8 +436,8 @@ public class ReplicaManagerImplementation implements RMInterface {
 		return isAssigned;
 	}
 
-	private synchronized boolean addItemToHashMap(ItemModel itemModel) {
-		boolean isAdded = false;
+	private synchronized String addItemToHashMap(ItemModel itemModel) {
+		String returnMessage = "";
 		if (itemHashMap.containsKey(itemModel.getItemId())) {
 			Utility.log("Item already present in concordia hash map.", logger);
 			ItemModel itemModel1 = itemHashMap.get(itemModel.getItemId());
@@ -439,13 +450,13 @@ public class ReplicaManagerImplementation implements RMInterface {
 				itemModel1.setQuantity(quantityValue);
 			}
 			itemHashMap.put(itemModel1.getItemId(), itemModel1);
-			isAdded = true;
+			returnMessage = ApplicationConstant.MSG_ADD_ITEM_QUANTITY_UPDATED;
 		} else {
 			itemHashMap.put(itemModel.getItemId(), itemModel);
 			Utility.log("Item successfully added to concordia hashmap.", logger);
-			isAdded = true;
+			returnMessage = ApplicationConstant.MSG_ADD_ITEM_ADDED;
 		}
-		return isAdded;
+		return returnMessage;
 	}
 
 	private synchronized void dataSet(ServerType serverType) {

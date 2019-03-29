@@ -13,9 +13,9 @@ import models.ItemModel;
  *
  */
 public interface RMInterface {
-	public boolean addItem(String managerId, String itemId, String itemName, int quantity);
+	public String addItem(String managerId, String itemId, String itemName, int quantity);
 
-	public boolean removeItem(String managerId, String itemId, int quantity);
+	public String removeItem(String managerId, String itemId, int quantity);
 
 	public String listItemAvailability(String managerId);
 
@@ -23,7 +23,7 @@ public interface RMInterface {
 
 	public String findItem(String userId, String itemName);
 
-	public boolean returnItem(String userId, String itemId);
+	public String returnItem(String userId, String itemId);
 
-	public boolean exchangeItem(String userId, String newItemId, String oldItemId);
+	public String exchangeItem(String userId, String newItemId, String oldItemId);
 }

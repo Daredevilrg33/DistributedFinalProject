@@ -43,7 +43,7 @@ public class ApplicationConstant {
 	public static final String PATH = "G:\\DistributedFinalProject.git\\trunk\\Log Files";
 
 	public static final String IP_ADDRESS_ROOHANI = "132.205.64.142";
-	public static final String IP_ADDRESS_ROHIT = "132.205.46.226";
+	public static final String IP_ADDRESS_ROHIT = "132.205.45.234";
 	public static final String IP_ADDRESS_NANCY = "132.205.46.167";
 	public static final String IP_ADDRESS_HASTI = "132.205.46.234";
 	public static final String DATA_USER_ID = "userId";
@@ -62,5 +62,12 @@ public class ApplicationConstant {
 	public static final String OP_RETURN_ITEM = "returnItem";
 	public static final String OP_EXCHANGE_ITEM = "exchangeItem";
 	public static final String OP_FIND_ITEM = "findItem";
+
+	public static final String MSG_ADD_ITEM_QUANTITY_UPDATED = "Quantity Updated";
+	public static final String MSG_ADD_ITEM_ADDED = "Item Added";
+	public static final String MSG_REMOVE_ITEM = "Item has been removed";
+
+	public static final String MSG_REMOVE_ITEM_INSUFFICIENT_QUANTITY = "Quantity available not sufficient";
+	public static final String MSG_REMOVE_ITEM_DECREASED_QUANTITY = "Item has been decreased with the given quantity";
 
 }

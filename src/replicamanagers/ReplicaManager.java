@@ -31,10 +31,11 @@ public class ReplicaManager {
 		DatagramSocket aSocket = null;
 		try {
 			aSocket = new DatagramSocket(ApplicationConstant.UDP_REPLICA_MANAGER_PORT);
-			byte[] buffer = new byte[1000];// to stored the received data from
-											// the client.
+			// the client.
 			System.out.println("Server Started............");
 			while (true) {// non-terminating loop as the server is always in listening mode.
+				byte[] buffer = new byte[1000];// to stored the received data from
+
 				DatagramPacket request = new DatagramPacket(buffer, buffer.length);
 
 				// Server waits for the request to come
@@ -68,10 +69,11 @@ public class ReplicaManager {
 
 			aSocket.joinGroup(InetAddress.getByName("230.1.1.2"));
 
-			byte[] buffer = new byte[1000];
 			System.out.println("Server Started............");
 
 			while (true) {
+				byte[] buffer = new byte[1000];
+
 				DatagramPacket request = new DatagramPacket(buffer, buffer.length);
 				aSocket.receive(request);
 				String requestData = new String(request.getData());
@@ -101,55 +103,10 @@ public class ReplicaManager {
 	public static String performAction(String requestData) {
 		String outputMessage = "";
 		String[] requestParams = requestData.split(",");
-		String sequenceNumber = requestParams[0].trim();
+
 		String action = requestParams[1].trim();
-
-		if (action.equalsIgnoreCase(ApplicationConstant.OP_ADD_ITEM)) {
-
-			String managerId = requestParams[2].trim();
-			String itemId = requestParams[3].trim();
-			String itemName = requestParams[4].trim();
-			String quantity = requestParams[5].trim();
-			outputMessage = sendUDPRequestToServer(getServerPort(managerId), requestData);
-		}
-		if (action.equalsIgnoreCase(ApplicationConstant.OP_REMOVE_ITEM)) {
-			String managerId = requestParams[2].trim();
-			String itemId = requestParams[3].trim();
-			String quantity = requestParams[4].trim();
-			outputMessage = sendUDPRequestToServer(getServerPort(managerId), requestData);
-
-		}
-		if (action.equalsIgnoreCase(ApplicationConstant.OP_LIST_ITEM_AVAILABLILITY)) {
-
-			String managerId = requestParams[2].trim();
-			outputMessage = sendUDPRequestToServer(getServerPort(managerId), requestData);
-
-		}
-		if (action.equalsIgnoreCase(ApplicationConstant.OP_BORROW_ITEM)) {
-			String userId = requestParams[2].trim();
-			String itemId = requestParams[3].trim();
-			String noOfDays = requestParams[4].trim();
-			outputMessage = sendUDPRequestToServer(getServerPort(userId), requestData);
-
-		}
-		if (action.equalsIgnoreCase(ApplicationConstant.OP_FIND_ITEM)) {
-			String userId = requestParams[2].trim();
-			String itemName = requestParams[3].trim();
-			outputMessage = sendUDPRequestToServer(getServerPort(userId), requestData);
-
-		}
-		if (action.equalsIgnoreCase(ApplicationConstant.OP_RETURN_ITEM)) {
-			String userId = requestParams[2].trim();
-			String itemId = requestParams[3].trim();
-			outputMessage = sendUDPRequestToServer(getServerPort(userId), requestData);
-
-		}
-		if (action.equalsIgnoreCase(ApplicationConstant.OP_EXCHANGE_ITEM)) {
-			String userId = requestParams[2].trim();
-			String newItemId = requestParams[3].trim();
-			String oldItemId = requestParams[4].trim();
-			outputMessage = sendUDPRequestToServer(getServerPort(userId), requestData);
-		}
+		String managerId = requestParams[2].trim();
+		outputMessage = sendUDPRequestToServer(getServerPort(managerId), requestData);
 		return outputMessage;
 	}
 
@@ -167,9 +124,6 @@ public class ReplicaManager {
 
 	private synchronized static String sendUDPRequestToServer(int serverPort, String message) {
 
-		// Utility.log("Accessing UDP Request", logger);
-		// Utility.log("Requesting Port " + serverPort + " message: " + message,
-		// logger);
 		System.out.println("sendUDPRequestToServer" + message);
 		DatagramSocket aSocket = null;
 		String messageReceived = null;
@@ -182,8 +136,6 @@ public class ReplicaManager {
 			DatagramPacket request = new DatagramPacket(mes, mes.length, aHost, serverPort);
 
 			aSocket.send(request);
-			// String requestData = new String(request.getData());
-			// System.out.println("Request received from client: " + requestData.trim());
 
 			byte[] buffer = new byte[1000];
 

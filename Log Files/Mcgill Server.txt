@@ -1,0 +1,38 @@
+Mar 28, 2019 2:34:13 PM servers.ServerMcgill receiveLocalUDP
+INFO: Socket: Address already in use: Cannot bind
+Mar 28, 2019 2:54:12 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Mar 28, 2019 2:54:12 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Mar 28, 2019 2:54:12 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful,MCG1077,ITEM 30,5,MCG1065,ITEM 30,10
+Mar 28, 2019 2:57:59 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Mar 28, 2019 2:57:59 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Mar 28, 2019 2:57:59 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful,MCG1077,ITEM 30,5,MCG1065,ITEM 30,10
+Mar 28, 2019 4:55:12 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Mar 28, 2019 4:55:12 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Mar 28, 2019 4:55:12 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful,MCG1077,ITEM 30,5,MCG1065,ITEM 30,10
+Mar 28, 2019 6:05:25 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Mar 28, 2019 6:05:25 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Mar 28, 2019 6:05:25 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful,MCG1077,ITEM 30,5,MCG1065,ITEM 30,10
+Mar 28, 2019 10:05:54 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Mar 28, 2019 10:05:54 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ROHIT
+Mar 28, 2019 10:05:54 PM servers.ServerMcgill receiveLocalUDP
+INFO: unsuccessful
+Mar 28, 2019 10:12:28 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Mar 28, 2019 10:12:28 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0002,ROHIT8787
+Mar 28, 2019 10:12:28 PM servers.ServerMcgill receiveLocalUDP
+INFO: unsuccessful

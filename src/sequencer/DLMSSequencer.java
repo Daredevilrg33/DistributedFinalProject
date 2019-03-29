@@ -33,19 +33,20 @@ public class DLMSSequencer {
 		DatagramSocket aSocket = null;
 		try {
 			aSocket = new DatagramSocket(ApplicationConstant.UDP_SEQUENCER_PORT);
-			byte[] buffer = new byte[1000];// to stored the received data from
-											// the client.
+			// the client.
 			System.out.println("Sequencer Server Started............");
 			while (true) {// non-terminating loop as the server is always in listening mode.
+				byte[] buffer = new byte[1000];// to stored the received data from
+
 				DatagramPacket request = new DatagramPacket(buffer, buffer.length);
 
 				// Server waits for the request to come
 				aSocket.receive(request);// request received
 				String requestData = new String(request.getData());
 				System.out.println("Request received from Front End: " + requestData.trim());
-				// String multicastMessage = String.valueOf(SequenceNumber) + "," + requestData;
-				String multicastMessage = requestData;
+				String multicastMessage = String.valueOf(SequenceNumber) + "," + requestData;
 
+				buffer = new byte[1000];
 				multicastUDPRequest(multicastMessage);
 				SequenceNumber++;
 				// DatagramPacket reply = new DatagramPacket(request.getData(),
