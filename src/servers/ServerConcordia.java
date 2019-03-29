@@ -50,7 +50,8 @@ public class ServerConcordia {
 
 				// Server waits for the request to come
 				aSocket.receive(request);// request received
-				String requestData = new String(request.getData());
+				String requestData = new String(request.getData(), request.getOffset(), request.getLength());
+
 				System.out.println("Request received from client: " + requestData.trim());
 				String replyMessage = performAction(requestData.trim(), replicaManagerImplementation);
 				DatagramPacket reply = new DatagramPacket(replyMessage.getBytes(), replyMessage.getBytes().length,

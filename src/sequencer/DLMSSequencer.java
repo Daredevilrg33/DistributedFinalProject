@@ -42,7 +42,7 @@ public class DLMSSequencer {
 
 				// Server waits for the request to come
 				aSocket.receive(request);// request received
-				String requestData = new String(request.getData());
+				String requestData = new String(request.getData(), request.getOffset(), request.getLength());
 				System.out.println("Request received from Front End: " + requestData.trim());
 				String multicastMessage = String.valueOf(SequenceNumber) + "," + requestData;
 
@@ -130,7 +130,7 @@ public class DLMSSequencer {
 			DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
 			aSocket.receive(reply);
 			Utility.log("Received reply" + reply, logger);
-			messageReceived = new String(reply.getData());
+			messageReceived = new String(reply.getData(), reply.getOffset(), reply.getLength());
 		} catch (SocketException e) {
 			System.out.println("Socket: " + e.getMessage());
 		} catch (IOException e) {

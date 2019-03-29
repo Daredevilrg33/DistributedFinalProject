@@ -76,7 +76,7 @@ public class ReplicaManager {
 
 				DatagramPacket request = new DatagramPacket(buffer, buffer.length);
 				aSocket.receive(request);
-				String requestData = new String(request.getData());
+				String requestData = new String(request.getData(), request.getOffset(), request.getLength());
 				System.out.println(requestData);
 
 				String replyMessage = "Reply : ";

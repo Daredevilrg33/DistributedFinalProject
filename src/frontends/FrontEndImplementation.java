@@ -46,13 +46,13 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 	 * java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	public boolean addItem(String managerId, String itemId, String itemName, int quantity) {
+	public String addItem(String managerId, String itemId, String itemName, int quantity) {
 		// TODO Auto-generated method stub
 		String udpMessage = ApplicationConstant.OP_ADD_ITEM + "," + managerId + "," + itemId + "," + itemName + ","
 				+ String.valueOf(quantity);
 		System.out.println("Add ITEM " + udpMessage);
 		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
-		return true;
+		return output;
 
 	}
 
@@ -63,14 +63,14 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 	 * java.lang.String, int)
 	 */
 	@Override
-	public boolean removeItem(String managerId, String itemId, int quantity) {
+	public String removeItem(String managerId, String itemId, int quantity) {
 		// TODO Auto-generated method stub
 		String udpMessage = ApplicationConstant.OP_REMOVE_ITEM + "," + managerId + "," + itemId + ","
 				+ String.valueOf(quantity);
 		System.out.println("Remove ITEM " + udpMessage);
 
 		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
-		return false;
+		return output;
 	}
 
 	/*
@@ -129,13 +129,13 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 	 * java.lang.String)
 	 */
 	@Override
-	public boolean returnItem(String userId, String itemId) {
+	public String returnItem(String userId, String itemId) {
 		// TODO Auto-generated method stub
 		String udpMessage = ApplicationConstant.OP_RETURN_ITEM + "," + userId + "," + itemId;
 		System.out.println("Return ITEM " + udpMessage);
 
 		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
-		return false;
+		return output;
 	}
 
 	/*
@@ -145,14 +145,14 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 	 * java.lang.String, java.lang.String)
 	 */
 	@Override
-	public boolean exchangeItem(String userId, String newItemId, String oldItemId) {
+	public String exchangeItem(String userId, String newItemId, String oldItemId) {
 		// TODO Auto-generated method stub
 
 		String udpMessage = ApplicationConstant.OP_EXCHANGE_ITEM + "," + userId + "," + newItemId + "," + oldItemId;
 		System.out.println("Exchange ITEM " + udpMessage);
 
 		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
-		return false;
+		return output;
 	}
 
 	public void logging(String fileName) {

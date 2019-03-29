@@ -130,7 +130,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 		if (userModel != null) {
 			return itemHashMap.toString();
 		} else
-			return "No items available";
+			return ApplicationConstant.MSG_NO_ITEMS_AVAILABLE;
 	}
 
 	/*
@@ -160,7 +160,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 						userQueue1.add(userModel.getUserId());
 						waitList.put(itemId, userQueue1);
 					}
-					replyMessage = "User successfully added to waitlist";
+					replyMessage = ApplicationConstant._MSG_USER_ADDED_TO_WAITLIST;
 
 				} else {
 					replyMessage = "User has not been added to waitlist.";

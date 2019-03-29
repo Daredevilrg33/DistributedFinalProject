@@ -125,11 +125,11 @@ public class DLMSClient {
 			logger.info("Return an Item !");
 			log("Please enter item id: ");
 			String itemId1 = scanner.nextLine();
-			boolean isItemReturned = frontEndOperations.returnItem(userModel.getUserId(), itemId1);
-			if (isItemReturned)
-				log("Item Returned Successfully !!!!!");
-			else
-				log("Unable to return the Item  !!!!!");
+			log(frontEndOperations.returnItem(userModel.getUserId(), itemId1));
+			// if (isItemReturned)
+			// log("Item Returned Successfully !!!!!");
+			// else
+			// log("Unable to return the Item !!!!!");
 			openOptionMenu(userModel);
 			break;
 
@@ -140,11 +140,11 @@ public class DLMSClient {
 			String[] s = data.split(",");
 			String newItemId = s[0].trim();
 			String oldItemId = s[1].trim();
-			boolean isItemExchanged = frontEndOperations.exchangeItem(userModel.getUserId(), newItemId, oldItemId);
-			if (isItemExchanged)
-				log("Item has been exchanged successfully !!!!");
-			else
-				log("Unable to exchange the item !!!");
+			log(frontEndOperations.exchangeItem(userModel.getUserId(), newItemId, oldItemId));
+			// if (isItemExchanged)
+			// log("Item has been exchanged successfully !!!!");
+			// else
+			// log("Unable to exchange the item !!!");
 			openOptionMenu(userModel);
 			break;
 		case ApplicationConstant.USER_EXIT:
@@ -173,11 +173,11 @@ public class DLMSClient {
 			String itemId = values[0];
 			String itemName = values[1];
 			int quantity = Integer.valueOf(values[2]);
-			boolean isItemAdded = frontEndOperations.addItem(userModel.getUserId(), itemId, itemName, quantity);
-			if (isItemAdded)
-				log("Item added successfully");
-			else
-				log("Item is not added");
+			log(frontEndOperations.addItem(userModel.getUserId(), itemId, itemName, quantity));
+			// if (isItemAdded)
+			// log("Item added successfully");
+			// else
+			// log("Item is not added");
 			openOptionMenu(userModel);
 			break;
 		case ApplicationConstant.MANAGER_REMOVE_ITEM:
@@ -187,11 +187,11 @@ public class DLMSClient {
 			String[] values1 = value1.split(",");
 			String itemId1 = values1[0];
 			int quantity1 = Integer.valueOf(values1[1]);
-			boolean isItemRemoved = frontEndOperations.removeItem(userModel.getUserId(), itemId1, quantity1);
-			if (isItemRemoved)
-				log("Item Removed Successfully");
-			else
-				log("Item not removed");
+			log(frontEndOperations.removeItem(userModel.getUserId(), itemId1, quantity1));
+			// if (isItemRemoved)
+			// log("Item Removed Successfully");
+			// else
+			// log("Item not removed");
 			openOptionMenu(userModel);
 			break;
 		case ApplicationConstant.MANAGER_LIST_ITEM_AVAILABILITY:

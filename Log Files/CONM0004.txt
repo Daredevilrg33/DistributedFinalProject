@@ -384,3 +384,27 @@ Mar 28, 2019 10:41:02 PM clients.DLMSClient log
 INFO: Please select one of the operations: 
 Mar 28, 2019 10:41:05 PM clients.DLMSClient performActionForManager
 INFO:  Manager has exited !!
+Mar 29, 2019 12:43:16 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 29, 2019 12:43:17 PM clients.DLMSClient performActionForManager
+INFO:  Accessing add item !!
+Mar 29, 2019 12:43:17 PM clients.DLMSClient log
+INFO: Please enter Item Id, Item Name and quantity using comma seperation.
+Mar 29, 2019 12:43:23 PM clients.DLMSClient log
+INFO: Item added successfully
+Mar 29, 2019 12:43:23 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 29, 2019 12:43:26 PM clients.DLMSClient performActionForManager
+INFO:  Accessing List Item Availability !!
+Mar 29, 2019 12:43:26 PM clients.DLMSClient log
+INFO: Reply : {CON1021=ItemModel [itemId=CON1021, itemName=ITEM 30, quantity=5], CON1011=ItemModel [itemId=CON1011, itemName=ITEM 11, quantity=10], CON1025=ItemModel [itemId=CON1025, itemName=ITEM 30, quantity=2], CON8888=ItemModel [itemId=CON8888, itemName=ROHIT, quantity=2]}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+Mar 29, 2019 12:43:26 PM clients.DLMSClient log
+INFO: Please select one of the operations: 
+Mar 29, 2019 12:43:34 PM clients.DLMSClient performActionForManager
+INFO:  Accessing add item !!
+Mar 29, 2019 12:43:34 PM clients.DLMSClient log
+INFO: Please enter Item Id, Item Name and quantity using comma seperation.
+Mar 29, 2019 12:43:44 PM clients.DLMSClient log
+INFO: Item added successfully
+Mar 29, 2019 12:43:44 PM clients.DLMSClient log
+INFO: Please select one of the operations: 

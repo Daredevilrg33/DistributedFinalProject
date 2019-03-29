@@ -156,3 +156,11 @@ Mar 28, 2019 10:41:02 PM utilities.Utility log
 INFO: Accessing Add Item. 
 Mar 28, 2019 10:41:02 PM utilities.Utility log
 INFO: Item successfully added to concordia hashmap.
+Mar 29, 2019 12:43:23 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 29, 2019 12:43:23 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Mar 29, 2019 12:43:44 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 29, 2019 12:43:44 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
