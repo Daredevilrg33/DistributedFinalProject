@@ -36,3 +36,63 @@ Mar 28, 2019 10:12:28 PM servers.ServerMcgill receiveLocalUDP
 INFO: Find Item,CONU0002,ROHIT8787
 Mar 28, 2019 10:12:28 PM servers.ServerMcgill receiveLocalUDP
 INFO: unsuccessful
+Mar 30, 2019 4:58:30 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Mar 30, 2019 4:58:30 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,we
+Mar 30, 2019 4:58:30 PM servers.ServerMcgill receiveLocalUDP
+INFO: unsuccessful
+Mar 30, 2019 5:04:46 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Mar 30, 2019 5:04:46 PM servers.ServerMcgill receiveLocalUDP
+INFO: Borrow,CONU0001,MCG0001,4,false
+Mar 30, 2019 5:04:46 PM servers.ServerMcgill receiveLocalUDP
+INFO: User has borrowed successfully !!
+Mar 30, 2019 5:36:46 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Mar 30, 2019 5:36:46 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 5:36:46 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful,MCG0002,ITEM 30,5,MCG0001,ITEM 30,10
+Mar 30, 2019 5:40:43 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Mar 30, 2019 5:40:43 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 5:40:43 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful,MCG0002,ITEM 30,5,MCG0001,ITEM 30,10
+Mar 30, 2019 5:42:08 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Mar 30, 2019 5:42:08 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 5:42:08 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful,MCG0002,ITEM 30,5,MCG0001,ITEM 30,10
+Mar 30, 2019 5:46:00 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Mar 30, 2019 5:46:00 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 5:46:00 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful,MCG0002,ITEM 30,5,MCG0001,ITEM 30,10
+Mar 30, 2019 7:42:07 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Mar 30, 2019 7:42:07 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 7:42:07 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful,MCG0002,ITEM 30,5,MCG0001,ITEM 30,10
+Mar 30, 2019 8:14:33 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 8:14:33 PM utilities.Utility log
+INFO: Requesting Port 6001 message: Borrow,MCGU0001,CON0001,9,true
+Mar 30, 2019 8:14:33 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@6976bcb6
+Mar 30, 2019 8:14:55 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 8:14:55 PM utilities.Utility log
+INFO: Requesting Port 6001 message: Borrow,MCGU0001,CON0002,4,false
+Mar 30, 2019 8:14:55 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@67b15fe8
+Mar 30, 2019 8:14:55 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 8:14:55 PM utilities.Utility log
+INFO: Requesting Port 6001 message: Return Item,MCGU0001,CON0001
+Mar 30, 2019 8:14:55 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@638ed7c6

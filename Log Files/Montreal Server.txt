@@ -36,3 +36,117 @@ Mar 28, 2019 10:12:28 PM servers.ServerMontreal receiveLocalUDP
 INFO: Find Item,CONU0002,ROHIT8787
 Mar 28, 2019 10:12:28 PM servers.ServerMontreal receiveLocalUDP
 INFO: unsuccessful
+Mar 30, 2019 4:58:30 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 30, 2019 4:58:30 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,we
+Mar 30, 2019 4:58:30 PM servers.ServerMontreal receiveLocalUDP
+INFO: unsuccessful
+Mar 30, 2019 5:13:50 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 30, 2019 5:13:50 PM servers.ServerMontreal receiveLocalUDP
+INFO: Borrow,CONU0001,MON0002,4,false
+Mar 30, 2019 5:13:50 PM servers.ServerMontreal receiveLocalUDP
+INFO: User has borrowed successfully !!
+Mar 30, 2019 5:28:54 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 30, 2019 5:28:54 PM servers.ServerMontreal receiveLocalUDP
+INFO: Borrow,CONU0001,MON0001,4,false
+Mar 30, 2019 5:28:54 PM servers.ServerMontreal receiveLocalUDP
+INFO: User has borrowed successfully !!
+Mar 30, 2019 5:36:46 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 30, 2019 5:36:46 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 5:36:46 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON0001,ITEM 30,8
+Mar 30, 2019 5:40:43 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 30, 2019 5:40:43 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 5:40:43 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON0001,ITEM 30,8
+Mar 30, 2019 5:42:08 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 30, 2019 5:42:08 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 5:42:08 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON0001,ITEM 30,8
+Mar 30, 2019 5:46:00 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 30, 2019 5:46:00 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 5:46:00 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON0001,ITEM 30,8
+Mar 30, 2019 7:42:07 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 30, 2019 7:42:07 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 7:42:07 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON0001,ITEM 30,8
+Mar 30, 2019 7:42:47 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 30, 2019 7:42:47 PM servers.ServerMontreal receiveLocalUDP
+INFO: Borrow,CONU0001,MON0001,9,true
+Mar 30, 2019 7:42:47 PM servers.ServerMontreal receiveLocalUDP
+INFO: User has borrowed successfully !!
+Mar 30, 2019 7:42:59 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 30, 2019 7:42:59 PM servers.ServerMontreal receiveLocalUDP
+INFO: Borrow,CONU0001,MON0002,4,false
+Mar 30, 2019 7:42:59 PM servers.ServerMontreal receiveLocalUDP
+INFO: User has borrowed successfully !!
+Mar 30, 2019 7:42:59 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 30, 2019 7:42:59 PM servers.ServerMontreal receiveLocalUDP
+INFO: Return Item,CONU0001,MON0001
+Mar 30, 2019 7:42:59 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful
+Mar 30, 2019 7:50:25 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 7:50:25 PM utilities.Utility log
+INFO: Requesting Port 6001 message: Borrow,MONU0001,CON0003,10,true
+Mar 30, 2019 7:50:25 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@638ed7c6
+Mar 30, 2019 7:54:22 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 30, 2019 7:54:22 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Mar 30, 2019 8:00:15 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 8:00:15 PM utilities.Utility log
+INFO: Requesting Port 6001 message: Borrow,MONU0001,CON0001,2,true
+Mar 30, 2019 8:00:15 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@1e90d21b
+Mar 30, 2019 8:03:22 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Mar 30, 2019 8:03:22 PM utilities.Utility log
+INFO: Quantity is greater than zero.
+Mar 30, 2019 8:03:22 PM utilities.Utility log
+INFO: Old quantity of the item: 8
+Mar 30, 2019 8:03:22 PM utilities.Utility log
+INFO: Quantity to be reduce : 7
+Mar 30, 2019 8:03:22 PM utilities.Utility log
+INFO: Item quantity has been reduced to : 1
+Mar 30, 2019 8:05:53 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 30, 2019 8:05:53 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Mar 30, 2019 8:07:13 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 30, 2019 8:07:13 PM servers.ServerMontreal receiveLocalUDP
+INFO: Borrow,CONU0001,MON5656,9,true
+Mar 30, 2019 8:07:13 PM servers.ServerMontreal receiveLocalUDP
+INFO: User has borrowed successfully !!
+Mar 30, 2019 8:07:46 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 30, 2019 8:07:46 PM servers.ServerMontreal receiveLocalUDP
+INFO: Borrow,CONU0001,MON0001,4,false
+Mar 30, 2019 8:07:46 PM servers.ServerMontreal receiveLocalUDP
+INFO: User has borrowed successfully !!
+Mar 30, 2019 8:07:46 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Mar 30, 2019 8:07:46 PM servers.ServerMontreal receiveLocalUDP
+INFO: Return Item,CONU0001,MON5656
+Mar 30, 2019 8:07:46 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful

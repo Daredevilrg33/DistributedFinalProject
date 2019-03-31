@@ -50,7 +50,7 @@ public class ServerMcgill {
 				// Server waits for the request to come
 				aSocket.receive(request);// request received
 
-				String requestData = new String(request.getData());
+				String requestData = new String(request.getData(), request.getOffset(), request.getLength());
 				System.out.println("Request received from client: " + requestData.trim());
 				String replyMessage = performAction(requestData.trim(), replicaManagerImplementation);
 				DatagramPacket reply = new DatagramPacket(replyMessage.getBytes(), replyMessage.getBytes().length,
@@ -133,8 +133,7 @@ public class ServerMcgill {
 				aSocket.receive(request);
 				System.out.println("UDP Request Recieved MCGILL. ");
 				replicaManagerImplementation.logger.info("UDP Request Recieved MCGILL!!");
-				String inputFromServer = new String(request.getData()); // Request received from server
-				inputFromServer = inputFromServer.trim();
+				String inputFromServer = new String(request.getData(), request.getOffset(), request.getLength());
 				DatagramPacket reply = null;
 				String replyMessage = "";
 				replicaManagerImplementation.logger.info(inputFromServer);

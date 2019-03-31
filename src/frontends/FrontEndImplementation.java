@@ -10,6 +10,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -30,6 +31,7 @@ import utilities.Utility;
 public class FrontEndImplementation extends FrontEndOperationsPOA {
 	public Logger logger = Logger.getLogger(FrontEndImplementation.class.getName());
 	String outputResult = "";
+	HashMap<String,String> responseMap = new HashMap();
 
 	/**
 	 * @param orb
@@ -186,7 +188,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 
 	}
 
-	private synchronized String sendUDPRequestToSequencer(int serverPort, String message) {
+	private String sendUDPRequestToSequencer(int serverPort, String message) {
 
 		Utility.log("Accessing UDP Request", logger);
 		Utility.log("Requesting Port " + serverPort + " message: " + message, logger);
@@ -206,17 +208,18 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 
 			byte[] buffer = new byte[1000];
 			int resultCount = 0;
-			while (resultCount < 1) {
+			while (resultCount < 2) {
 				DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
 				aSocket.receive(reply);
 				messageReceived = "";
-				messageReceived = new String(reply.getData());
-
+				outputResult = "";
+				messageReceived = new String(reply.getData(), reply.getOffset(), reply.getLength());
+//				String resIdentifier=messageReceived.split("@")[0];
+//				responseMap.put(resIdentifier, messageReceived.split("@")[1]);
 				System.out.println("Message Recieved: " + messageReceived.trim());
 				System.out.println("Address : " + reply.getAddress());
 				System.out.println("Port: " + reply.getPort());
-				outputResult = outputResult.concat(messageReceived.trim());
-				Utility.log("Received reply" + outputResult, logger);
+				Utility.log("Received reply" + messageReceived.trim(), logger);
 				resultCount++;
 				buffer = new byte[1000];
 			}
@@ -232,6 +235,81 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 				aSocket.close();
 		}
 		return messageReceived;
+	}
+	
+	private void compareResponse()
+	{
+		int count=0;
+		boolean rmNancy=false;
+		boolean rmRohit=false;
+		boolean rmRoohani=false;
+		boolean rmHasti=false;
+			if(responseMap.get("RMNancy").equals(responseMap.get("RMRohit")))
+			{
+			count++;	
+			rmRohit=true;
+			}
+			else if(responseMap.get("RMNancy").equals(responseMap.get("RMRoohani")))
+			{
+			count++;
+			rmRoohani=true;
+			}
+			else if(responseMap.get("RMNancy").equals(responseMap.get("RMHasti")))
+			{
+			count++;
+			rmHasti=true;
+			}
+			
+			if(rmRohit && rmRoohani && rmHasti)
+			{
+				System.out.println("\n\n\n All Responses matches");
+				rmNancy=true;
+			}
+			if(!rmRohit && !rmRoohani && !rmHasti)
+			{
+				if(responseMap.get("RMRohit").equals(responseMap.get("RMHasti")))
+				{
+					count++;	
+					rmHasti=true;
+				}
+				if(responseMap.get("RMRohit").equals(responseMap.get("RMRoohani")))
+				{
+					count++;	
+					rmRoohani=true;
+				}
+				if(rmHasti && rmRoohani)
+				{
+					rmRohit=true;
+				}
+				if(!rmHasti &&! rmRoohani)
+				{
+					if(responseMap.get("RMHasti").equals(responseMap.get("RMRoohani")))
+					{
+						
+					}
+				}
+			}
+			if(!rmNancy)
+			{
+				System.out.println("\n\n\n Nancy RM fails");
+			}
+			if(!rmRohit)
+			{
+				System.out.println("\n\n\n Rohit RM fails");
+			}
+			if(!rmRoohani)
+			{
+				System.out.println("\n\n\n Rohit RM fails");
+			}
+			if(!rmHasti)
+			{
+				System.out.println("\n\n\n Hasti RM fails");
+			}
+			
+			if(count>2)
+			{
+				System.out.println("Majority responses are matching ");
+			}
 	}
 
 }

@@ -152,7 +152,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 				String value = scanner.nextLine();
 				if (value.trim().equalsIgnoreCase("y")) {
 					if (waitList.containsKey(itemId)) {
-						Queue<String> userQueue = waitList.get(itemId);
+					 	Queue<String> userQueue = waitList.get(itemId);
 						userQueue.add(userId);
 						waitList.put(itemId, userQueue);
 					} else {
@@ -160,7 +160,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 						userQueue1.add(userModel.getUserId());
 						waitList.put(itemId, userQueue1);
 					}
-					replyMessage = ApplicationConstant._MSG_USER_ADDED_TO_WAITLIST;
+					replyMessage = ApplicationConstant.MSG_USER_ADDED_TO_WAITLIST;
 
 				} else {
 					replyMessage = "User has not been added to waitlist.";
@@ -267,9 +267,9 @@ public class ReplicaManagerImplementation implements RMInterface {
 			if (itemHashMap.containsKey(itemId)) {
 				boolean isItemReturned = returnItemAndAssignToWaitListUser(userId, itemId);
 				if (isItemReturned)
-					replyMessage = "Item has been returned successfully";
+					replyMessage = ApplicationConstant.ITEM_RETURNED_SUCCESSFULLY;
 				else
-					replyMessage = "Item does not exist. You cannot perform this operation";
+					replyMessage = ApplicationConstant.ITEM_RETURNED_DOESNOT_EXIST;
 			} else {
 				String str = itemId.substring(0, 3);
 				String reply = "";
@@ -287,15 +287,15 @@ public class ReplicaManagerImplementation implements RMInterface {
 					UserModel user1 = userHashMap.get(userId);
 					user1.removeItem(itemId);
 					userHashMap.put(user1.getUserId(), user1);
-					replyMessage = "Item has been returned successfully";
+					replyMessage = ApplicationConstant.ITEM_RETURNED_SUCCESSFULLY;
 
 				} else {
-					replyMessage = "Item does not exist. You cannot perform this operation";
+					replyMessage = ApplicationConstant.ITEM_RETURNED_DOESNOT_EXIST;
 
 				}
 			}
 		} else
-			replyMessage = "Item has not been borrowed by this user.";
+			replyMessage = ApplicationConstant.ITEM_NOT_BORROWED;
 		return replyMessage;
 	}
 
@@ -326,9 +326,9 @@ public class ReplicaManagerImplementation implements RMInterface {
 
 					String itemReturned = returnItem(userId, oldItemId);
 					if (itemReturned.equalsIgnoreCase("Item has been returned successfully"))
-						replyMessage = "Item has been exchanged successfully";
+						replyMessage = ApplicationConstant.MSG_ITEM_EXCHANGE_SUCCESSFULLY;
 					else
-						replyMessage = "Item cannot be per as one of the operations is failed.";
+						replyMessage = ApplicationConstant.MSG_ITEM_EXCHANGE_UNSUCCESSFUL;
 				}
 			} else {
 				if (newItemValue.equalsIgnoreCase(ApplicationConstant.CONCORDIA_SERVER)) {
@@ -347,16 +347,16 @@ public class ReplicaManagerImplementation implements RMInterface {
 					userHashMap.put(user.getUserId(), user);
 					String itemReturned = returnItem(userId, oldItemId);
 					if (itemReturned.equalsIgnoreCase("Item has been returned successfully"))
-						replyMessage = "Item has been exchanged successfully";
+						replyMessage = ApplicationConstant.MSG_ITEM_EXCHANGE_SUCCESSFULLY;
 					else
-						replyMessage = "Item cannot be per as one of the operations is failed.";
+						replyMessage = ApplicationConstant.MSG_ITEM_EXCHANGE_UNSUCCESSFUL;
 				} else {
 					System.out.println(replyMessage);
-					replyMessage = "Item cannot be per as one of the operations is failed.";
+					replyMessage = ApplicationConstant.MSG_ITEM_EXCHANGE_UNSUCCESSFUL;
 				}
 			}
 		} else
-			replyMessage = "Item cannot be per as one of the operations is failed.";
+			replyMessage = ApplicationConstant.MSG_ITEM_EXCHANGE_UNSUCCESSFUL;
 		return replyMessage;
 	}
 
@@ -463,16 +463,16 @@ public class ReplicaManagerImplementation implements RMInterface {
 		Utility.log("Accessing the Data Set", logger);
 		switch (serverType) {
 		case CONCORDIA:
-			ItemModel itemModel = new ItemModel("CON1011", "ITEM 11", 10);
+			ItemModel itemModel = new ItemModel("CON0001", "ITEM 11", 10);
 			itemHashMap.put(itemModel.getItemId(), itemModel);
-			ItemModel itemModel1 = new ItemModel("CON1021", "ITEM 30", 5);
+			ItemModel itemModel1 = new ItemModel("CON0002", "ITEM 30", 5);
 			itemHashMap.put(itemModel1.getItemId(), itemModel1);
-			ItemModel itemModel2 = new ItemModel("CON1025", "ITEM 30", 2);
+			ItemModel itemModel2 = new ItemModel("CON0003", "ITEM 30", 2);
 			itemHashMap.put(itemModel2.getItemId(), itemModel2);
 			UserModel userModel1 = new UserModel("CONU0001");
 			UserModel userModel2 = new UserModel("CONU0002");
-			UserModel userModel3 = new UserModel("CONM0003");
-			UserModel userModel4 = new UserModel("CONM0004");
+			UserModel userModel3 = new UserModel("CONM0001");
+			UserModel userModel4 = new UserModel("CONM0002");
 			userHashMap.put(userModel1.getUserId(), userModel1);
 			userHashMap.put(userModel2.getUserId(), userModel2);
 			userHashMap.put(userModel3.getUserId(), userModel3);
@@ -480,16 +480,16 @@ public class ReplicaManagerImplementation implements RMInterface {
 
 			break;
 		case MCGILL:
-			ItemModel itemModel6 = new ItemModel("MCG1065", "ITEM 30", 10);
+			ItemModel itemModel6 = new ItemModel("MCG0001", "ITEM 30", 10);
 			itemHashMap.put(itemModel6.getItemId(), itemModel6);
-			ItemModel itemModel7 = new ItemModel("MCG1077", "ITEM 30", 5);
+			ItemModel itemModel7 = new ItemModel("MCG0002", "ITEM 30", 5);
 			itemHashMap.put(itemModel7.getItemId(), itemModel7);
-			ItemModel itemModel8 = new ItemModel("MCG1080", "ITEM 80", 8);
+			ItemModel itemModel8 = new ItemModel("MCG0003", "ITEM 80", 8);
 			itemHashMap.put(itemModel8.getItemId(), itemModel8);
-			UserModel userModel5 = new UserModel("MCGU0005");
-			UserModel userModel6 = new UserModel("MCGU0006");
-			UserModel userModel7 = new UserModel("MCGM0007");
-			UserModel userModel8 = new UserModel("MCGM0008");
+			UserModel userModel5 = new UserModel("MCGU0001");
+			UserModel userModel6 = new UserModel("MCGU0002");
+			UserModel userModel7 = new UserModel("MCGM0001");
+			UserModel userModel8 = new UserModel("MCGM0002");
 			userHashMap.put(userModel5.getUserId(), userModel5);
 			userHashMap.put(userModel6.getUserId(), userModel6);
 			userHashMap.put(userModel7.getUserId(), userModel7);
@@ -497,16 +497,16 @@ public class ReplicaManagerImplementation implements RMInterface {
 
 			break;
 		case MONTREAL:
-			ItemModel itemModel3 = new ItemModel("MON1030", "ITEM 30", 8);
+			ItemModel itemModel3 = new ItemModel("MON0001", "ITEM 30", 8);
 			itemHashMap.put(itemModel3.getItemId(), itemModel3);
-			ItemModel itemModel4 = new ItemModel("MON1040", "ITEM 40", 6);
+			ItemModel itemModel4 = new ItemModel("MON0002", "ITEM 40", 6);
 			itemHashMap.put(itemModel4.getItemId(), itemModel4);
-			ItemModel itemModel5 = new ItemModel("MON1051", "ITEM 51", 4);
+			ItemModel itemModel5 = new ItemModel("MON0003", "ITEM 51", 4);
 			itemHashMap.put(itemModel5.getItemId(), itemModel5);
-			UserModel userModel9 = new UserModel("MONU0009");
-			UserModel userModel10 = new UserModel("MONU0010");
-			UserModel userModel11 = new UserModel("MONM0011");
-			UserModel userModel12 = new UserModel("MONM0012");
+			UserModel userModel9 = new UserModel("MONU0001");
+			UserModel userModel10 = new UserModel("MONU0002");
+			UserModel userModel11 = new UserModel("MONM0001");
+			UserModel userModel12 = new UserModel("MONM0002");
 			userHashMap.put(userModel9.getUserId(), userModel9);
 			userHashMap.put(userModel10.getUserId(), userModel10);
 			userHashMap.put(userModel11.getUserId(), userModel11);

@@ -164,3 +164,305 @@ Mar 29, 2019 12:43:44 PM utilities.Utility log
 INFO: Accessing Add Item. 
 Mar 29, 2019 12:43:44 PM utilities.Utility log
 INFO: Item successfully added to concordia hashmap.
+Mar 30, 2019 4:16:30 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 30, 2019 4:24:08 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 30, 2019 4:24:08 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Mar 30, 2019 4:25:19 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 30, 2019 4:25:19 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Mar 30, 2019 4:26:48 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Mar 30, 2019 4:26:48 PM utilities.Utility log
+INFO: Quantity is greater than zero.
+Mar 30, 2019 4:26:48 PM utilities.Utility log
+INFO: Old quantity of the item: 6
+Mar 30, 2019 4:26:48 PM utilities.Utility log
+INFO: Quantity to be reduce : 2
+Mar 30, 2019 4:26:48 PM utilities.Utility log
+INFO: Item quantity has been reduced to : 4
+Mar 30, 2019 4:35:29 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 30, 2019 4:35:29 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Mar 30, 2019 4:35:55 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Mar 30, 2019 4:35:55 PM utilities.Utility log
+INFO: Quantity is greater than zero.
+Mar 30, 2019 4:35:55 PM utilities.Utility log
+INFO: Old quantity of the item: 3
+Mar 30, 2019 4:35:55 PM utilities.Utility log
+INFO: Quantity to be reduce : 2
+Mar 30, 2019 4:35:55 PM utilities.Utility log
+INFO: Item quantity has been reduced to : 1
+Mar 30, 2019 4:36:46 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Mar 30, 2019 4:36:46 PM utilities.Utility log
+INFO: Quantity is less than zero.
+Mar 30, 2019 4:36:46 PM utilities.Utility log
+INFO: Item has been removed successfully !!
+Mar 30, 2019 4:37:17 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 30, 2019 4:37:17 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Mar 30, 2019 4:56:13 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 30, 2019 4:56:13 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Mar 30, 2019 4:58:30 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 4:58:30 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Find Item,CONU0001,we
+Mar 30, 2019 4:58:30 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@6976bcb6
+Mar 30, 2019 4:58:30 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 4:58:30 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Find Item,CONU0001,we
+Mar 30, 2019 4:58:30 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@67b15fe8
+Mar 30, 2019 5:04:46 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 5:04:46 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Borrow,CONU0001,MCG0001,4,false
+Mar 30, 2019 5:04:46 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@638ed7c6
+Mar 30, 2019 5:12:24 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 5:12:24 PM utilities.Utility log
+INFO: Requesting Port 6001 message: Borrow,CONU0001,CON001,2,true
+Mar 30, 2019 5:12:24 PM servers.ServerConcordia receiveLocalUDP
+INFO: UDP Request Recieved Concordia!!
+Mar 30, 2019 5:12:24 PM servers.ServerConcordia receiveLocalUDP
+INFO: Borrow,CONU0001,CON001,2,true
+Mar 30, 2019 5:13:50 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 5:13:50 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Borrow,CONU0001,MON0002,4,false
+Mar 30, 2019 5:13:50 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@43e47cb3
+Mar 30, 2019 5:28:54 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 5:28:54 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Borrow,CONU0001,MON0001,4,false
+Mar 30, 2019 5:28:54 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@43e47cb3
+Mar 30, 2019 5:36:46 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 5:36:46 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 5:36:46 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@1e90d21b
+Mar 30, 2019 5:36:46 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 5:36:46 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 5:36:46 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@5b924fad
+Mar 30, 2019 5:40:43 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 5:40:43 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 5:40:43 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@43e47cb3
+Mar 30, 2019 5:40:43 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 5:40:43 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 5:40:43 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@47dbf017
+Mar 30, 2019 5:42:08 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 5:42:08 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 5:42:08 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@2d97688
+Mar 30, 2019 5:42:08 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 5:42:08 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 5:42:08 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@53f02d17
+Mar 30, 2019 5:46:00 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 5:46:00 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 5:46:00 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@47dbf017
+Mar 30, 2019 5:46:00 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 5:46:00 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 5:46:00 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@2d97688
+Mar 30, 2019 6:26:35 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 30, 2019 6:26:35 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Mar 30, 2019 6:27:45 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 30, 2019 6:27:45 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Mar 30, 2019 6:34:40 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 30, 2019 6:34:40 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Mar 30, 2019 6:35:10 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Mar 30, 2019 6:35:10 PM utilities.Utility log
+INFO: Quantity is greater than zero.
+Mar 30, 2019 6:35:10 PM utilities.Utility log
+INFO: Old quantity of the item: 2
+Mar 30, 2019 6:35:10 PM utilities.Utility log
+INFO: Quantity to be reduce : 1
+Mar 30, 2019 6:35:10 PM utilities.Utility log
+INFO: Item quantity has been reduced to : 1
+Mar 30, 2019 6:39:22 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Mar 30, 2019 6:39:22 PM utilities.Utility log
+INFO: Quantity is greater than zero.
+Mar 30, 2019 6:39:22 PM utilities.Utility log
+INFO: Old quantity of the item: 10
+Mar 30, 2019 6:39:22 PM utilities.Utility log
+INFO: Quantity to be reduce : 3
+Mar 30, 2019 6:39:22 PM utilities.Utility log
+INFO: Item quantity has been reduced to : 7
+Mar 30, 2019 6:59:14 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 30, 2019 6:59:14 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Mar 30, 2019 7:25:38 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 30, 2019 7:25:38 PM utilities.Utility log
+INFO: Item already present in concordia hash map.
+Mar 30, 2019 7:25:38 PM utilities.Utility log
+INFO: Previous Quantity: 10
+Mar 30, 2019 7:25:38 PM utilities.Utility log
+INFO: Final Quantity: 14
+Mar 30, 2019 7:26:37 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 30, 2019 7:26:37 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Mar 30, 2019 7:27:22 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Mar 30, 2019 7:27:22 PM utilities.Utility log
+INFO: Quantity is greater than zero.
+Mar 30, 2019 7:27:22 PM utilities.Utility log
+INFO: Old quantity of the item: 14
+Mar 30, 2019 7:27:22 PM utilities.Utility log
+INFO: Quantity to be reduce : 2
+Mar 30, 2019 7:27:22 PM utilities.Utility log
+INFO: Item quantity has been reduced to : 12
+Mar 30, 2019 7:39:37 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 30, 2019 7:39:37 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Mar 30, 2019 7:40:35 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 30, 2019 7:40:35 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Mar 30, 2019 7:41:15 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Mar 30, 2019 7:41:15 PM utilities.Utility log
+INFO: Quantity is greater than zero.
+Mar 30, 2019 7:41:15 PM utilities.Utility log
+INFO: Old quantity of the item: 10
+Mar 30, 2019 7:41:15 PM utilities.Utility log
+INFO: Quantity to be reduce : 8
+Mar 30, 2019 7:41:15 PM utilities.Utility log
+INFO: Item quantity has been reduced to : 2
+Mar 30, 2019 7:41:28 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Mar 30, 2019 7:41:28 PM utilities.Utility log
+INFO: Quantity is less than zero.
+Mar 30, 2019 7:41:28 PM utilities.Utility log
+INFO: Item has been removed successfully !!
+Mar 30, 2019 7:42:07 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 7:42:07 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 7:42:07 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@67b15fe8
+Mar 30, 2019 7:42:07 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 7:42:07 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Find Item,CONU0001,ITEM 30
+Mar 30, 2019 7:42:07 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@638ed7c6
+Mar 30, 2019 7:42:47 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 7:42:47 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Borrow,CONU0001,MON0001,9,true
+Mar 30, 2019 7:42:47 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@268c55d3
+Mar 30, 2019 7:42:59 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 7:42:59 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Borrow,CONU0001,MON0002,4,false
+Mar 30, 2019 7:42:59 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@7a43ceb8
+Mar 30, 2019 7:42:59 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 7:42:59 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Return Item,CONU0001,MON0001
+Mar 30, 2019 7:42:59 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@17e09007
+Mar 30, 2019 7:50:25 PM servers.ServerConcordia receiveLocalUDP
+INFO: UDP Request Recieved Concordia!!
+Mar 30, 2019 7:50:25 PM servers.ServerConcordia receiveLocalUDP
+INFO: Borrow,MONU0001,CON0003,10,true
+Mar 30, 2019 7:50:25 PM servers.ServerConcordia receiveLocalUDP
+INFO: User has borrowed successfully !!
+Mar 30, 2019 7:51:57 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 30, 2019 7:51:57 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Mar 30, 2019 8:00:15 PM servers.ServerConcordia receiveLocalUDP
+INFO: UDP Request Recieved Concordia!!
+Mar 30, 2019 8:00:15 PM servers.ServerConcordia receiveLocalUDP
+INFO: Borrow,MONU0001,CON0001,2,true
+Mar 30, 2019 8:00:15 PM servers.ServerConcordia receiveLocalUDP
+INFO: User has borrowed successfully !!
+Mar 30, 2019 8:07:13 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 8:07:13 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Borrow,CONU0001,MON5656,9,true
+Mar 30, 2019 8:07:13 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@4d239b67
+Mar 30, 2019 8:07:46 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 8:07:46 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Borrow,CONU0001,MON0001,4,false
+Mar 30, 2019 8:07:46 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@43e47cb3
+Mar 30, 2019 8:07:46 PM utilities.Utility log
+INFO: Accessing UDP Request
+Mar 30, 2019 8:07:46 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Return Item,CONU0001,MON5656
+Mar 30, 2019 8:07:46 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@47dbf017
+Mar 30, 2019 8:14:33 PM servers.ServerConcordia receiveLocalUDP
+INFO: UDP Request Recieved Concordia!!
+Mar 30, 2019 8:14:33 PM servers.ServerConcordia receiveLocalUDP
+INFO: Borrow,MCGU0001,CON0001,9,true
+Mar 30, 2019 8:14:33 PM servers.ServerConcordia receiveLocalUDP
+INFO: User has borrowed successfully !!
+Mar 30, 2019 8:14:55 PM servers.ServerConcordia receiveLocalUDP
+INFO: UDP Request Recieved Concordia!!
+Mar 30, 2019 8:14:55 PM servers.ServerConcordia receiveLocalUDP
+INFO: Borrow,MCGU0001,CON0002,4,false
+Mar 30, 2019 8:14:55 PM servers.ServerConcordia receiveLocalUDP
+INFO: User has borrowed successfully !!
+Mar 30, 2019 8:14:55 PM servers.ServerConcordia receiveLocalUDP
+INFO: UDP Request Recieved Concordia!!
+Mar 30, 2019 8:14:55 PM servers.ServerConcordia receiveLocalUDP
+INFO: Return Item,MCGU0001,CON0001
+Mar 30, 2019 8:14:55 PM servers.ServerConcordia receiveLocalUDP
+INFO: successful
+Mar 30, 2019 8:46:36 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Mar 30, 2019 8:46:36 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.

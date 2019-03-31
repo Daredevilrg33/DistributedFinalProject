@@ -136,8 +136,7 @@ public class ServerConcordia {
 				aSocket.receive(request);
 				System.out.println("UDP Request Recieved Concordia. ");
 				replicaManagerImplementation.logger.info("UDP Request Recieved Concordia!!");
-				String inputFromServer = new String(request.getData()); // Request received from server
-				inputFromServer = inputFromServer.trim();
+				String inputFromServer = new String(request.getData(), request.getOffset(), request.getLength());
 				DatagramPacket reply = null;
 				String replyMessage = "";
 				replicaManagerImplementation.logger.info(inputFromServer);
