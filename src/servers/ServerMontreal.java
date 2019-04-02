@@ -20,8 +20,11 @@ import utilities.ApplicationConstant;
  * @author Rohit Gupta
  *
  */
-public class ServerMontreal {
-	public static void main(String[] args) {
+public class ServerMontreal extends Thread{
+	
+	@Override
+	public void run()
+	{
 		ReplicaManagerImplementation replicaManagerImplementation = new ReplicaManagerImplementation(
 				ServerType.MONTREAL);
 		replicaManagerImplementation.logging("Montreal Server");

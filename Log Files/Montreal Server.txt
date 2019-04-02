@@ -150,3 +150,49 @@ Mar 30, 2019 8:07:46 PM servers.ServerMontreal receiveLocalUDP
 INFO: Return Item,CONU0001,MON5656
 Mar 30, 2019 8:07:46 PM servers.ServerMontreal receiveLocalUDP
 INFO: successful
+Apr 01, 2019 4:15:30 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 01, 2019 4:15:30 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Apr 01, 2019 4:15:45 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 01, 2019 4:15:45 PM servers.ServerMontreal receiveLocalUDP
+INFO: Borrow,CONU0001,MON9090,4,true
+Apr 01, 2019 4:15:45 PM servers.ServerMontreal receiveLocalUDP
+INFO: User has borrowed successfully !!
+Apr 01, 2019 5:16:57 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 01, 2019 5:16:57 PM servers.ServerMontreal receiveLocalUDP
+INFO: Borrow,CONU0001,MON0001,1,true
+Apr 01, 2019 5:16:57 PM servers.ServerMontreal receiveLocalUDP
+INFO: User has borrowed successfully !!
+Apr 01, 2019 6:18:05 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 01, 2019 6:18:05 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 6:18:05 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON0001,ITEM 30,8
+Apr 01, 2019 6:44:40 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 01, 2019 6:44:40 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 6:44:40 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON0001,ITEM 30,8
+Apr 01, 2019 6:54:05 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 01, 2019 6:54:05 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 6:54:05 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON0001,ITEM 30,8
+Apr 01, 2019 6:59:50 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 01, 2019 6:59:50 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 6:59:50 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON0001,ITEM 30,8
+Apr 01, 2019 7:39:02 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 01, 2019 7:39:02 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 7:39:02 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON0001,ITEM 30,8

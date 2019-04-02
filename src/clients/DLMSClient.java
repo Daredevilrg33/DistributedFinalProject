@@ -200,6 +200,15 @@ public class DLMSClient {
 			log(response);
 			openOptionMenu(userModel);
 			break;
+		case ApplicationConstant.MANAGER_TEST_CRASH_FAILURE:
+			logger.info(" Accessing Crash Failure !!");
+			log("Please enter value less than 0 to crash the server.");
+			String status = scanner.nextLine();
+			String response1 = frontEndOperations.crashingServer(Integer.valueOf(status));
+			log(response1);
+			openOptionMenu(userModel);
+
+			break;
 		case ApplicationConstant.MANAGER_EXIT:
 			logger.info(" Manager has exited !!");
 			welcomePortal();
@@ -231,7 +240,8 @@ public class DLMSClient {
 			System.out.println("1. Add Item ");
 			System.out.println("2. Remove Item ");
 			System.out.println("3. List Item Availability");
-			System.out.println("4. Exit");
+			System.out.println("4. Test Crash Failure");
+			System.out.println("5. Exit");
 			break;
 		default:
 			break;

@@ -466,3 +466,101 @@ Mar 30, 2019 8:46:36 PM utilities.Utility log
 INFO: Accessing Add Item. 
 Mar 30, 2019 8:46:36 PM utilities.Utility log
 INFO: Item successfully added to concordia hashmap.
+Apr 01, 2019 4:14:17 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 01, 2019 4:14:17 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Apr 01, 2019 4:14:46 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Apr 01, 2019 4:14:46 PM utilities.Utility log
+INFO: Quantity is greater than zero.
+Apr 01, 2019 4:14:46 PM utilities.Utility log
+INFO: Old quantity of the item: 2
+Apr 01, 2019 4:14:46 PM utilities.Utility log
+INFO: Quantity to be reduce : 1
+Apr 01, 2019 4:14:46 PM utilities.Utility log
+INFO: Item quantity has been reduced to : 1
+Apr 01, 2019 4:15:01 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Apr 01, 2019 4:15:01 PM utilities.Utility log
+INFO: Quantity is less than zero.
+Apr 01, 2019 4:15:01 PM utilities.Utility log
+INFO: Item has been removed successfully !!
+Apr 01, 2019 4:15:45 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 01, 2019 4:15:45 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Borrow,CONU0001,MON9090,4,true
+Apr 01, 2019 4:15:45 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@e5e91fb
+Apr 01, 2019 4:30:18 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 01, 2019 4:30:18 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Borrow,CONU0001,MCG0001,10,true
+Apr 01, 2019 4:30:18 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@996e40
+Apr 01, 2019 5:16:57 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 01, 2019 5:16:57 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Borrow,CONU0001,MON0001,1,true
+Apr 01, 2019 5:16:57 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@24fc6206
+Apr 01, 2019 6:18:05 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 01, 2019 6:18:05 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 6:18:05 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@3a621e0f
+Apr 01, 2019 6:18:05 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 01, 2019 6:18:05 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 6:18:05 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@3e5d9d9b
+Apr 01, 2019 6:44:40 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 01, 2019 6:44:40 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 6:44:40 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@3a621e0f
+Apr 01, 2019 6:44:40 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 01, 2019 6:44:40 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 6:44:40 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@3e5d9d9b
+Apr 01, 2019 6:54:05 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 01, 2019 6:54:05 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 6:54:05 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@996e40
+Apr 01, 2019 6:54:05 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 01, 2019 6:54:05 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 6:54:05 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@4a6fa8b
+Apr 01, 2019 6:59:50 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 01, 2019 6:59:50 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 6:59:50 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@3a621e0f
+Apr 01, 2019 6:59:50 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 01, 2019 6:59:50 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 6:59:50 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@3e5d9d9b
+Apr 01, 2019 7:39:02 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 01, 2019 7:39:02 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 7:39:02 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@4a6fa8b
+Apr 01, 2019 7:39:02 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 01, 2019 7:39:02 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 7:39:02 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@41a4647b

@@ -13,7 +13,8 @@ public class ApplicationConstant {
 	public static final int MANAGER_ADD_ITEM = 1;
 	public static final int MANAGER_REMOVE_ITEM = 2;
 	public static final int MANAGER_LIST_ITEM_AVAILABILITY = 3;
-	public static final int MANAGER_EXIT = 4;
+	public static final int MANAGER_TEST_CRASH_FAILURE = 4;
+	public static final int MANAGER_EXIT = 5;
 
 	public static final int USER_BORROW_ITEM = 1;
 	public static final int USER_FIND_ITEM = 2;
@@ -77,5 +78,6 @@ public class ApplicationConstant {
 	public static final String ITEM_RETURNED_SUCCESSFULLY = "Item has been returned successfully";
 	public static final String ITEM_RETURNED_DOESNOT_EXIST = "Item does not exist. You cannot perform this operation";
 	public static final String ITEM_NOT_BORROWED = "Item has not been borrowed by this user.";
+	public static final String OP_CRASH_SERVER = "crashServer";
 
 }

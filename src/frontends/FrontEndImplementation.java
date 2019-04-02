@@ -31,7 +31,7 @@ import utilities.Utility;
 public class FrontEndImplementation extends FrontEndOperationsPOA {
 	public Logger logger = Logger.getLogger(FrontEndImplementation.class.getName());
 	String outputResult = "";
-	HashMap<String,String> responseMap = new HashMap();
+	HashMap<String, String> responseMap = new HashMap();
 
 	/**
 	 * @param orb
@@ -196,7 +196,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		String messageReceived = null;
 		try {
 			aSocket = new DatagramSocket(ApplicationConstant.UDP_FRONT_END_PORT);
-			// aSocket.setSoTimeout(30000);
+			// aSocket.setSoTimeout(10000);
 			byte[] mes = message.getBytes();
 			InetAddress aHost = InetAddress.getByName("localhost");
 
@@ -214,8 +214,8 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 				messageReceived = "";
 				outputResult = "";
 				messageReceived = new String(reply.getData(), reply.getOffset(), reply.getLength());
-//				String resIdentifier=messageReceived.split("@")[0];
-//				responseMap.put(resIdentifier, messageReceived.split("@")[1]);
+				// String resIdentifier=messageReceived.split("@")[0];
+				// responseMap.put(resIdentifier, messageReceived.split("@")[1]);
 				System.out.println("Message Recieved: " + messageReceived.trim());
 				System.out.println("Address : " + reply.getAddress());
 				System.out.println("Port: " + reply.getPort());
@@ -236,80 +236,74 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		}
 		return messageReceived;
 	}
-	
-	private void compareResponse()
-	{
-		int count=0;
-		boolean rmNancy=false;
-		boolean rmRohit=false;
-		boolean rmRoohani=false;
-		boolean rmHasti=false;
-			if(responseMap.get("RMNancy").equals(responseMap.get("RMRohit")))
-			{
-			count++;	
-			rmRohit=true;
-			}
-			else if(responseMap.get("RMNancy").equals(responseMap.get("RMRoohani")))
-			{
+
+	private void compareResponse() {
+		int count = 0;
+		boolean rmNancy = false;
+		boolean rmRohit = false;
+		boolean rmRoohani = false;
+		boolean rmHasti = false;
+		if (responseMap.get("RMNancy").equals(responseMap.get("RMRohit"))) {
 			count++;
-			rmRoohani=true;
-			}
-			else if(responseMap.get("RMNancy").equals(responseMap.get("RMHasti")))
-			{
+			rmRohit = true;
+		} else if (responseMap.get("RMNancy").equals(responseMap.get("RMRoohani"))) {
 			count++;
-			rmHasti=true;
+			rmRoohani = true;
+		} else if (responseMap.get("RMNancy").equals(responseMap.get("RMHasti"))) {
+			count++;
+			rmHasti = true;
+		}
+
+		if (rmRohit && rmRoohani && rmHasti) {
+			System.out.println("\n\n\n All Responses matches");
+			rmNancy = true;
+		}
+		if (!rmRohit && !rmRoohani && !rmHasti) {
+			if (responseMap.get("RMRohit").equals(responseMap.get("RMHasti"))) {
+				count++;
+				rmHasti = true;
 			}
-			
-			if(rmRohit && rmRoohani && rmHasti)
-			{
-				System.out.println("\n\n\n All Responses matches");
-				rmNancy=true;
+			if (responseMap.get("RMRohit").equals(responseMap.get("RMRoohani"))) {
+				count++;
+				rmRoohani = true;
 			}
-			if(!rmRohit && !rmRoohani && !rmHasti)
-			{
-				if(responseMap.get("RMRohit").equals(responseMap.get("RMHasti")))
-				{
-					count++;	
-					rmHasti=true;
-				}
-				if(responseMap.get("RMRohit").equals(responseMap.get("RMRoohani")))
-				{
-					count++;	
-					rmRoohani=true;
-				}
-				if(rmHasti && rmRoohani)
-				{
-					rmRohit=true;
-				}
-				if(!rmHasti &&! rmRoohani)
-				{
-					if(responseMap.get("RMHasti").equals(responseMap.get("RMRoohani")))
-					{
-						
-					}
+			if (rmHasti && rmRoohani) {
+				rmRohit = true;
+			}
+			if (!rmHasti && !rmRoohani) {
+				if (responseMap.get("RMHasti").equals(responseMap.get("RMRoohani"))) {
+
 				}
 			}
-			if(!rmNancy)
-			{
-				System.out.println("\n\n\n Nancy RM fails");
-			}
-			if(!rmRohit)
-			{
-				System.out.println("\n\n\n Rohit RM fails");
-			}
-			if(!rmRoohani)
-			{
-				System.out.println("\n\n\n Rohit RM fails");
-			}
-			if(!rmHasti)
-			{
-				System.out.println("\n\n\n Hasti RM fails");
-			}
-			
-			if(count>2)
-			{
-				System.out.println("Majority responses are matching ");
-			}
+		}
+		if (!rmNancy) {
+			System.out.println("\n\n\n Nancy RM fails");
+		}
+		if (!rmRohit) {
+			System.out.println("\n\n\n Rohit RM fails");
+		}
+		if (!rmRoohani) {
+			System.out.println("\n\n\n Rohit RM fails");
+		}
+		if (!rmHasti) {
+			System.out.println("\n\n\n Hasti RM fails");
+		}
+
+		if (count > 2) {
+			System.out.println("Majority responses are matching ");
+		}
+	}
+
+	@Override
+	public String crashingServer(int status) {
+		// TODO Auto-generated method stub
+		String response = "";
+		String udpMessage = ApplicationConstant.OP_CRASH_SERVER + "," + status;
+		System.out.println("CRASH SERVER" + udpMessage);
+
+		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage);
+		return response;
+
 	}
 
 }

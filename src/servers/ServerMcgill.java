@@ -20,8 +20,11 @@ import utilities.ApplicationConstant;
  * @author Rohit Gupta
  *
  */
-public class ServerMcgill {
-	public static void main(String[] args) {
+public class ServerMcgill extends Thread{
+	
+	@Override
+	public void run()
+	{
 
 		ReplicaManagerImplementation replicaManagerImplementation = new ReplicaManagerImplementation(ServerType.MCGILL);
 		replicaManagerImplementation.logging("Mcgill Server");

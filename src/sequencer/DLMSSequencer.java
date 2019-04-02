@@ -8,6 +8,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import utilities.ApplicationConstant;
@@ -18,8 +19,9 @@ import utilities.Utility;
  *
  */
 public class DLMSSequencer {
-	static long SequenceNumber = 1;
+	static int sequenceNumber = 1;
 	public static Logger logger = Logger.getLogger(DLMSSequencer.class.getName());
+	static HashMap<Integer, String> historyBuffer = new HashMap<>();
 
 	public static void main(String[] args) {
 		Runnable task = () -> {
@@ -44,11 +46,16 @@ public class DLMSSequencer {
 				aSocket.receive(request);// request received
 				String requestData = new String(request.getData(), request.getOffset(), request.getLength());
 				System.out.println("Request received from Front End: " + requestData.trim());
-				String multicastMessage = String.valueOf(SequenceNumber) + "," + requestData;
+				String multicastMessage = String.valueOf(sequenceNumber) + "," + requestData;
 
 				buffer = new byte[1000];
-				multicastUDPRequest(multicastMessage);
-				SequenceNumber++;
+				historyBuffer.put(sequenceNumber, multicastMessage);
+				if (sequenceNumber != 3)
+					multicastUDPRequest(multicastMessage);
+				if (sequenceNumber == 5) {
+					multicastUDPRequest(historyBuffer.get(3));
+				}
+				sequenceNumber++;
 				// DatagramPacket reply = new DatagramPacket(request.getData(),
 				// request.getLength(), request.getAddress(),
 				// request.getPort());// reply packet ready

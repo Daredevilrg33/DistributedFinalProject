@@ -13,5 +13,7 @@ module dlms{
 	string removeItem(in string managerId,in string itemId, in long quantity);
 
 	string listItemAvailability(in string managerId);
-};
+	
+	string crashingServer(in long status);
+	};
 };

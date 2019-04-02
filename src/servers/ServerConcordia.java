@@ -20,9 +20,12 @@ import utilities.ApplicationConstant;
  * @author Rohit Gupta
  *
  */
-public class ServerConcordia {
-
-	public static void main(String[] args) {
+public class ServerConcordia extends Thread{
+	
+	
+	@Override
+	public void run()
+	{
 		ReplicaManagerImplementation replicaManagerImplementation = new ReplicaManagerImplementation(
 				ServerType.CONCORDIA);
 		replicaManagerImplementation.logging("Concordia Server");
@@ -33,11 +36,14 @@ public class ServerConcordia {
 			receiveLocalUDP(replicaManagerImplementation);
 		};
 		Thread thread = new Thread(task);
+		thread.setName("rmToServerThread");
 		thread.start();
 		Thread thread1 = new Thread(task1);
+		thread1.setName("serverToServerThread");
 		thread1.start();
 	}
 
+	
 	private static void receive(ReplicaManagerImplementation replicaManagerImplementation) {
 		DatagramSocket aSocket = null;
 		try {

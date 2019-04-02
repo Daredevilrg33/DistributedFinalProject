@@ -96,3 +96,39 @@ Mar 30, 2019 8:14:55 PM utilities.Utility log
 INFO: Requesting Port 6001 message: Return Item,MCGU0001,CON0001
 Mar 30, 2019 8:14:55 PM utilities.Utility log
 INFO: Received replyjava.net.DatagramPacket@638ed7c6
+Apr 01, 2019 4:30:18 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Apr 01, 2019 4:30:18 PM servers.ServerMcgill receiveLocalUDP
+INFO: Borrow,CONU0001,MCG0001,10,true
+Apr 01, 2019 4:30:18 PM servers.ServerMcgill receiveLocalUDP
+INFO: User has borrowed successfully !!
+Apr 01, 2019 6:18:05 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Apr 01, 2019 6:18:05 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 6:18:05 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful,MCG0002,ITEM 30,5,MCG0001,ITEM 30,10
+Apr 01, 2019 6:44:40 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Apr 01, 2019 6:44:40 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 6:44:40 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful,MCG0002,ITEM 30,5,MCG0001,ITEM 30,10
+Apr 01, 2019 6:54:05 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Apr 01, 2019 6:54:05 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 6:54:05 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful,MCG0002,ITEM 30,5,MCG0001,ITEM 30,10
+Apr 01, 2019 6:59:50 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Apr 01, 2019 6:59:50 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 6:59:50 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful,MCG0002,ITEM 30,5,MCG0001,ITEM 30,10
+Apr 01, 2019 7:39:02 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Apr 01, 2019 7:39:02 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Apr 01, 2019 7:39:02 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful,MCG0002,ITEM 30,5,MCG0001,ITEM 30,10

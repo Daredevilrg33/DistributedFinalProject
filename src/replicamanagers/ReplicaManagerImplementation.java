@@ -655,4 +655,6 @@ public class ReplicaManagerImplementation implements RMInterface {
 		}
 		return isAllowed;
 	}
+	
+	
 }
