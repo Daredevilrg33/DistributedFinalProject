@@ -182,3 +182,99 @@ Apr 03, 2019 1:12:24 AM servers.ServerMcgill receiveLocalUDP
 INFO: Socket: Address already in use: Cannot bind
 Apr 03, 2019 1:12:24 AM servers.ServerConcordia receiveLocalUDP
 INFO: Socket: Address already in use: Cannot bind
+Apr 03, 2019 2:26:15 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Apr 03, 2019 2:26:15 PM utilities.Utility log
+INFO: Quantity is greater than zero.
+Apr 03, 2019 2:26:15 PM utilities.Utility log
+INFO: Old quantity of the item: 10
+Apr 03, 2019 2:26:15 PM utilities.Utility log
+INFO: Quantity to be reduce : 1
+Apr 03, 2019 2:26:15 PM utilities.Utility log
+INFO: Item quantity has been reduced to : 9
+Apr 03, 2019 2:36:24 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Apr 03, 2019 2:36:24 PM utilities.Utility log
+INFO: Quantity is greater than zero.
+Apr 03, 2019 2:36:24 PM utilities.Utility log
+INFO: Old quantity of the item: 10
+Apr 03, 2019 2:36:24 PM utilities.Utility log
+INFO: Quantity to be reduce : 1
+Apr 03, 2019 2:36:24 PM utilities.Utility log
+INFO: Item quantity has been reduced to : 9
+Apr 03, 2019 2:36:24 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Apr 03, 2019 2:36:24 PM utilities.Utility log
+INFO: Quantity is greater than zero.
+Apr 03, 2019 2:36:24 PM utilities.Utility log
+INFO: Old quantity of the item: 9
+Apr 03, 2019 2:36:24 PM utilities.Utility log
+INFO: Quantity to be reduce : 1
+Apr 03, 2019 2:36:24 PM utilities.Utility log
+INFO: Item quantity has been reduced to : 8
+Apr 03, 2019 2:36:24 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Apr 03, 2019 2:36:24 PM utilities.Utility log
+INFO: Quantity is greater than zero.
+Apr 03, 2019 2:36:24 PM utilities.Utility log
+INFO: Old quantity of the item: 8
+Apr 03, 2019 2:36:24 PM utilities.Utility log
+INFO: Quantity to be reduce : 1
+Apr 03, 2019 2:36:24 PM utilities.Utility log
+INFO: Item quantity has been reduced to : 7
+Apr 03, 2019 2:59:17 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Apr 03, 2019 2:59:17 PM utilities.Utility log
+INFO: Quantity is greater than zero.
+Apr 03, 2019 2:59:17 PM utilities.Utility log
+INFO: Old quantity of the item: 10
+Apr 03, 2019 2:59:17 PM utilities.Utility log
+INFO: Quantity to be reduce : 1
+Apr 03, 2019 2:59:17 PM utilities.Utility log
+INFO: Item quantity has been reduced to : 9
+Apr 03, 2019 2:59:17 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Apr 03, 2019 2:59:17 PM utilities.Utility log
+INFO: Quantity is greater than zero.
+Apr 03, 2019 2:59:17 PM utilities.Utility log
+INFO: Old quantity of the item: 9
+Apr 03, 2019 2:59:17 PM utilities.Utility log
+INFO: Quantity to be reduce : 1
+Apr 03, 2019 2:59:17 PM utilities.Utility log
+INFO: Item quantity has been reduced to : 8
+Apr 03, 2019 2:59:17 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Apr 03, 2019 2:59:17 PM utilities.Utility log
+INFO: Quantity is greater than zero.
+Apr 03, 2019 2:59:17 PM utilities.Utility log
+INFO: Old quantity of the item: 8
+Apr 03, 2019 2:59:17 PM utilities.Utility log
+INFO: Quantity to be reduce : 1
+Apr 03, 2019 2:59:17 PM utilities.Utility log
+INFO: Item quantity has been reduced to : 7
+Apr 03, 2019 3:24:46 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Apr 03, 2019 3:24:46 PM utilities.Utility log
+INFO: Quantity is greater than zero.
+Apr 03, 2019 3:24:46 PM utilities.Utility log
+INFO: Old quantity of the item: 10
+Apr 03, 2019 3:24:46 PM utilities.Utility log
+INFO: Quantity to be reduce : 1
+Apr 03, 2019 3:24:46 PM utilities.Utility log
+INFO: Item quantity has been reduced to : 9
+Apr 03, 2019 3:24:46 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 03, 2019 3:24:46 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Apr 03, 2019 4:19:17 PM utilities.Utility log
+INFO: Starting CONCORDIA server.
+Apr 03, 2019 4:19:17 PM utilities.Utility log
+INFO: Starting MONTREAL server.
+Apr 03, 2019 4:19:17 PM utilities.Utility log
+INFO: Starting MCGILL server.
+Apr 03, 2019 4:19:17 PM utilities.Utility log
+INFO: Accessing the Data Set
+Apr 03, 2019 4:19:17 PM utilities.Utility log
+INFO: Accessing the Data Set
+Apr 03, 2019 4:19:17 PM servers.ServerMcgill receiveLocalUDP
+INFO: Socket: Address already in use: Cannot bind

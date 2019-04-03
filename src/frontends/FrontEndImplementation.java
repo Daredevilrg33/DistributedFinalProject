@@ -207,7 +207,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 
 			byte[] buffer = new byte[1000];
 			int resultCount = 0;
-			while (resultCount < 1) {
+			while (resultCount < 2) {
 				DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
 				aSocket.receive(reply);
 				messageReceived = "";
@@ -341,10 +341,12 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		System.out.println("CRASH SERVER" + udpMessage);
 
 		response = sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage);
-		if (response.contains("System Crashed")) {
-			udpMessage = ApplicationConstant.OP_CRASH_SERVER + "," + 10;
-			response = sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage);
-		}
+		// if (response.contains("System Crashed")) {
+		// udpMessage = ApplicationConstant.OP_CRASH_SERVER + "," + 10;
+		// response =
+		// sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT,
+		// udpMessage);
+		// }
 		return response;
 
 	}

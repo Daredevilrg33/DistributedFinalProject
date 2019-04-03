@@ -20,11 +20,12 @@ import utilities.ApplicationConstant;
  * @author Rohit Gupta
  *
  */
-public class ServerMcgill extends Thread{
-	
+public class ServerMcgill extends Thread {
+	public static volatile boolean crashFailure = false;
+	public static DatagramSocket aSocket = null;
+
 	@Override
-	public void run()
-	{
+	public void run() {
 
 		ReplicaManagerImplementation replicaManagerImplementation = new ReplicaManagerImplementation(ServerType.MCGILL);
 		replicaManagerImplementation.logging("Mcgill Server");
@@ -41,7 +42,7 @@ public class ServerMcgill extends Thread{
 	}
 
 	private static void receive(ReplicaManagerImplementation replicaManagerImplementation) {
-		DatagramSocket aSocket = null;
+
 		try {
 			aSocket = new DatagramSocket(ApplicationConstant.UDP_MCGILL_PORT);
 			byte[] buffer = new byte[1000];// to stored the received data from
@@ -126,14 +127,14 @@ public class ServerMcgill extends Thread{
 	}
 
 	private static void receiveLocalUDP(ReplicaManagerImplementation replicaManagerImplementation) {
-		DatagramSocket aSocket = null;
+		DatagramSocket dataSocket = null;
 		try {
-			aSocket = new DatagramSocket(ApplicationConstant.UDP_MCG_SERVER);
+			dataSocket = new DatagramSocket(ApplicationConstant.UDP_MCG_SERVER);
 			while (true) {
 				byte[] buffer = new byte[3000];
 				DatagramPacket request = null;
 				request = new DatagramPacket(buffer, buffer.length);
-				aSocket.receive(request);
+				dataSocket.receive(request);
 				System.out.println("UDP Request Recieved MCGILL. ");
 				replicaManagerImplementation.logger.info("UDP Request Recieved MCGILL!!");
 				String inputFromServer = new String(request.getData(), request.getOffset(), request.getLength());
@@ -188,7 +189,7 @@ public class ServerMcgill extends Thread{
 				System.out.println(replyMessage);
 				byte[] finalmessage = replyMessage.getBytes();
 				reply = new DatagramPacket(finalmessage, finalmessage.length, request.getAddress(), request.getPort());
-				aSocket.send(reply);
+				dataSocket.send(reply);
 			}
 		} catch (SocketException e) {
 			replicaManagerImplementation.logger.info("Socket: " + e.getMessage());
@@ -197,8 +198,17 @@ public class ServerMcgill extends Thread{
 			replicaManagerImplementation.logger.info("IO: " + e.getMessage());
 			System.out.println("IO: " + e.getMessage());
 		} finally {
-			if (aSocket != null)
-				aSocket.close();
+			if (dataSocket != null)
+				dataSocket.close();
 		}
 	}
+
+	public boolean isCrashFailure() {
+		return crashFailure;
+	}
+
+	public static void setCrashFailure(boolean crashFail) {
+		crashFailure = crashFail;
+	}
+
 }

@@ -75,10 +75,12 @@ public class ReplicaManager {
 				replyMessage = replyMessage.concat(performAction(requestData.trim()));
 				System.out.println("replyMessage  " + replyMessage);
 				InetAddress aHost = InetAddress.getByName("localhost");
-
+				// if (!replyMessage.equalsIgnoreCase("Reply : ")) {
 				DatagramPacket reply = new DatagramPacket(replyMessage.getBytes(), replyMessage.getBytes().length,
 						aHost, ApplicationConstant.UDP_FRONT_END_PORT);
 				aSocket.send(reply);
+
+				// }
 			}
 
 		} catch (SocketException e) {
@@ -96,53 +98,65 @@ public class ReplicaManager {
 		String outputMessage = "";
 		String[] requestParams = requestData.split(",");
 		String methodName = requestParams[0];
-		if (methodName.equalsIgnoreCase(ApplicationConstant.OP_CRASH_SERVER)) {
+		System.out.println("methodName" + methodName);
+		if (methodName.trim().equalsIgnoreCase(ApplicationConstant.OP_CRASH_SERVER)) {
 
 			boolean isCrashed = handlingCrashFailure(requestParams[1]);
 			if (isCrashed)
 				outputMessage = "System Crashed";
 		} else {
 			int sequenceNumber = Integer.parseInt(requestParams[0].trim());
-			if (!pwaitListQueue.contains(sequenceNumber)) {
+			System.out.println("sequenceNumber" + sequenceNumber);
+			System.out.println("historyBuffer" + historyBuffer);
+			System.out.println("pwaitListQueue" + pwaitListQueue);
+			if (!historyBuffer.containsKey(sequenceNumber)) {
 				pwaitListQueue.add(sequenceNumber);
 				historyBuffer.put(sequenceNumber, requestData);
-			}
-			String action = requestParams[1].trim();
-			String managerId = requestParams[2].trim();
-			int value = seqCount + 1;
-			if (pwaitListQueue.peek() == value) {
-				outputMessage = sendUDPRequestToServer(getServerPort(managerId), requestData);
-				seqCount = seqCount + 1;
-				pwaitListQueue.poll();
-			} else {
-				System.out.println("Waiting for required request");
+				String action = requestParams[1].trim();
+				String managerId = requestParams[2].trim();
+				int value = seqCount + 1;
+				if (pwaitListQueue.peek() == value) {
+					while (!pwaitListQueue.isEmpty()) {
+						int seqNo = pwaitListQueue.peek();
+						String request = historyBuffer.get(seqNo);
+						String[] requestParams1 = request.split(",");
+						String managerId1 = requestParams1[2].trim();
+						outputMessage = sendUDPRequestToServer(getServerPort(managerId1), request);
+
+						seqCount = seqCount + 1;
+						pwaitListQueue.poll();
+					}
+				} else {
+					System.out.println("Waiting for required request");
+				}
 			}
 
 		}
 
 		return outputMessage;
+
 	}
 
 	public static boolean handlingCrashFailure(String opt) {
 		boolean isCrashed = false;
 		if (Integer.valueOf(opt) < 0) {
-//			conThread.interrupt();
-//			mcgThread.interrupt();
-//			monThread.interrupt();
-			monThread = null;
-			conThread = null;
-			mcgThread = null;
+			ServerConcordia.aSocket.close();
+			ServerMcgill.aSocket.close();
+			ServerMontreal.aSocket.close();
+
 			isCrashed = true;
 		} else {
-//			ServerConcordia conServer = new ServerConcordia();
-			conThread = new Thread(conServer);
-//			ServerMontreal monServer = new ServerMontreal();
-			monThread = new Thread(monServer);
-//			ServerMcgill mcgServer = new ServerMcgill();
-			mcgThread = new Thread(mcgServer);
-			conThread.start();
-			monThread.start();
-			mcgThread.start();
+			try {
+				ServerConcordia.aSocket = new DatagramSocket(ApplicationConstant.UDP_CONCORDIA_PORT);
+				ServerMcgill.aSocket = new DatagramSocket(ApplicationConstant.UDP_MCGILL_PORT);
+				ServerMontreal.aSocket = new DatagramSocket(ApplicationConstant.UDP_MONTREAL_PORT);
+
+			} catch (SocketException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			// ServerConcordia conServer = new ServerConcordia();
 			if (historyBuffer.size() > 0) {
 				for (int i = 1; i < seqCount; i++) {
 					String request = historyBuffer.get(i);

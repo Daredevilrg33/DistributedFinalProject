@@ -42,19 +42,25 @@ public class TestDLMSClient {
 		}
 		Runnable task = () -> {
 			System.out.println(Thread.currentThread().getName());
-			System.out.println(frontEndOperations.borrowItem("CONU0001", "CON1011", 3));
-			frontEndOperations.exchangeItem("CONU0001", "CON1025", "CON1011");
+			String result = frontEndOperations.borrowItem("CONU0001", "CON0001", 3);
+			if (result.equals("User has borrowed successfully !!"))
+				System.out.println("Item CON0001 has been borrowed successfully !!");
+			else
+				System.out.println("Unable to borrow Item !!");
+
+			result  = frontEndOperations.exchangeItem("CONU0001", "CON0002", "CON0001");
+		
 			System.out.println("Item has been exchanged successfully.");
 			System.out.println("New Item Borrowed: " + "CON1025");
 			System.out.println("Item returned: " + "CON1011");
 
-//			} else
+			// } else
 			System.out.println("Exchange operation unsuccessful.");
 			frontEndOperations.returnItem("CONU0001", "CON1025");
-//				if () {
+			// if () {
 			System.out.println("The item CON1025 has been successfully returned by CONU0001.");
 
-//			} else
+			// } else
 			System.out.println("The return operation was unsuccessful.");
 
 			System.out.println(Thread.currentThread().getName());
@@ -63,17 +69,17 @@ public class TestDLMSClient {
 			System.out.println(Thread.currentThread().getName());
 			System.out.println(frontEndOperations.borrowItem("MCGU0005", "CON1011", 3));
 			frontEndOperations.exchangeItem("MCGU0005", "CON1025", "CON1011");
-//			if () {
+			// if () {
 			System.out.println("Item has been exchanged successfully.");
 			System.out.println("New Item Borrowed: " + "CON1025");
 			System.out.println("Item returned: " + "CON1011");
-//			} else
+			// } else
 			System.out.println("Exchange operation unsuccessful.");
-//				frontEndOperations.returnItem("MCGU0005", "CON125")
-//			if () {
+			// frontEndOperations.returnItem("MCGU0005", "CON125")
+			// if () {
 			System.out.println("The item CON1025 has been successfully returned by MCGU0005.");
 
-//			} else
+			// } else
 			System.out.println("The return operation was unsuccessful.");
 
 			System.out.println(Thread.currentThread().getName());
@@ -84,17 +90,17 @@ public class TestDLMSClient {
 			System.out.println(frontEndOperations.borrowItem("CONU0001", "MON1030", 3));
 
 			frontEndOperations.exchangeItem("CONU0001", "MCG1080", "MON1030");
-//		if () {
+			// if () {
 			System.out.println("Item has been exchanged successfully.");
 			System.out.println("New Item Borrowed: " + "MCG1080");
 			System.out.println("Item returned: " + "MON1030");
 
-//		} else
+			// } else
 			System.out.println("Exchange operation unsuccessful.");
 			frontEndOperations.returnItem("CONU0001", "MCG1080");
-//		if () {
+			// if () {
 			System.out.println("The item MCG1080 has been successfully returned by CONU0001.");
-//		} else
+			// } else
 			System.out.println("The return operation was unsuccessful.");
 
 			System.out.println(Thread.currentThread().getName());

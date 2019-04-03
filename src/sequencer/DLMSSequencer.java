@@ -50,11 +50,12 @@ public class DLMSSequencer {
 
 				buffer = new byte[1000];
 				historyBuffer.put(sequenceNumber, multicastMessage);
-				if (sequenceNumber != 3)
-					multicastUDPRequest(multicastMessage);
-				if (sequenceNumber == 5) {
-					multicastUDPRequest(historyBuffer.get(3));
-				}
+				// if (sequenceNumber != 3)
+				// multicastUDPRequest(multicastMessage);
+				// if (sequenceNumber == 5) {
+				// multicastUDPRequest(historyBuffer.get(3));
+				// }
+				multicastUDPRequest(multicastMessage);
 				sequenceNumber++;
 				// DatagramPacket reply = new DatagramPacket(request.getData(),
 				// request.getLength(), request.getAddress(),
@@ -104,7 +105,11 @@ public class DLMSSequencer {
 				// ApplicationConstant.IP_ADDRESS_ROHIT
 				// sendUDPRequest("localhost", ApplicationConstant.UDP_REPLICA_MANAGER_PORT,
 				// requestMessage);
-				sendMultiCastRequest(requestMessage);
+				int count = 0;
+				while (count < 2) {
+					sendMultiCastRequest(requestMessage);
+					count++;
+				}
 			}
 		}).start();
 		// new Thread(new Runnable() {
