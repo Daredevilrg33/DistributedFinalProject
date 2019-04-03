@@ -132,3 +132,53 @@ Apr 01, 2019 7:39:02 PM servers.ServerMcgill receiveLocalUDP
 INFO: Find Item,CONU0001,ITEM 30
 Apr 01, 2019 7:39:02 PM servers.ServerMcgill receiveLocalUDP
 INFO: successful,MCG0002,ITEM 30,5,MCG0001,ITEM 30,10
+Apr 03, 2019 12:33:38 AM utilities.Utility log
+INFO: Starting CONCORDIA server.
+Apr 03, 2019 12:33:38 AM utilities.Utility log
+INFO: Accessing the Data Set
+Apr 03, 2019 12:33:38 AM servers.ServerMcgill receiveLocalUDP
+INFO: Socket: Address already in use: Cannot bind
+Apr 03, 2019 1:04:31 AM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 03, 2019 1:04:31 AM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Apr 03, 2019 1:07:26 AM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 03, 2019 1:07:26 AM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Apr 03, 2019 1:07:32 AM utilities.Utility log
+INFO: Starting MCGILL server.
+Apr 03, 2019 1:07:32 AM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 03, 2019 1:07:32 AM utilities.Utility log
+INFO: Starting MONTREAL server.
+Apr 03, 2019 1:07:32 AM utilities.Utility log
+INFO: Starting CONCORDIA server.
+Apr 03, 2019 1:07:32 AM utilities.Utility log
+INFO: Accessing the Data Set
+Apr 03, 2019 1:07:32 AM utilities.Utility log
+INFO: Item already present in concordia hash map.
+Apr 03, 2019 1:07:32 AM utilities.Utility log
+INFO: Accessing the Data Set
+Apr 03, 2019 1:12:12 AM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 03, 2019 1:12:12 AM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Apr 03, 2019 1:12:24 AM utilities.Utility log
+INFO: Starting MONTREAL server.
+Apr 03, 2019 1:12:24 AM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 03, 2019 1:12:24 AM utilities.Utility log
+INFO: Starting MCGILL server.
+Apr 03, 2019 1:12:24 AM utilities.Utility log
+INFO: Starting CONCORDIA server.
+Apr 03, 2019 1:12:24 AM utilities.Utility log
+INFO: Accessing the Data Set
+Apr 03, 2019 1:12:24 AM utilities.Utility log
+INFO: Item already present in concordia hash map.
+Apr 03, 2019 1:12:24 AM utilities.Utility log
+INFO: Accessing the Data Set
+Apr 03, 2019 1:12:24 AM servers.ServerMcgill receiveLocalUDP
+INFO: Socket: Address already in use: Cannot bind
+Apr 03, 2019 1:12:24 AM servers.ServerConcordia receiveLocalUDP
+INFO: Socket: Address already in use: Cannot bind

@@ -20,12 +20,10 @@ import utilities.ApplicationConstant;
  * @author Rohit Gupta
  *
  */
-public class ServerConcordia extends Thread{
-	
-	
+public class ServerConcordia extends Thread {
+
 	@Override
-	public void run()
-	{
+	public void run() {
 		ReplicaManagerImplementation replicaManagerImplementation = new ReplicaManagerImplementation(
 				ServerType.CONCORDIA);
 		replicaManagerImplementation.logging("Concordia Server");
@@ -43,7 +41,6 @@ public class ServerConcordia extends Thread{
 		thread1.start();
 	}
 
-	
 	private static void receive(ReplicaManagerImplementation replicaManagerImplementation) {
 		DatagramSocket aSocket = null;
 		try {

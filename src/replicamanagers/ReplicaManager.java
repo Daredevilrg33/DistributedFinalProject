@@ -27,6 +27,9 @@ public class ReplicaManager {
 	static LinkedHashMap<Integer, String> historyBuffer = new LinkedHashMap<Integer, String>();
 	static int seqCount = 0;
 	static Thread conThread, monThread, mcgThread;
+	static ServerConcordia conServer;
+	static ServerMontreal monServer;
+	static ServerMcgill mcgServer;
 
 	public static void main(String[] args) {
 		Runnable task = () -> {
@@ -39,48 +42,15 @@ public class ReplicaManager {
 	}
 
 	public static void startingServer() {
-		ServerConcordia conServer = new ServerConcordia();
+		conServer = new ServerConcordia();
 		conThread = new Thread(conServer);
-		ServerMontreal monServer = new ServerMontreal();
+		monServer = new ServerMontreal();
 		monThread = new Thread(monServer);
-		ServerMcgill mcgServer = new ServerMcgill();
+		mcgServer = new ServerMcgill();
 		mcgThread = new Thread(mcgServer);
 		conThread.run();
 		monThread.run();
 		mcgThread.run();
-	}
-
-	private static void receive() {
-		DatagramSocket aSocket = null;
-		try {
-			aSocket = new DatagramSocket(ApplicationConstant.UDP_REPLICA_MANAGER_PORT);
-			// the client.
-			System.out.println("Server Started............");
-			while (true) {// non-terminating loop as the server is always in listening mode.
-				byte[] buffer = new byte[1000];// to stored the received data from
-
-				DatagramPacket request = new DatagramPacket(buffer, buffer.length);
-
-				// Server waits for the request to come
-				aSocket.receive(request);// request received
-
-				String requestData = new String(request.getData());
-				System.out.println("Request received from Sequencer: " + requestData.trim());
-				performAction(requestData.trim());
-				InetAddress aHost = InetAddress.getByName("localhost");
-				DatagramPacket reply = new DatagramPacket(request.getData(), request.getLength(), aHost,
-						ApplicationConstant.UDP_FRONT_END_PORT);// reply packet ready
-
-				aSocket.send(reply);// reply sent
-			}
-		} catch (SocketException e) {
-			System.out.println("Socket: " + e.getMessage());
-		} catch (IOException e) {
-			System.out.println("IO: " + e.getMessage());
-		} finally {
-			if (aSocket != null)
-				aSocket.close();
-		}
 	}
 
 	private static void recieveMessage() {
@@ -128,8 +98,9 @@ public class ReplicaManager {
 		String methodName = requestParams[0];
 		if (methodName.equalsIgnoreCase(ApplicationConstant.OP_CRASH_SERVER)) {
 
-			handlingCrashFailure(requestParams[1]);
-
+			boolean isCrashed = handlingCrashFailure(requestParams[1]);
+			if (isCrashed)
+				outputMessage = "System Crashed";
 		} else {
 			int sequenceNumber = Integer.parseInt(requestParams[0].trim());
 			if (!pwaitListQueue.contains(sequenceNumber)) {
@@ -152,24 +123,29 @@ public class ReplicaManager {
 		return outputMessage;
 	}
 
-	public static void handlingCrashFailure(String opt) {
+	public static boolean handlingCrashFailure(String opt) {
+		boolean isCrashed = false;
 		if (Integer.valueOf(opt) < 0) {
-			conThread.destroy();
-			mcgThread.destroy();
-			monThread.destroy();
+//			conThread.interrupt();
+//			mcgThread.interrupt();
+//			monThread.interrupt();
+			monThread = null;
+			conThread = null;
+			mcgThread = null;
+			isCrashed = true;
 		} else {
-			ServerConcordia conServer = new ServerConcordia();
+//			ServerConcordia conServer = new ServerConcordia();
 			conThread = new Thread(conServer);
-			ServerMontreal monServer = new ServerMontreal();
+//			ServerMontreal monServer = new ServerMontreal();
 			monThread = new Thread(monServer);
-			ServerMcgill mcgServer = new ServerMcgill();
+//			ServerMcgill mcgServer = new ServerMcgill();
 			mcgThread = new Thread(mcgServer);
-			conThread.run();
-			monThread.run();
-			mcgThread.run();
+			conThread.start();
+			monThread.start();
+			mcgThread.start();
 			if (historyBuffer.size() > 0) {
 				for (int i = 1; i < seqCount; i++) {
-					String request = historyBuffer.get(String.valueOf(i));
+					String request = historyBuffer.get(i);
 					String[] reqParams = request.split(",");
 					String managerId = reqParams[2].trim();
 					sendUDPRequestToServer(getServerPort(managerId), request);
@@ -177,6 +153,7 @@ public class ReplicaManager {
 				}
 			}
 		}
+		return isCrashed;
 	}
 
 	public static int getServerPort(String userId) {

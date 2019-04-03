@@ -10,7 +10,6 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.HashMap;
-import java.util.Map.Entry;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -208,7 +207,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 
 			byte[] buffer = new byte[1000];
 			int resultCount = 0;
-			while (resultCount < 2) {
+			while (resultCount < 1) {
 				DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
 				aSocket.receive(reply);
 				messageReceived = "";
@@ -225,6 +224,46 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 			}
 			if (resultCount == 1)
 				aSocket.close();
+		} catch (SocketException e) {
+			System.out.println("Socket: " + e.getMessage());
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("IO: " + e.getMessage());
+		} finally {
+			if (aSocket != null)
+				aSocket.close();
+		}
+		return messageReceived;
+	}
+
+	private String sendUDPRequestForCrashFailure(int serverPort, String message) {
+
+		Utility.log("Accessing UDP Request", logger);
+		Utility.log("Requesting Port " + serverPort + " message: " + message, logger);
+		DatagramSocket aSocket = null;
+		String messageReceived = null;
+		try {
+			aSocket = new DatagramSocket(ApplicationConstant.UDP_FRONT_END_PORT);
+			// aSocket.setSoTimeout(10000);
+			byte[] mes = message.getBytes();
+			InetAddress aHost = InetAddress.getByName("localhost");
+
+			DatagramPacket request = new DatagramPacket(mes, mes.length, aHost, serverPort);
+
+			aSocket.send(request);
+			// String requestData = new String(request.getData());
+			// System.out.println("Request received from client: " + requestData.trim());
+
+			byte[] buffer = new byte[1000];
+
+			DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
+			aSocket.receive(reply);
+			messageReceived = "";
+			messageReceived = new String(reply.getData(), reply.getOffset(), reply.getLength());
+			// String resIdentifier=messageReceived.split("@")[0];
+			// responseMap.put(resIdentifier, messageReceived.split("@")[1]);
+			Utility.log("Received reply" + messageReceived.trim(), logger);
+			buffer = new byte[1000];
 		} catch (SocketException e) {
 			System.out.println("Socket: " + e.getMessage());
 		} catch (IOException e) {
@@ -301,7 +340,11 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		String udpMessage = ApplicationConstant.OP_CRASH_SERVER + "," + status;
 		System.out.println("CRASH SERVER" + udpMessage);
 
-		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage);
+		response = sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage);
+		if (response.contains("System Crashed")) {
+			udpMessage = ApplicationConstant.OP_CRASH_SERVER + "," + 10;
+			response = sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage);
+		}
 		return response;
 
 	}

@@ -41,13 +41,16 @@ public class ApplicationConstant {
 
 	// public static final String PATH =
 	// "G:\\workspace\\DistributedFinalProject\\Log Files";
-	public static final String PATH = "G:\\DistributedFinalProject.git\\trunk\\Log Files";
+//	public static final String PATH = "G:\\DistributedFinalProject.git\\trunk\\Log Files";
 
+	public static final String PATH = "D:\\DistributedFinalProject\\Log Files";
 	public static final String IP_ADDRESS_ROOHANI = "132.205.64.142";
 	public static final String IP_ADDRESS_ROHIT = "132.205.45.234";
 
 	public static final String IP_ADDRESS_NANCY = "132.205.46.167";
 	public static final String IP_ADDRESS_HASTI = "132.205.45.235";
+	
+	
 	public static final String DATA_USER_ID = "userId";
 	public static final String DATA_ITEM_ID = "itemId";
 	public static final String DATA_ITEM_NAME = "itemName";

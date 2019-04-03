@@ -196,3 +196,51 @@ Apr 01, 2019 7:39:02 PM servers.ServerMontreal receiveLocalUDP
 INFO: Find Item,CONU0001,ITEM 30
 Apr 01, 2019 7:39:02 PM servers.ServerMontreal receiveLocalUDP
 INFO: successful,MON0001,ITEM 30,8
+Apr 03, 2019 12:20:02 AM utilities.Utility log
+INFO: Starting MCGILL server.
+Apr 03, 2019 12:20:02 AM utilities.Utility log
+INFO: Accessing the Data Set
+Apr 03, 2019 12:22:08 AM utilities.Utility log
+INFO: Starting MCGILL server.
+Apr 03, 2019 12:22:08 AM utilities.Utility log
+INFO: Accessing the Data Set
+Apr 03, 2019 12:24:58 AM utilities.Utility log
+INFO: Starting MCGILL server.
+Apr 03, 2019 12:24:58 AM utilities.Utility log
+INFO: Accessing the Data Set
+Apr 03, 2019 12:31:44 AM utilities.Utility log
+INFO: Starting MCGILL server.
+Apr 03, 2019 12:31:44 AM utilities.Utility log
+INFO: Accessing the Data Set
+Apr 03, 2019 12:33:15 AM utilities.Utility log
+INFO: Starting MCGILL server.
+Apr 03, 2019 12:33:15 AM utilities.Utility log
+INFO: Accessing the Data Set
+Apr 03, 2019 12:33:38 AM utilities.Utility log
+INFO: Starting MCGILL server.
+Apr 03, 2019 12:33:38 AM servers.ServerMontreal receiveLocalUDP
+INFO: Socket: Address already in use: Cannot bind
+Apr 03, 2019 12:33:38 AM utilities.Utility log
+INFO: Accessing the Data Set
+Apr 03, 2019 12:40:03 AM utilities.Utility log
+INFO: Starting MCGILL server.
+Apr 03, 2019 12:40:03 AM utilities.Utility log
+INFO: Accessing the Data Set
+Apr 03, 2019 1:03:53 AM utilities.Utility log
+INFO: Starting MCGILL server.
+Apr 03, 2019 1:03:53 AM utilities.Utility log
+INFO: Accessing the Data Set
+Apr 03, 2019 1:05:45 AM utilities.Utility log
+INFO: Starting MCGILL server.
+Apr 03, 2019 1:05:45 AM utilities.Utility log
+INFO: Accessing the Data Set
+Apr 03, 2019 1:07:32 AM servers.ServerMontreal receiveLocalUDP
+INFO: Socket: Address already in use: Cannot bind
+Apr 03, 2019 1:07:32 AM servers.ServerConcordia receiveLocalUDP
+INFO: Socket: Address already in use: Cannot bind
+Apr 03, 2019 1:11:43 AM utilities.Utility log
+INFO: Starting MCGILL server.
+Apr 03, 2019 1:11:43 AM utilities.Utility log
+INFO: Accessing the Data Set
+Apr 03, 2019 1:12:24 AM servers.ServerMontreal receiveLocalUDP
+INFO: Socket: Address already in use: Cannot bind
