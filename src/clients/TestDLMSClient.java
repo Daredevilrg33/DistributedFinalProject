@@ -112,6 +112,9 @@ public class TestDLMSClient {
 		thread.start();
 		thread2.start();
 		thread3.start();
+		
+		
+		
 
 	}
 }

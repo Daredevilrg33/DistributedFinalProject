@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.MulticastSocket;
 import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.LinkedHashMap;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -38,8 +40,50 @@ public class ReplicaManager {
 		Thread thread = new Thread(task);
 		thread.start();
 		startingServer();
+		// Runnable task1 = () -> {
+		// recieveMessageForCrashRecovery();
+		// };
+		// Thread thread1 = new Thread(task1);
+		// thread1.start();
 
 	}
+
+	// private static void recieveMessageForCrashRecovery() {
+	// // TODO Auto-generated method stub
+	// DatagramSocket aSocket = null;
+	// try {
+	// aSocket = new DatagramSocket(ApplicationConstant.UDP_RM_RECOVERY_PORT);
+	// byte[] buffer = new byte[1000];// to stored the received data from
+	// // the client.
+	// System.out.println("Recovery Server Started............");
+	// while (true) {// non-terminating loop as the server is always in listening
+	// mode.
+	// DatagramPacket request = new DatagramPacket(buffer, buffer.length);
+	//
+	// // Server waits for the request to come
+	// aSocket.receive(request);
+	// // request received
+	// String requestData = new String(request.getData(), request.getOffset(),
+	// request.getLength());
+	//
+	// System.out.println("Request received from client for Recovery: " +
+	// requestData.trim());
+	//// String response = performAction(requestData.trim());
+	//
+	// DatagramPacket reply = new DatagramPacket(response.trim().getBytes(),
+	// response.trim().getBytes().length,
+	// request.getAddress(), request.getPort());// reply packet ready
+	// aSocket.send(reply);// reply sent
+	// }
+	// } catch (SocketException e) {
+	// System.out.println("Socket: " + e.getMessage());
+	// } catch (IOException e) {
+	// System.out.println("IO: " + e.getMessage());
+	// } finally {
+	// if (aSocket != null)
+	// aSocket.close();
+	// }
+	// }
 
 	public static void startingServer() {
 		conServer = new ServerConcordia();
@@ -65,21 +109,24 @@ public class ReplicaManager {
 
 			while (true) {
 				byte[] buffer = new byte[1000];
-
+				System.out.println("recieveMessage");
 				DatagramPacket request = new DatagramPacket(buffer, buffer.length);
 				aSocket.receive(request);
 				String requestData = new String(request.getData(), request.getOffset(), request.getLength());
 				System.out.println("************ request message: " + requestData);
 
-				String replyMessage = "Reply : ";
-				replyMessage = replyMessage.concat(performAction(requestData.trim()));
-				System.out.println("replyMessage  " + replyMessage);
-				InetAddress aHost = InetAddress.getByName("localhost");
-				// if (!replyMessage.equalsIgnoreCase("Reply : ")) {
-				DatagramPacket reply = new DatagramPacket(replyMessage.getBytes(), replyMessage.getBytes().length,
-						aHost, ApplicationConstant.UDP_FRONT_END_PORT);
-				aSocket.send(reply);
+				String replyMessage = "RM1:";
 
+				String response = performAction(requestData.trim());
+				if (!response.trim().isEmpty()) {
+					replyMessage = replyMessage.concat(response.trim());
+					System.out.println("replyMessage  " + replyMessage);
+					InetAddress aHost = InetAddress.getByName("localhost");
+					// if (!replyMessage.equalsIgnoreCase("Reply : ")) {
+					DatagramPacket reply = new DatagramPacket(replyMessage.getBytes(), replyMessage.getBytes().length,
+							aHost, ApplicationConstant.UDP_FRONT_END_PORT);
+					aSocket.send(reply);
+				}
 				// }
 			}
 
@@ -104,6 +151,8 @@ public class ReplicaManager {
 			boolean isCrashed = handlingCrashFailure(requestParams[1]);
 			if (isCrashed)
 				outputMessage = "System Crashed";
+			else
+				outputMessage = "System Recovered from crashed";
 		} else {
 			int sequenceNumber = Integer.parseInt(requestParams[0].trim());
 			System.out.println("sequenceNumber" + sequenceNumber);
@@ -140,32 +189,51 @@ public class ReplicaManager {
 	public static boolean handlingCrashFailure(String opt) {
 		boolean isCrashed = false;
 		if (Integer.valueOf(opt) < 0) {
-			ServerConcordia.aSocket.close();
-			ServerMcgill.aSocket.close();
-			ServerMontreal.aSocket.close();
+			conServer.aSocket.close();
+			monServer.aSocket.close();
+			mcgServer.aSocket.close();
 
 			isCrashed = true;
 		} else {
+			System.out.println("Crash Recovery Code Running");
 			try {
-				ServerConcordia.aSocket = new DatagramSocket(ApplicationConstant.UDP_CONCORDIA_PORT);
-				ServerMcgill.aSocket = new DatagramSocket(ApplicationConstant.UDP_MCGILL_PORT);
-				ServerMontreal.aSocket = new DatagramSocket(ApplicationConstant.UDP_MONTREAL_PORT);
+				conServer.aSocket = new DatagramSocket(null);
+				conServer.aSocket.setReuseAddress(true);
+				conServer.aSocket.bind(new InetSocketAddress(InetAddress.getByName("localhost"),
+						ApplicationConstant.UDP_CONCORDIA_PORT));
+
+				mcgServer.aSocket = new DatagramSocket(null);
+				mcgServer.aSocket.setReuseAddress(true);
+				mcgServer.aSocket.bind(
+						new InetSocketAddress(InetAddress.getByName("localhost"), ApplicationConstant.UDP_MCGILL_PORT));
+
+				monServer.aSocket = new DatagramSocket(null);
+				monServer.aSocket.setReuseAddress(true);
+				monServer.aSocket.bind(new InetSocketAddress(InetAddress.getByName("localhost"),
+						ApplicationConstant.UDP_MONTREAL_PORT));
 
 			} catch (SocketException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-
+			System.out.println("Before Accessing history Buffer" + historyBuffer.size());
 			// ServerConcordia conServer = new ServerConcordia();
 			if (historyBuffer.size() > 0) {
 				for (int i = 1; i < seqCount; i++) {
+					System.out.println("Accessing history Buffer");
 					String request = historyBuffer.get(i);
+					System.out.println("Accessing history Buffer request " + request);
+
 					String[] reqParams = request.split(",");
 					String managerId = reqParams[2].trim();
-					sendUDPRequestToServer(getServerPort(managerId), request);
-
+					String response = sendUDPRequestToServer(getServerPort(managerId), request);
+					System.out.println("Response Messaghes " + response);
 				}
 			}
+			isCrashed = false;
 		}
 		return isCrashed;
 	}

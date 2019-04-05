@@ -3,6 +3,8 @@
  */
 package utilities;
 
+import java.net.SocketAddress;
+
 /**
  * @author Rohit Gupta
  *
@@ -31,6 +33,7 @@ public class ApplicationConstant {
 	public static final int UDP_SEQUENCER_PORT = 7009;
 	public static final int UDP_FRONT_END_PORT = 7005;
 	public static final int UDP_REPLICA_MANAGER_PORT = 7001;
+	public static final int UDP_RM_RECOVERY_PORT = 8010;
 	public static final int RM_PORT = 7010;
 	public static final int UDP_CONCORDIA_PORT = 7777;
 	public static final int UDP_MCGILL_PORT = 7778;
@@ -81,5 +84,6 @@ public class ApplicationConstant {
 	public static final String ITEM_RETURNED_DOESNOT_EXIST = "Item does not exist. You cannot perform this operation";
 	public static final String ITEM_NOT_BORROWED = "Item has not been borrowed by this user.";
 	public static final String OP_CRASH_SERVER = "crashServer";
+	public static final int UDP_FRONT_END_PORT_FOR_CRASH = 8011;
 
 }

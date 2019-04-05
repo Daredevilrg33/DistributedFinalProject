@@ -6,6 +6,8 @@ package servers;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.SocketException;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +47,11 @@ public class ServerConcordia extends Thread {
 
 	private static void receive(ReplicaManagerImplementation replicaManagerImplementation) {
 		try {
-			aSocket = new DatagramSocket(ApplicationConstant.UDP_CONCORDIA_PORT);
+			//aSocket = new DatagramSocket(ApplicationConstant.UDP_CONCORDIA_PORT);
+			aSocket = new DatagramSocket(null);
+			aSocket.setReuseAddress(true);
+			aSocket.bind(
+					new InetSocketAddress(InetAddress.getByName("localhost"), ApplicationConstant.UDP_CONCORDIA_PORT));
 			byte[] buffer = new byte[1000];// to stored the received data from
 											// the client.
 			System.out.println("Server Started............");

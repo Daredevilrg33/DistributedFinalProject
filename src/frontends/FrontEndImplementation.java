@@ -9,6 +9,8 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
@@ -31,6 +33,8 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 	public Logger logger = Logger.getLogger(FrontEndImplementation.class.getName());
 	String outputResult = "";
 	HashMap<String, String> responseMap = new HashMap();
+	boolean resultFound = false;
+	String failedRM = "";
 
 	/**
 	 * @param orb
@@ -191,11 +195,14 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 
 		Utility.log("Accessing UDP Request", logger);
 		Utility.log("Requesting Port " + serverPort + " message: " + message, logger);
+		responseMap.clear();
+
 		DatagramSocket aSocket = null;
+
 		String messageReceived = null;
 		try {
 			aSocket = new DatagramSocket(ApplicationConstant.UDP_FRONT_END_PORT);
-			// aSocket.setSoTimeout(10000);
+			aSocket.setSoTimeout(10000);
 			byte[] mes = message.getBytes();
 			InetAddress aHost = InetAddress.getByName("localhost");
 
@@ -207,12 +214,14 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 
 			byte[] buffer = new byte[1000];
 			int resultCount = 0;
-			while (resultCount < 2) {
+			while (resultCount < 3) {
 				DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
 				aSocket.receive(reply);
 				messageReceived = "";
 				outputResult = "";
 				messageReceived = new String(reply.getData(), reply.getOffset(), reply.getLength());
+				addResponseToMap(messageReceived);
+
 				// String resIdentifier=messageReceived.split("@")[0];
 				// responseMap.put(resIdentifier, messageReceived.split("@")[1]);
 				System.out.println("Message Recieved: " + messageReceived.trim());
@@ -220,20 +229,61 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 				System.out.println("Port: " + reply.getPort());
 				Utility.log("Received reply" + messageReceived.trim(), logger);
 				resultCount++;
-				buffer = new byte[1000];
 			}
-			if (resultCount == 1)
-				aSocket.close();
-		} catch (SocketException e) {
+		} catch (SocketTimeoutException e) {
 			System.out.println("Socket: " + e.getMessage());
-		} catch (IOException e) {
+			// sentRecoverRMRequest();
+			//crashingServer(10);
+		} catch (SocketException e1) {
+			System.out.println("Socket: " + e1.getMessage());
+			sentRecoverRMRequest();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("IO: " + e.getMessage());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			if (aSocket != null)
 				aSocket.close();
 		}
+		String response1, response2, response3, response4 = "";
+
+		response1 = responseMap.get("RM1") == null ? "" : responseMap.get("RM1");
+		response2 = responseMap.get("RM2") == null ? "" : responseMap.get("RM2");
+		response3 = responseMap.get("RM3") == null ? "" : responseMap.get("RM3");
+		response4 = responseMap.get("RM4") == null ? "" : responseMap.get("RM4");
+		messageReceived =
+
+				resultComparison(response1, response2, response3, response4);
+
 		return messageReceived;
+	}
+
+	private void sentRecoverRMRequest() {
+		// TODO Auto-generated method stub
+		if (!responseMap.containsKey("RM1")) {
+			failedRM = "RM1";
+		}
+		if (!responseMap.containsKey("RM2")) {
+			failedRM = "RM2";
+		}
+		if (!responseMap.containsKey("RM3")) {
+			failedRM = "RM3";
+		}
+		if (!responseMap.containsKey("RM4")) {
+			failedRM = "RM4";
+		}
+		String udpMessage = ApplicationConstant.OP_CRASH_SERVER + "," + 10;
+		System.out.println("\n\n sentRecoverRMRequest " + udpMessage);
+		sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage);
+	}
+
+	private void addResponseToMap(String messageReceived) {
+		// TODO Auto-generated method stub
+		String[] str = messageReceived.split(":");
+		if (str.length > 1)
+			responseMap.put(str[0].trim(), str[1].trim());
 	}
 
 	private String sendUDPRequestForCrashFailure(int serverPort, String message) {
@@ -243,27 +293,28 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		DatagramSocket aSocket = null;
 		String messageReceived = null;
 		try {
-			aSocket = new DatagramSocket(ApplicationConstant.UDP_FRONT_END_PORT);
-			// aSocket.setSoTimeout(10000);
+			aSocket = new DatagramSocket();
+
 			byte[] mes = message.getBytes();
 			InetAddress aHost = InetAddress.getByName("localhost");
 
 			DatagramPacket request = new DatagramPacket(mes, mes.length, aHost, serverPort);
 
 			aSocket.send(request);
-			// String requestData = new String(request.getData());
-			// System.out.println("Request received from client: " + requestData.trim());
+			String requestData = new String(request.getData());
+			System.out.println("Request received from client: " + requestData.trim());
+			messageReceived = "Operation Done";
+			// byte[] buffer = new byte[1000];
 
-			byte[] buffer = new byte[1000];
-
-			DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
-			aSocket.receive(reply);
-			messageReceived = "";
-			messageReceived = new String(reply.getData(), reply.getOffset(), reply.getLength());
-			// String resIdentifier=messageReceived.split("@")[0];
+			// DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
+			// aSocket.receive(reply);
+			// messageReceived = "";
+			// messageReceived = new String(reply.getData(), reply.getOffset(),
+			// reply.getLength());
+			// // String resIdentifier=messageReceived.split("@")[0];
 			// responseMap.put(resIdentifier, messageReceived.split("@")[1]);
-			Utility.log("Received reply" + messageReceived.trim(), logger);
-			buffer = new byte[1000];
+			// Utility.log("Received reply" + messageReceived.trim(), logger);
+			// buffer = new byte[1000];
 		} catch (SocketException e) {
 			System.out.println("Socket: " + e.getMessage());
 		} catch (IOException e) {
@@ -276,61 +327,99 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		return messageReceived;
 	}
 
-	private void compareResponse() {
-		int count = 0;
-		boolean rmNancy = false;
-		boolean rmRohit = false;
-		boolean rmRoohani = false;
-		boolean rmHasti = false;
-		if (responseMap.get("RMNancy").equals(responseMap.get("RMRohit"))) {
-			count++;
-			rmRohit = true;
-		} else if (responseMap.get("RMNancy").equals(responseMap.get("RMRoohani"))) {
-			count++;
-			rmRoohani = true;
-		} else if (responseMap.get("RMNancy").equals(responseMap.get("RMHasti"))) {
-			count++;
-			rmHasti = true;
+	// private String sendUDPRequestForCrashRecover(int serverPort, String message)
+	// {
+	//
+	// Utility.log("Accessing UDP Request", logger);
+	// Utility.log("Requesting Port " + serverPort + " message: " + message,
+	// logger);
+	// DatagramSocket aSocket = null;
+	// String messageReceived = null;
+	// try {
+	// aSocket = new
+	// DatagramSocket(ApplicationConstant.UDP_FRONT_END_PORT_FOR_CRASH);
+	//
+	// byte[] mes = message.getBytes();
+	// InetAddress aHost = InetAddress.getByName("localhost");
+	//
+	// DatagramPacket request = new DatagramPacket(mes, mes.length, aHost,
+	// serverPort);
+	//
+	// aSocket.send(request);
+	// // String requestData = new String(request.getData());
+	// // System.out.println("Request received from client: " + requestData.trim());
+	//
+	// byte[] buffer = new byte[1000];
+	//
+	// DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
+	// aSocket.receive(reply);
+	// messageReceived = "";
+	// messageReceived = new String(reply.getData(), reply.getOffset(),
+	// reply.getLength());
+	// // String resIdentifier=messageReceived.split("@")[0];
+	// // responseMap.put(resIdentifier, messageReceived.split("@")[1]);
+	// Utility.log("Received reply" + messageReceived.trim(), logger);
+	// buffer = new byte[1000];
+	// } catch (SocketException e) {
+	// System.out.println("Socket: " + e.getMessage());
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// System.out.println("IO: " + e.getMessage());
+	// } finally {
+	// if (aSocket != null)
+	// aSocket.close();
+	// }
+	// return messageReceived;
+	// }
+
+	private String resultComparison(String response1, String response2, String response3, String response4) {
+		String output = "";
+
+		boolean isRM1AndRM4Equal = false;
+		boolean isRM2AndRM3Equal = false;
+		resultFound = true;
+		if (response1.trim().equalsIgnoreCase(response4.trim())) {
+
+			System.out.println("RM1 and RM4 results are same.");
+			isRM1AndRM4Equal = true;
+		}
+		if (response2.trim().equalsIgnoreCase(response3.trim())) {
+			System.out.println("RM2 and RM3 results are same.");
+			isRM2AndRM3Equal = true;
 		}
 
-		if (rmRohit && rmRoohani && rmHasti) {
-			System.out.println("\n\n\n All Responses matches");
-			rmNancy = true;
-		}
-		if (!rmRohit && !rmRoohani && !rmHasti) {
-			if (responseMap.get("RMRohit").equals(responseMap.get("RMHasti"))) {
-				count++;
-				rmHasti = true;
+		if (isRM1AndRM4Equal && isRM2AndRM3Equal) {
+			if (response1.trim().equalsIgnoreCase(response2.trim())) {
+				resultFound = true;
+				return response1;
 			}
-			if (responseMap.get("RMRohit").equals(responseMap.get("RMRoohani"))) {
-				count++;
-				rmRoohani = true;
+		} else if (!isRM1AndRM4Equal && isRM2AndRM3Equal) {
+			if (response1.trim().equalsIgnoreCase(response2.trim())) {
+				resultFound = true;
+				return response1;
+			} else if (response4.trim().equalsIgnoreCase(response2.trim())) {
+				resultFound = true;
+				return response4;
+			} else {
+				resultFound = true;
+				return response2;
 			}
-			if (rmHasti && rmRoohani) {
-				rmRohit = true;
-			}
-			if (!rmHasti && !rmRoohani) {
-				if (responseMap.get("RMHasti").equals(responseMap.get("RMRoohani"))) {
 
-				}
+		} else if (!isRM2AndRM3Equal && isRM1AndRM4Equal) {
+			if (response2.trim().equalsIgnoreCase(response1.trim())) {
+				resultFound = true;
+				return response2;
+			} else if (response3.trim().equalsIgnoreCase(response1.trim())) {
+				resultFound = true;
+				return response3;
+			} else {
+				resultFound = true;
+				return response1;
 			}
-		}
-		if (!rmNancy) {
-			System.out.println("\n\n\n Nancy RM fails");
-		}
-		if (!rmRohit) {
-			System.out.println("\n\n\n Rohit RM fails");
-		}
-		if (!rmRoohani) {
-			System.out.println("\n\n\n Rohit RM fails");
-		}
-		if (!rmHasti) {
-			System.out.println("\n\n\n Hasti RM fails");
+
 		}
 
-		if (count > 2) {
-			System.out.println("Majority responses are matching ");
-		}
+		return output;
 	}
 
 	@Override
@@ -341,12 +430,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		System.out.println("CRASH SERVER" + udpMessage);
 
 		response = sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage);
-		// if (response.contains("System Crashed")) {
-		// udpMessage = ApplicationConstant.OP_CRASH_SERVER + "," + 10;
-		// response =
-		// sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT,
-		// udpMessage);
-		// }
+
 		return response;
 
 	}

@@ -278,3 +278,371 @@ Apr 03, 2019 4:19:17 PM utilities.Utility log
 INFO: Accessing the Data Set
 Apr 03, 2019 4:19:17 PM servers.ServerMcgill receiveLocalUDP
 INFO: Socket: Address already in use: Cannot bind
+Apr 04, 2019 12:54:42 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 12:54:42 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Borrow,CONU0001,MON0002,4,false
+Apr 04, 2019 12:54:42 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 04, 2019 12:54:42 PM servers.ServerMontreal receiveLocalUDP
+INFO: Borrow,CONU0001,MON0002,4,false
+Apr 04, 2019 12:54:42 PM servers.ServerMontreal receiveLocalUDP
+INFO: User has borrowed successfully !!
+Apr 04, 2019 12:54:42 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@35ee7a48
+Apr 04, 2019 12:55:57 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 12:55:57 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Borrow,CONU0001,MON0001,4,false
+Apr 04, 2019 12:55:57 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 04, 2019 12:55:57 PM servers.ServerMontreal receiveLocalUDP
+INFO: Borrow,CONU0001,MON0001,4,false
+Apr 04, 2019 12:55:57 PM servers.ServerMontreal receiveLocalUDP
+INFO: User has borrowed successfully !!
+Apr 04, 2019 12:55:57 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@31d1e82d
+Apr 04, 2019 12:55:57 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 12:55:57 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Return Item,CONU0001,MON0002
+Apr 04, 2019 12:55:57 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 04, 2019 12:55:57 PM servers.ServerMontreal receiveLocalUDP
+INFO: Return Item,CONU0001,MON0002
+Apr 04, 2019 12:55:57 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful
+Apr 04, 2019 12:55:57 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@74d37073
+Apr 04, 2019 1:42:26 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 1:42:26 PM utilities.Utility log
+INFO: Requesting Port 6001 message: Borrow,CONU0001,CON001,2,true
+Apr 04, 2019 1:42:26 PM servers.ServerConcordia receiveLocalUDP
+INFO: UDP Request Recieved Concordia!!
+Apr 04, 2019 1:42:26 PM servers.ServerConcordia receiveLocalUDP
+INFO: Borrow,CONU0001,CON001,2,true
+Apr 04, 2019 1:46:31 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 04, 2019 1:46:31 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Apr 04, 2019 1:46:58 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Apr 04, 2019 1:46:58 PM utilities.Utility log
+INFO: Quantity is greater than zero.
+Apr 04, 2019 1:46:58 PM utilities.Utility log
+INFO: Old quantity of the item: 2
+Apr 04, 2019 1:46:58 PM utilities.Utility log
+INFO: Quantity to be reduce : 1
+Apr 04, 2019 1:46:58 PM utilities.Utility log
+INFO: Item quantity has been reduced to : 1
+Apr 04, 2019 1:47:59 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Apr 04, 2019 1:47:59 PM utilities.Utility log
+INFO: Quantity is less than zero.
+Apr 04, 2019 1:47:59 PM utilities.Utility log
+INFO: Item has been removed successfully !!
+Apr 04, 2019 1:48:44 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 04, 2019 1:48:44 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Apr 04, 2019 1:49:09 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 04, 2019 1:49:09 PM utilities.Utility log
+INFO: Item already present in concordia hash map.
+Apr 04, 2019 1:49:09 PM utilities.Utility log
+INFO: Previous Quantity: 2
+Apr 04, 2019 1:49:09 PM utilities.Utility log
+INFO: Final Quantity: 4
+Apr 04, 2019 1:50:05 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 1:50:05 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Borrow,CONU0001,MON0001,2,true
+Apr 04, 2019 1:50:05 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 04, 2019 1:50:05 PM servers.ServerMontreal receiveLocalUDP
+INFO: Borrow,CONU0001,MON0001,2,true
+Apr 04, 2019 1:50:05 PM servers.ServerMontreal receiveLocalUDP
+INFO: User has borrowed successfully !!
+Apr 04, 2019 1:50:05 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@c483a3
+Apr 04, 2019 1:50:41 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 1:50:41 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Borrow,CONU0001,MCG0001,2,true
+Apr 04, 2019 1:50:41 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Apr 04, 2019 1:50:41 PM servers.ServerMcgill receiveLocalUDP
+INFO: Borrow,CONU0001,MCG0001,2,true
+Apr 04, 2019 1:50:41 PM servers.ServerMcgill receiveLocalUDP
+INFO: User has borrowed successfully !!
+Apr 04, 2019 1:50:41 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@e037dcb
+Apr 04, 2019 1:51:28 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 1:51:28 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Return Item,CONU0001,MCG0001
+Apr 04, 2019 1:51:28 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Apr 04, 2019 1:51:28 PM servers.ServerMcgill receiveLocalUDP
+INFO: Return Item,CONU0001,MCG0001
+Apr 04, 2019 1:51:28 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful
+Apr 04, 2019 1:51:28 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@a3ce8d3
+Apr 04, 2019 1:52:06 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 1:52:06 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Borrow,CONU0001,MCG0002,4,false
+Apr 04, 2019 1:52:06 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Apr 04, 2019 1:52:06 PM servers.ServerMcgill receiveLocalUDP
+INFO: Borrow,CONU0001,MCG0002,4,false
+Apr 04, 2019 1:52:06 PM servers.ServerMcgill receiveLocalUDP
+INFO: User has borrowed successfully !!
+Apr 04, 2019 1:52:06 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@4f3e77f0
+Apr 04, 2019 1:52:06 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 1:52:06 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Return Item,CONU0001,MON0001
+Apr 04, 2019 1:52:06 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 04, 2019 1:52:06 PM servers.ServerMontreal receiveLocalUDP
+INFO: Return Item,CONU0001,MON0001
+Apr 04, 2019 1:52:06 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful
+Apr 04, 2019 1:52:06 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@6bc32c2f
+Apr 04, 2019 1:52:39 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 1:52:39 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Find Item,CONU0001,ITEM 40
+Apr 04, 2019 1:52:39 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Apr 04, 2019 1:52:39 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 40
+Apr 04, 2019 1:52:39 PM servers.ServerMcgill receiveLocalUDP
+INFO: unsuccessful
+Apr 04, 2019 1:52:39 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@7ebbf9b9
+Apr 04, 2019 1:52:39 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 1:52:39 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Find Item,CONU0001,ITEM 40
+Apr 04, 2019 1:52:39 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 04, 2019 1:52:39 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 40
+Apr 04, 2019 1:52:39 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON0002,ITEM 40,6
+Apr 04, 2019 1:52:39 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@13acfccd
+Apr 04, 2019 1:53:32 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 1:53:32 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Borrow,CONU0001,MON0003,3,true
+Apr 04, 2019 1:53:32 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 04, 2019 1:53:32 PM servers.ServerMontreal receiveLocalUDP
+INFO: Borrow,CONU0001,MON0003,3,true
+Apr 04, 2019 1:53:32 PM servers.ServerMontreal receiveLocalUDP
+INFO: User has borrowed successfully !!
+Apr 04, 2019 1:53:32 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@2f1188bf
+Apr 04, 2019 1:54:03 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 1:54:03 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Borrow,CONU0001,MCG0003,4,false
+Apr 04, 2019 1:54:03 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Apr 04, 2019 1:54:03 PM servers.ServerMcgill receiveLocalUDP
+INFO: Borrow,CONU0001,MCG0003,4,false
+Apr 04, 2019 1:54:03 PM servers.ServerMcgill receiveLocalUDP
+INFO: User has borrowed successfully !!
+Apr 04, 2019 1:54:03 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@5d417b26
+Apr 04, 2019 1:54:03 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 1:54:03 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Return Item,CONU0001,MON0003
+Apr 04, 2019 1:54:03 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 04, 2019 1:54:03 PM servers.ServerMontreal receiveLocalUDP
+INFO: Return Item,CONU0001,MON0003
+Apr 04, 2019 1:54:03 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful
+Apr 04, 2019 1:54:03 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@7c962706
+Apr 04, 2019 1:56:35 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 1:56:35 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Borrow,CONU0001,MON0001,2,true
+Apr 04, 2019 1:56:35 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 04, 2019 1:56:35 PM servers.ServerMontreal receiveLocalUDP
+INFO: Borrow,CONU0001,MON0001,2,true
+Apr 04, 2019 1:56:35 PM servers.ServerMontreal receiveLocalUDP
+INFO: User has borrowed successfully !!
+Apr 04, 2019 1:56:35 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@35ee7a48
+Apr 04, 2019 1:57:00 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 1:57:00 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Borrow,CONU0001,MON0002,4,false
+Apr 04, 2019 1:57:00 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 04, 2019 1:57:00 PM servers.ServerMontreal receiveLocalUDP
+INFO: Borrow,CONU0001,MON0002,4,false
+Apr 04, 2019 1:57:00 PM servers.ServerMontreal receiveLocalUDP
+INFO: User has borrowed successfully !!
+Apr 04, 2019 1:57:00 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@31d1e82d
+Apr 04, 2019 1:57:00 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 1:57:00 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Return Item,CONU0001,MON0001
+Apr 04, 2019 1:57:00 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 04, 2019 1:57:00 PM servers.ServerMontreal receiveLocalUDP
+INFO: Return Item,CONU0001,MON0001
+Apr 04, 2019 1:57:00 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful
+Apr 04, 2019 1:57:00 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@74d37073
+Apr 04, 2019 1:58:37 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 1:58:37 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Borrow,CONU0001,MCG0001,4,false
+Apr 04, 2019 1:58:37 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Apr 04, 2019 1:58:37 PM servers.ServerMcgill receiveLocalUDP
+INFO: Borrow,CONU0001,MCG0001,4,false
+Apr 04, 2019 1:58:37 PM servers.ServerMcgill receiveLocalUDP
+INFO: User has borrowed successfully !!
+Apr 04, 2019 1:58:37 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@39736df
+Apr 04, 2019 1:58:37 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 1:58:37 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Return Item,CONU0001,MON0002
+Apr 04, 2019 1:58:37 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 04, 2019 1:58:37 PM servers.ServerMontreal receiveLocalUDP
+INFO: Return Item,CONU0001,MON0002
+Apr 04, 2019 1:58:37 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful
+Apr 04, 2019 1:58:37 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@456d20df
+Apr 04, 2019 2:00:50 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 2:00:50 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Return Item,CONU0001,MCG0001
+Apr 04, 2019 2:00:50 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Apr 04, 2019 2:00:50 PM servers.ServerMcgill receiveLocalUDP
+INFO: Return Item,CONU0001,MCG0001
+Apr 04, 2019 2:00:50 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful
+Apr 04, 2019 2:00:50 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@7bc338df
+Apr 04, 2019 4:37:31 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 4:37:31 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Find Item,CONU0001,ITEM 30
+Apr 04, 2019 4:37:31 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Apr 04, 2019 4:37:31 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Apr 04, 2019 4:37:31 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful,MCG0002,ITEM 30,5,MCG0001,ITEM 30,10
+Apr 04, 2019 4:37:31 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@53a1c470
+Apr 04, 2019 4:37:31 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 4:37:31 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Find Item,CONU0001,ITEM 30
+Apr 04, 2019 4:37:31 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 04, 2019 4:37:31 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Apr 04, 2019 4:37:31 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON0001,ITEM 30,8
+Apr 04, 2019 4:37:31 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@579e4adc
+Apr 04, 2019 4:44:41 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 4:44:41 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Find Item,CONU0001,ITEM 30
+Apr 04, 2019 4:44:41 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Apr 04, 2019 4:44:41 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Apr 04, 2019 4:44:41 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful,MCG0002,ITEM 30,5,MCG0001,ITEM 30,10
+Apr 04, 2019 4:44:41 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@341e9727
+Apr 04, 2019 4:44:41 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 4:44:41 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Find Item,CONU0001,ITEM 30
+Apr 04, 2019 4:44:41 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 04, 2019 4:44:41 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Apr 04, 2019 4:44:41 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON0001,ITEM 30,8
+Apr 04, 2019 4:44:41 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@3ad97fd4
+Apr 04, 2019 4:51:23 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 4:51:23 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Find Item,CONU0001,ITEM 30
+Apr 04, 2019 4:51:23 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Apr 04, 2019 4:51:23 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Apr 04, 2019 4:51:23 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful,MCG0002,ITEM 30,5,MCG0001,ITEM 30,10
+Apr 04, 2019 4:51:23 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@38c70c3c
+Apr 04, 2019 4:51:23 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 04, 2019 4:51:23 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Find Item,CONU0001,ITEM 30
+Apr 04, 2019 4:51:23 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 04, 2019 4:51:23 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Apr 04, 2019 4:51:23 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON0001,ITEM 30,8
+Apr 04, 2019 4:51:23 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@3cf88ffc
+Apr 04, 2019 6:57:27 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 04, 2019 6:57:27 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Apr 04, 2019 7:07:31 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 04, 2019 7:07:31 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Apr 04, 2019 7:14:29 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 04, 2019 7:14:29 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Apr 04, 2019 7:18:03 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 04, 2019 7:18:03 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Apr 04, 2019 7:20:35 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 04, 2019 7:20:35 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Apr 04, 2019 7:22:00 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 04, 2019 7:22:00 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Apr 04, 2019 7:24:14 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 04, 2019 7:24:14 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.

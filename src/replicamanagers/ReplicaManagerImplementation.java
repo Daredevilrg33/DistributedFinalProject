@@ -152,7 +152,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 				String value = scanner.nextLine();
 				if (value.trim().equalsIgnoreCase("y")) {
 					if (waitList.containsKey(itemId)) {
-					 	Queue<String> userQueue = waitList.get(itemId);
+						Queue<String> userQueue = waitList.get(itemId);
 						userQueue.add(userId);
 						waitList.put(itemId, userQueue);
 					} else {
@@ -655,6 +655,5 @@ public class ReplicaManagerImplementation implements RMInterface {
 		}
 		return isAllowed;
 	}
-	
-	
+
 }
