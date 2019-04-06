@@ -33,6 +33,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 	public Logger logger = Logger.getLogger(FrontEndImplementation.class.getName());
 	String outputResult = "";
 	HashMap<String, String> responseMap = new HashMap();
+	HashMap<String, String> addressMap = new HashMap();
 	boolean resultFound = false;
 	String failedRM = "";
 	String rmStatus="";
@@ -222,7 +223,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 				outputResult = "";
 				messageReceived = new String(reply.getData(), reply.getOffset(), reply.getLength());
 				addResponseToMap(messageReceived);
-
+				addressMap.put(messageReceived.split(":")[0].trim(), reply.getAddress().toString());
 				// String resIdentifier=messageReceived.split("@")[0];
 				// responseMap.put(resIdentifier, messageReceived.split("@")[1]);
 				System.out.println("Message Recieved: " + messageReceived.trim());
@@ -257,7 +258,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		messageReceived =resultComparison(response1, response2, response3, response4);
 		if(!rmStatus.isEmpty())
 		{
-			
+			 byzantineNotify() ;
 		}
 
 		return messageReceived;
@@ -388,4 +389,15 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 
 	}
 
+	
+	public String byzantineNotify() {
+		// TODO Auto-generated method stub
+		String response = "";
+		String udpMessage = ApplicationConstant.OP_BYZANTINE;
+		System.out.println("BYZANTINE NOTIFY" + udpMessage);
+		response = sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage,addressMap.get(rmStatus));
+
+		return response;
+
+	}
 }

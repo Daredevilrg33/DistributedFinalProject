@@ -175,7 +175,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 						itemHashMap.put(itemModel.getItemId(), itemModel);
 						userModel.addItem(itemModel.getItemId());
 						userHashMap.put(userModel.getUserId(), userModel);
-						replyMessage = "User has borrowed successfully !!";
+						replyMessage = ApplicationConstant.MSG_BORROW_ITEM_SUCCESSFULLY;
 					}
 				}
 
@@ -267,9 +267,9 @@ public class ReplicaManagerImplementation implements RMInterface {
 			if (itemHashMap.containsKey(itemId)) {
 				boolean isItemReturned = returnItemAndAssignToWaitListUser(userId, itemId);
 				if (isItemReturned)
-					replyMessage = ApplicationConstant.ITEM_RETURNED_SUCCESSFULLY;
+					replyMessage = ApplicationConstant.MSG_ITEM_RETURNED_SUCCESSFULLY;
 				else
-					replyMessage = ApplicationConstant.ITEM_RETURNED_DOESNOT_EXIST;
+					replyMessage = ApplicationConstant.MSG_ITEM_RETURNED_DOESNOT_EXIST;
 			} else {
 				String str = itemId.substring(0, 3);
 				String reply = "";
@@ -287,10 +287,10 @@ public class ReplicaManagerImplementation implements RMInterface {
 					UserModel user1 = userHashMap.get(userId);
 					user1.removeItem(itemId);
 					userHashMap.put(user1.getUserId(), user1);
-					replyMessage = ApplicationConstant.ITEM_RETURNED_SUCCESSFULLY;
+					replyMessage = ApplicationConstant.MSG_ITEM_RETURNED_SUCCESSFULLY;
 
 				} else {
-					replyMessage = ApplicationConstant.ITEM_RETURNED_DOESNOT_EXIST;
+					replyMessage = ApplicationConstant.MSG_ITEM_RETURNED_DOESNOT_EXIST;
 
 				}
 			}

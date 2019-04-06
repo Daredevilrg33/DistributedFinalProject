@@ -1,6 +1,3 @@
-/**
- * 
- */
 package clients;
 
 import org.omg.CORBA.ORB;
@@ -12,6 +9,7 @@ import org.omg.CosNaming.NamingContextPackage.NotFound;
 
 import dlms.FrontEndOperations;
 import dlms.FrontEndOperationsHelper;
+import utilities.ApplicationConstant;
 
 /**
  * @author Rohit Gupta
@@ -43,75 +41,160 @@ public class TestDLMSClient {
 		Runnable task = () -> {
 			System.out.println(Thread.currentThread().getName());
 			String result = frontEndOperations.borrowItem("CONU0001", "CON0001", 3);
-			if (result.equals("User has borrowed successfully !!"))
+			if (result.equalsIgnoreCase(ApplicationConstant.MSG_BORROW_ITEM_SUCCESSFULLY))
 				System.out.println("Item CON0001 has been borrowed successfully !!");
 			else
-				System.out.println("Unable to borrow Item !!");
+				System.out.println("Unable to borrow Item.");
 
 			result  = frontEndOperations.exchangeItem("CONU0001", "CON0002", "CON0001");
-		
-			System.out.println("Item has been exchanged successfully.");
-			System.out.println("New Item Borrowed: " + "CON1025");
-			System.out.println("Item returned: " + "CON1011");
-
-			// } else
-			System.out.println("Exchange operation unsuccessful.");
-			frontEndOperations.returnItem("CONU0001", "CON1025");
-			// if () {
-			System.out.println("The item CON1025 has been successfully returned by CONU0001.");
-
-			// } else
-			System.out.println("The return operation was unsuccessful.");
+			if(result.equalsIgnoreCase(ApplicationConstant.MSG_ITEM_EXCHANGE_SUCCESSFULLY)) {
+				System.out.println("Item has been exchanged successfully.");
+				System.out.println("New Item Borrowed: " + "CON0002");
+				System.out.println("Item returned: " + "CON0001");
+			} else 
+				System.out.println("Exchange operation unsuccessful.");	
+			
+			result = frontEndOperations.returnItem("CONU0001", "CON0002");
+			if(result.equalsIgnoreCase(ApplicationConstant.MSG_ITEM_RETURNED_SUCCESSFULLY))
+				System.out.println("The item CON0002 has been successfully returned by CONU0001.");
+			else
+				System.out.println("The return operation was unsuccessful.");
 
 			System.out.println(Thread.currentThread().getName());
 		};
 		Runnable task2 = () -> {
 			System.out.println(Thread.currentThread().getName());
-			System.out.println(frontEndOperations.borrowItem("MCGU0005", "CON1011", 3));
-			frontEndOperations.exchangeItem("MCGU0005", "CON1025", "CON1011");
-			// if () {
-			System.out.println("Item has been exchanged successfully.");
-			System.out.println("New Item Borrowed: " + "CON1025");
-			System.out.println("Item returned: " + "CON1011");
-			// } else
-			System.out.println("Exchange operation unsuccessful.");
-			// frontEndOperations.returnItem("MCGU0005", "CON125")
-			// if () {
-			System.out.println("The item CON1025 has been successfully returned by MCGU0005.");
-
-			// } else
-			System.out.println("The return operation was unsuccessful.");
+			String result = frontEndOperations.borrowItem("MCGU0001", "CON0001", 3);
+			if(result.equalsIgnoreCase(ApplicationConstant.MSG_BORROW_ITEM_SUCCESSFULLY))
+				System.out.println("Item CON0001 has been borrowed successfully.");
+			else
+				System.out.println("Unable to borrow Item.");
+			
+			result = frontEndOperations.exchangeItem("MCGU0001", "CON0002", "CON0001");
+			if (result.equalsIgnoreCase(ApplicationConstant.MSG_ITEM_EXCHANGE_SUCCESSFULLY)) {
+				System.out.println("Item has been exchanged successfully.");
+				System.out.println("New Item Borrowed: " + "CON0002");
+				System.out.println("Item returned: " + "CON0001");
+			}
+			else
+				System.out.println("Exchange operation unsuccessful.");
+			
+			result = frontEndOperations.returnItem("MCGU0001", "CON0002");
+			if (result.equalsIgnoreCase(ApplicationConstant.MSG_ITEM_RETURNED_SUCCESSFULLY)) 
+				System.out.println("The item CON0002 has been successfully returned by MCGU0001.");
+			else
+				System.out.println("The return operation was unsuccessful.");
 
 			System.out.println(Thread.currentThread().getName());
 		};
 
 		Runnable task3 = () -> {
 			System.out.println(Thread.currentThread().getName());
-			System.out.println(frontEndOperations.borrowItem("CONU0001", "MON1030", 3));
-
-			frontEndOperations.exchangeItem("CONU0001", "MCG1080", "MON1030");
-			// if () {
-			System.out.println("Item has been exchanged successfully.");
-			System.out.println("New Item Borrowed: " + "MCG1080");
-			System.out.println("Item returned: " + "MON1030");
-
-			// } else
-			System.out.println("Exchange operation unsuccessful.");
-			frontEndOperations.returnItem("CONU0001", "MCG1080");
-			// if () {
-			System.out.println("The item MCG1080 has been successfully returned by CONU0001.");
-			// } else
-			System.out.println("The return operation was unsuccessful.");
+			String result = frontEndOperations.borrowItem("CONU0001", "MCG0001", 3);
+			if(result.equalsIgnoreCase(ApplicationConstant.MSG_BORROW_ITEM_SUCCESSFULLY))
+				System.out.println("Item MCG0001 has been borrowed successfully.");
+			else
+				System.out.println("Unable to borrow Item.");
+			
+			result = frontEndOperations.exchangeItem("CONU0001", "MON0001", "MCG0001");
+			if (result.equalsIgnoreCase(ApplicationConstant.MSG_ITEM_EXCHANGE_SUCCESSFULLY)) {
+				System.out.println("Item has been exchanged successfully.");
+				System.out.println("New Item Borrowed: " + "MON0001");
+				System.out.println("Item returned: " + "MCG0001");
+			}
+			else
+				System.out.println("Exchange operation unsuccessful.");
+			
+			result = frontEndOperations.returnItem("CONU0001", "MON0001");
+			if (result.equalsIgnoreCase(ApplicationConstant.MSG_ITEM_RETURNED_SUCCESSFULLY)) 
+				System.out.println("The item MON0001 has been successfully returned by CONU0001.");
+			else
+				System.out.println("The return operation was unsuccessful.");
 
 			System.out.println(Thread.currentThread().getName());
+		};
+		
+		Runnable task4 = () -> {
+			System.out.println(Thread.currentThread().getName());
+			String result = frontEndOperations.addItem("CONM0001", "CON2121", "TestItem", 1);
+			if(result.equalsIgnoreCase(ApplicationConstant.MSG_ADD_ITEM_ADDED))
+				System.out.println("Item CON2121 has been added successfully.");
+			else
+				System.out.println("Unable to add item.");
+			
+			result = frontEndOperations.borrowItem("CONU0001", "CON2121", 2);
+			if(result.equalsIgnoreCase(ApplicationConstant.MSG_BORROW_ITEM_SUCCESSFULLY))
+				System.out.println("Item CON2121 has been borrowed successfully.");
+			else
+				System.out.println("Unable to borrow item.");
+			
+			result = frontEndOperations.borrowItem("CONU0002", "CON2121", 3);
+			if(result.equalsIgnoreCase(ApplicationConstant.MSG_BORROW_ITEM_SUCCESSFULLY))
+				System.out.println("Item CON2121 has been borrowed successfully.");
+			else
+				System.out.println("Unable to borrow item.");
+			
+			result = frontEndOperations.returnItem("CONU0001", "CON2121");
+			if (result.equalsIgnoreCase(ApplicationConstant.MSG_ITEM_RETURNED_SUCCESSFULLY)) 
+				System.out.println("The item CON2121 has been successfully returned by CONU0001.");
+			else
+				System.out.println("The return operation was unsuccessful.");
+			result = frontEndOperations.returnItem("CONU0002", "CON2121");
+			if (result.equalsIgnoreCase(ApplicationConstant.MSG_ITEM_RETURNED_SUCCESSFULLY)) 
+				System.out.println("The item CON2121 has been successfully returned by CONU0002.");
+			else
+				System.out.println("The return operation was unsuccessful.");
+			
+			
+		};
+		Runnable task5 = () -> {
+			System.out.println(Thread.currentThread().getName());
+			String result = frontEndOperations.addItem("CONM0001", "CON3131", "TestItem2", 1);
+			if(result.equalsIgnoreCase(ApplicationConstant.MSG_ADD_ITEM_ADDED))
+				System.out.println("Item CON3131 has been added successfully.");
+			else
+				System.out.println("Unable to add item.");
+			
+			result = frontEndOperations.borrowItem("CONU0001", "CON3131", 2);
+			if(result.equalsIgnoreCase(ApplicationConstant.MSG_BORROW_ITEM_SUCCESSFULLY))
+				System.out.println("Item CON3131 has been borrowed successfully.");
+			else
+				System.out.println("Unable to borrow item.");
+			
+			result = frontEndOperations.borrowItem("CONU0002", "CON3131", 3);
+			if(result.equalsIgnoreCase(ApplicationConstant.MSG_BORROW_ITEM_SUCCESSFULLY))
+				System.out.println("Item CON3131 has been borrowed successfully.");
+			else
+				System.out.println("Unable to borrow item.");
+			
+			result = frontEndOperations.addItem("CONM0001", "CON3131", "TestItem2", 5);
+			if(result.equalsIgnoreCase(ApplicationConstant.MSG_ADD_ITEM_ADDED))
+				System.out.println("Item CON3131 has been added successfully.");
+			else
+				System.out.println("Unable to add item.");
+			
+			result = frontEndOperations.returnItem("CONU0001", "CON3131");
+			if (result.equalsIgnoreCase(ApplicationConstant.MSG_ITEM_RETURNED_SUCCESSFULLY)) 
+				System.out.println("The item CON3131 has been successfully returned by CONU0001.");
+			else
+				System.out.println("The return operation was unsuccessful.");
+			result = frontEndOperations.returnItem("CONU0002", "CON3131");
+			if (result.equalsIgnoreCase(ApplicationConstant.MSG_ITEM_RETURNED_SUCCESSFULLY)) 
+				System.out.println("The item CON3131 has been successfully returned by CONU0002.");
+			else
+				System.out.println("The return operation was unsuccessful.");
 		};
 
 		Thread thread = new Thread(task);
 		Thread thread2 = new Thread(task2);
 		Thread thread3 = new Thread(task3);
+		Thread thread4 = new Thread(task4);
+		Thread thread5 = new Thread(task5);
 		thread.start();
 		thread2.start();
 		thread3.start();
+		thread4.start();
+		thread5.start();
 		
 		
 		

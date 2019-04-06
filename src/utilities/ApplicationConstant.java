@@ -41,6 +41,7 @@ public class ApplicationConstant {
 	public static final int UDP_CON_SERVER = 6001;
 	public static final int UDP_MCG_SERVER = 6002;
 	public static final int UDP_MON_SERVER = 6003;
+	public static final int UDP_FRONT_END_PORT_FOR_CRASH = 8011;
 
 	// public static final String PATH =
 	// "G:\\workspace\\DistributedFinalProject\\Log Files";
@@ -70,6 +71,9 @@ public class ApplicationConstant {
 	public static final String OP_EXCHANGE_ITEM = "exchangeItem";
 	public static final String OP_FIND_ITEM = "findItem";
 
+	public static final String OP_CRASH_SERVER = "crashServer";
+	public static final String OP_BYZANTINE = "byzantineNotify";
+
 	public static final String MSG_ADD_ITEM_QUANTITY_UPDATED = "Quantity Updated";
 	public static final String MSG_ADD_ITEM_ADDED = "Item Added";
 	public static final String MSG_REMOVE_ITEM = "Item has been removed";
@@ -80,10 +84,9 @@ public class ApplicationConstant {
 	public static final String MSG_USER_ADDED_TO_WAITLIST = "User has been added to the waitList";
 	public static final String MSG_ITEM_EXCHANGE_SUCCESSFULLY = "Item has been exchanged successfully";
 	public static final String MSG_ITEM_EXCHANGE_UNSUCCESSFUL = "Item cannot be exchanged as per one of the operations is failed.";
-	public static final String ITEM_RETURNED_SUCCESSFULLY = "Item has been returned successfully";
-	public static final String ITEM_RETURNED_DOESNOT_EXIST = "Item does not exist. You cannot perform this operation";
+	public static final String MSG_ITEM_RETURNED_SUCCESSFULLY = "Item has been returned successfully";
+	public static final String MSG_ITEM_RETURNED_DOESNOT_EXIST = "Item does not exist. You cannot perform this operation";
 	public static final String ITEM_NOT_BORROWED = "Item has not been borrowed by this user.";
-	public static final String OP_CRASH_SERVER = "crashServer";
-	public static final int UDP_FRONT_END_PORT_FOR_CRASH = 8011;
+	public static final String MSG_BORROW_ITEM_SUCCESSFULLY = "User has borrowed successfully !!";
 
 }

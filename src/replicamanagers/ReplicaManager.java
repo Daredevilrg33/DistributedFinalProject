@@ -34,6 +34,8 @@ public class ReplicaManager {
 	static ServerMontreal monServer;
 	static ServerMcgill mcgServer;
 	private static boolean isCrashed = false;
+	//byzantine
+	private static int byzantineCount=0;
 
 	public static void main(String[] args) {
 		Runnable task = () -> {
@@ -42,50 +44,10 @@ public class ReplicaManager {
 		Thread thread = new Thread(task);
 		thread.start();
 		startingServer();
-		// Runnable task1 = () -> {
-		// recieveMessageForCrashRecovery();
-		// };
-		// Thread thread1 = new Thread(task1);
-		// thread1.start();
 
 	}
 
-	// private static void recieveMessageForCrashRecovery() {
-	// // TODO Auto-generated method stub
-	// DatagramSocket aSocket = null;
-	// try {
-	// aSocket = new DatagramSocket(ApplicationConstant.UDP_RM_RECOVERY_PORT);
-	// byte[] buffer = new byte[1000];// to stored the received data from
-	// // the client.
-	// System.out.println("Recovery Server Started............");
-	// while (true) {// non-terminating loop as the server is always in listening
-	// mode.
-	// DatagramPacket request = new DatagramPacket(buffer, buffer.length);
-	//
-	// // Server waits for the request to come
-	// aSocket.receive(request);
-	// // request received
-	// String requestData = new String(request.getData(), request.getOffset(),
-	// request.getLength());
-	//
-	// System.out.println("Request received from client for Recovery: " +
-	// requestData.trim());
-	//// String response = performAction(requestData.trim());
-	//
-	// DatagramPacket reply = new DatagramPacket(response.trim().getBytes(),
-	// response.trim().getBytes().length,
-	// request.getAddress(), request.getPort());// reply packet ready
-	// aSocket.send(reply);// reply sent
-	// }
-	// } catch (SocketException e) {
-	// System.out.println("Socket: " + e.getMessage());
-	// } catch (IOException e) {
-	// System.out.println("IO: " + e.getMessage());
-	// } finally {
-	// if (aSocket != null)
-	// aSocket.close();
-	// }
-	// }
+
 
 	public static void startingServer() {
 		conServer = new ServerConcordia();
@@ -186,9 +148,22 @@ public class ReplicaManager {
 			}
 
 		}
+		//byzantine
+		if (methodName.trim().equalsIgnoreCase(ApplicationConstant.OP_BYZANTINE)) {
+			byzantineCount++;
+			if(byzantineCount==3)
+			{
+				handlingByzantineFailure();
+			}
+		}
 
 		return outputMessage;
 
+	}
+	
+	public static boolean handlingByzantineFailure() {
+		
+		return true;
 	}
 
 	public static boolean handlingCrashFailure(String opt) {
