@@ -25,14 +25,16 @@ import utilities.ApplicationConstant;
 public class ServerConcordia extends Thread {
 	public static DatagramSocket aSocket = null;
 	public static volatile boolean crashFailure = false;
+	private static ReplicaManagerImplementation replicaManagerImplementation;
 
 	@Override
 	public void run() {
-		ReplicaManagerImplementation replicaManagerImplementation = new ReplicaManagerImplementation(
-				ServerType.CONCORDIA);
+		replicaManagerImplementation = new ReplicaManagerImplementation(ServerType.CONCORDIA);
 		replicaManagerImplementation.logging("Concordia Server");
+
+		System.out.println("Concordia Server Started............");
 		Runnable task = () -> {
-			receive(replicaManagerImplementation);
+			receive();
 		};
 		Runnable task1 = () -> {
 			receiveLocalUDP(replicaManagerImplementation);
@@ -45,16 +47,16 @@ public class ServerConcordia extends Thread {
 		thread1.start();
 	}
 
-	private static void receive(ReplicaManagerImplementation replicaManagerImplementation) {
+	private static void receive() {
 		try {
-			//aSocket = new DatagramSocket(ApplicationConstant.UDP_CONCORDIA_PORT);
+			// aSocket = new DatagramSocket(ApplicationConstant.UDP_CONCORDIA_PORT);
 			aSocket = new DatagramSocket(null);
 			aSocket.setReuseAddress(true);
 			aSocket.bind(
 					new InetSocketAddress(InetAddress.getByName("localhost"), ApplicationConstant.UDP_CONCORDIA_PORT));
 			byte[] buffer = new byte[1000];// to stored the received data from
 											// the client.
-			System.out.println("Server Started............");
+
 			while (true) {// non-terminating loop as the server is always in listening mode.
 				DatagramPacket request = new DatagramPacket(buffer, buffer.length);
 
@@ -70,6 +72,7 @@ public class ServerConcordia extends Thread {
 			}
 		} catch (SocketException e) {
 			System.out.println("Socket: " + e.getMessage());
+			receive();
 		} catch (IOException e) {
 			System.out.println("IO: " + e.getMessage());
 		} finally {

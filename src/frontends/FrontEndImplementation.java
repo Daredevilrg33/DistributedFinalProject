@@ -35,6 +35,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 	HashMap<String, String> responseMap = new HashMap();
 	boolean resultFound = false;
 	String failedRM = "";
+	String rmStatus="";
 
 	/**
 	 * @param orb
@@ -231,12 +232,12 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 				resultCount++;
 			}
 		} catch (SocketTimeoutException e) {
-			System.out.println("Socket: " + e.getMessage());
-			// sentRecoverRMRequest();
-			//crashingServer(10);
+			System.out.println("Socket Time Out: " + e.getMessage());
+			 sentRecoverRMRequest();
+			// crashingServer(10);
 		} catch (SocketException e1) {
 			System.out.println("Socket: " + e1.getMessage());
-			sentRecoverRMRequest();
+//			sentRecoverRMRequest();
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -253,9 +254,11 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		response2 = responseMap.get("RM2") == null ? "" : responseMap.get("RM2");
 		response3 = responseMap.get("RM3") == null ? "" : responseMap.get("RM3");
 		response4 = responseMap.get("RM4") == null ? "" : responseMap.get("RM4");
-		messageReceived =
-
-				resultComparison(response1, response2, response3, response4);
+		messageReceived =resultComparison(response1, response2, response3, response4);
+		if(!rmStatus.isEmpty())
+		{
+			
+		}
 
 		return messageReceived;
 	}
@@ -276,7 +279,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		}
 		String udpMessage = ApplicationConstant.OP_CRASH_SERVER + "," + 10;
 		System.out.println("\n\n sentRecoverRMRequest " + udpMessage);
-		sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage);
+		sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage,"localhost");
 	}
 
 	private void addResponseToMap(String messageReceived) {
@@ -286,7 +289,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 			responseMap.put(str[0].trim(), str[1].trim());
 	}
 
-	private String sendUDPRequestForCrashFailure(int serverPort, String message) {
+	private String sendUDPRequestForCrashFailure(int serverPort, String message, String ipAddress) {
 
 		Utility.log("Accessing UDP Request", logger);
 		Utility.log("Requesting Port " + serverPort + " message: " + message, logger);
@@ -296,7 +299,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 			aSocket = new DatagramSocket();
 
 			byte[] mes = message.getBytes();
-			InetAddress aHost = InetAddress.getByName("localhost");
+			InetAddress aHost = InetAddress.getByName(ipAddress);
 
 			DatagramPacket request = new DatagramPacket(mes, mes.length, aHost, serverPort);
 
@@ -304,17 +307,6 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 			String requestData = new String(request.getData());
 			System.out.println("Request received from client: " + requestData.trim());
 			messageReceived = "Operation Done";
-			// byte[] buffer = new byte[1000];
-
-			// DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
-			// aSocket.receive(reply);
-			// messageReceived = "";
-			// messageReceived = new String(reply.getData(), reply.getOffset(),
-			// reply.getLength());
-			// // String resIdentifier=messageReceived.split("@")[0];
-			// responseMap.put(resIdentifier, messageReceived.split("@")[1]);
-			// Utility.log("Received reply" + messageReceived.trim(), logger);
-			// buffer = new byte[1000];
 		} catch (SocketException e) {
 			System.out.println("Socket: " + e.getMessage());
 		} catch (IOException e) {
@@ -326,51 +318,6 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		}
 		return messageReceived;
 	}
-
-	// private String sendUDPRequestForCrashRecover(int serverPort, String message)
-	// {
-	//
-	// Utility.log("Accessing UDP Request", logger);
-	// Utility.log("Requesting Port " + serverPort + " message: " + message,
-	// logger);
-	// DatagramSocket aSocket = null;
-	// String messageReceived = null;
-	// try {
-	// aSocket = new
-	// DatagramSocket(ApplicationConstant.UDP_FRONT_END_PORT_FOR_CRASH);
-	//
-	// byte[] mes = message.getBytes();
-	// InetAddress aHost = InetAddress.getByName("localhost");
-	//
-	// DatagramPacket request = new DatagramPacket(mes, mes.length, aHost,
-	// serverPort);
-	//
-	// aSocket.send(request);
-	// // String requestData = new String(request.getData());
-	// // System.out.println("Request received from client: " + requestData.trim());
-	//
-	// byte[] buffer = new byte[1000];
-	//
-	// DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
-	// aSocket.receive(reply);
-	// messageReceived = "";
-	// messageReceived = new String(reply.getData(), reply.getOffset(),
-	// reply.getLength());
-	// // String resIdentifier=messageReceived.split("@")[0];
-	// // responseMap.put(resIdentifier, messageReceived.split("@")[1]);
-	// Utility.log("Received reply" + messageReceived.trim(), logger);
-	// buffer = new byte[1000];
-	// } catch (SocketException e) {
-	// System.out.println("Socket: " + e.getMessage());
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// System.out.println("IO: " + e.getMessage());
-	// } finally {
-	// if (aSocket != null)
-	// aSocket.close();
-	// }
-	// return messageReceived;
-	// }
 
 	private String resultComparison(String response1, String response2, String response3, String response4) {
 		String output = "";
@@ -396,24 +343,30 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		} else if (!isRM1AndRM4Equal && isRM2AndRM3Equal) {
 			if (response1.trim().equalsIgnoreCase(response2.trim())) {
 				resultFound = true;
+				rmStatus="RM4";
 				return response1;
 			} else if (response4.trim().equalsIgnoreCase(response2.trim())) {
 				resultFound = true;
+				rmStatus="RM1";
 				return response4;
 			} else {
 				resultFound = true;
+				rmStatus="RM4";
 				return response2;
 			}
 
 		} else if (!isRM2AndRM3Equal && isRM1AndRM4Equal) {
 			if (response2.trim().equalsIgnoreCase(response1.trim())) {
 				resultFound = true;
+				rmStatus="RM3";
 				return response2;
 			} else if (response3.trim().equalsIgnoreCase(response1.trim())) {
 				resultFound = true;
+				rmStatus="RM2";
 				return response3;
 			} else {
 				resultFound = true;
+				rmStatus="RM3";
 				return response1;
 			}
 
@@ -429,7 +382,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		String udpMessage = ApplicationConstant.OP_CRASH_SERVER + "," + status;
 		System.out.println("CRASH SERVER" + udpMessage);
 
-		response = sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage);
+		response = sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage,"localhost");
 
 		return response;
 

@@ -31,6 +31,7 @@ public class ServerMontreal extends Thread {
 		ReplicaManagerImplementation replicaManagerImplementation = new ReplicaManagerImplementation(
 				ServerType.MONTREAL);
 		replicaManagerImplementation.logging("Montreal Server");
+		System.out.println("Montreal Server Started............");
 		Runnable task = () -> {
 			receive(replicaManagerImplementation);
 		};
@@ -48,13 +49,13 @@ public class ServerMontreal extends Thread {
 
 		try {
 			aSocket = new DatagramSocket(null);
-			//aSocket = new DatagramSocket(ApplicationConstant.UDP_MONTREAL_PORT);
+			// aSocket = new DatagramSocket(ApplicationConstant.UDP_MONTREAL_PORT);
 			aSocket.setReuseAddress(true);
 			aSocket.bind(
 					new InetSocketAddress(InetAddress.getByName("localhost"), ApplicationConstant.UDP_MONTREAL_PORT));
 			byte[] buffer = new byte[1000];// to stored the received data from
 											// the client.
-			System.out.println("Server Started............");
+
 			while (true) {// non-terminating loop as the server is always in listening mode.
 				DatagramPacket request = new DatagramPacket(buffer, buffer.length);
 
@@ -70,6 +71,7 @@ public class ServerMontreal extends Thread {
 			}
 		} catch (SocketException e) {
 			System.out.println("Socket: " + e.getMessage());
+			receive(replicaManagerImplementation);
 		} catch (IOException e) {
 			System.out.println("IO: " + e.getMessage());
 		} finally {

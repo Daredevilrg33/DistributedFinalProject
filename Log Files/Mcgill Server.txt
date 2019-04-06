@@ -646,3 +646,45 @@ Apr 04, 2019 7:24:14 PM utilities.Utility log
 INFO: Accessing Add Item. 
 Apr 04, 2019 7:24:14 PM utilities.Utility log
 INFO: Item successfully added to concordia hashmap.
+Apr 05, 2019 7:05:35 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 05, 2019 7:05:35 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Apr 05, 2019 7:11:51 PM utilities.Utility log
+INFO: Accessing Add Item. 
+Apr 05, 2019 7:11:51 PM utilities.Utility log
+INFO: Item successfully added to concordia hashmap.
+Apr 05, 2019 7:12:49 PM utilities.Utility log
+INFO: Accessing Remove Item.
+Apr 05, 2019 7:12:49 PM utilities.Utility log
+INFO: Quantity is greater than zero.
+Apr 05, 2019 7:12:49 PM utilities.Utility log
+INFO: Old quantity of the item: 2
+Apr 05, 2019 7:12:49 PM utilities.Utility log
+INFO: Quantity to be reduce : 1
+Apr 05, 2019 7:12:49 PM utilities.Utility log
+INFO: Item quantity has been reduced to : 1
+Apr 05, 2019 7:19:01 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 05, 2019 7:19:01 PM utilities.Utility log
+INFO: Requesting Port 6002 message: Find Item,CONU0001,ITEM 30
+Apr 05, 2019 7:19:01 PM servers.ServerMcgill receiveLocalUDP
+INFO: UDP Request Recieved MCGILL!!
+Apr 05, 2019 7:19:01 PM servers.ServerMcgill receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Apr 05, 2019 7:19:01 PM servers.ServerMcgill receiveLocalUDP
+INFO: successful,MCG0002,ITEM 30,5,MCG0001,ITEM 30,10
+Apr 05, 2019 7:19:01 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@47d098e9
+Apr 05, 2019 7:19:01 PM utilities.Utility log
+INFO: Accessing UDP Request
+Apr 05, 2019 7:19:01 PM utilities.Utility log
+INFO: Requesting Port 6003 message: Find Item,CONU0001,ITEM 30
+Apr 05, 2019 7:19:01 PM servers.ServerMontreal receiveLocalUDP
+INFO: UDP Request Recieved MONTREAL!!
+Apr 05, 2019 7:19:01 PM servers.ServerMontreal receiveLocalUDP
+INFO: Find Item,CONU0001,ITEM 30
+Apr 05, 2019 7:19:01 PM servers.ServerMontreal receiveLocalUDP
+INFO: successful,MON0001,ITEM 30,8
+Apr 05, 2019 7:19:01 PM utilities.Utility log
+INFO: Received replyjava.net.DatagramPacket@43ef04cb

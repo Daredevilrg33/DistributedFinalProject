@@ -31,7 +31,9 @@ public class ServerMcgill extends Thread {
 
 		ReplicaManagerImplementation replicaManagerImplementation = new ReplicaManagerImplementation(ServerType.MCGILL);
 		replicaManagerImplementation.logging("Mcgill Server");
+		System.out.println("Mcgill Server Started............");
 		Runnable task = () -> {
+			
 			receive(replicaManagerImplementation);
 		};
 		Runnable task1 = () -> {
@@ -47,14 +49,14 @@ public class ServerMcgill extends Thread {
 
 		try {
 			aSocket = new DatagramSocket(null);
-			aSocket = new DatagramSocket(ApplicationConstant.UDP_MCGILL_PORT);
+//			aSocket = new DatagramSocket(ApplicationConstant.UDP_MCGILL_PORT);
 			aSocket.setReuseAddress(true);
 			aSocket.bind(
 					new InetSocketAddress(InetAddress.getByName("localhost"), ApplicationConstant.UDP_MCGILL_PORT));
 
 			byte[] buffer = new byte[1000];// to stored the received data from
 											// the client.
-			System.out.println("Server Started............");
+			
 			while (true) {// non-terminating loop as the server is always in listening mode.
 				DatagramPacket request = new DatagramPacket(buffer, buffer.length);
 
@@ -71,6 +73,7 @@ public class ServerMcgill extends Thread {
 			}
 		} catch (SocketException e) {
 			System.out.println("Socket: " + e.getMessage());
+			receive(replicaManagerImplementation);
 		} catch (IOException e) {
 			System.out.println("IO: " + e.getMessage());
 		} finally {

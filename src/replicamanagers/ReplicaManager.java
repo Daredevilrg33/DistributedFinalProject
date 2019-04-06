@@ -11,6 +11,7 @@ import java.net.InetSocketAddress;
 import java.net.MulticastSocket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.time.chrono.IsoChronology;
 import java.util.LinkedHashMap;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -32,6 +33,7 @@ public class ReplicaManager {
 	static ServerConcordia conServer;
 	static ServerMontreal monServer;
 	static ServerMcgill mcgServer;
+	private static boolean isCrashed = false;
 
 	public static void main(String[] args) {
 		Runnable task = () -> {
@@ -161,23 +163,26 @@ public class ReplicaManager {
 			if (!historyBuffer.containsKey(sequenceNumber)) {
 				pwaitListQueue.add(sequenceNumber);
 				historyBuffer.put(sequenceNumber, requestData);
-				String action = requestParams[1].trim();
-				String managerId = requestParams[2].trim();
-				int value = seqCount + 1;
-				if (pwaitListQueue.peek() == value) {
-					while (!pwaitListQueue.isEmpty()) {
-						int seqNo = pwaitListQueue.peek();
-						String request = historyBuffer.get(seqNo);
-						String[] requestParams1 = request.split(",");
-						String managerId1 = requestParams1[2].trim();
-						outputMessage = sendUDPRequestToServer(getServerPort(managerId1), request);
+				if (!isCrashed) {
+					String action = requestParams[1].trim();
+					String managerId = requestParams[2].trim();
+					int value = seqCount + 1;
+					if (pwaitListQueue.peek() == value) {
+						while (!pwaitListQueue.isEmpty()) {
+							int seqNo = pwaitListQueue.peek();
+							String request = historyBuffer.get(seqNo);
+							String[] requestParams1 = request.split(",");
+							String managerId1 = requestParams1[2].trim();
+							outputMessage = sendUDPRequestToServer(getServerPort(managerId1), request);
 
-						seqCount = seqCount + 1;
-						pwaitListQueue.poll();
+							seqCount = seqCount + 1;
+							pwaitListQueue.poll();
+						}
+					} else {
+						System.out.println("Waiting for required request");
 					}
-				} else {
-					System.out.println("Waiting for required request");
 				}
+
 			}
 
 		}
@@ -187,40 +192,16 @@ public class ReplicaManager {
 	}
 
 	public static boolean handlingCrashFailure(String opt) {
-		boolean isCrashed = false;
+
 		if (Integer.valueOf(opt) < 0) {
-			conServer.aSocket.close();
-			monServer.aSocket.close();
-			mcgServer.aSocket.close();
+			ServerConcordia.aSocket.close();
+			ServerMontreal.aSocket.close();
+			ServerMcgill.aSocket.close();
 
 			isCrashed = true;
 		} else {
 			System.out.println("Crash Recovery Code Running");
-			try {
-				conServer.aSocket = new DatagramSocket(null);
-				conServer.aSocket.setReuseAddress(true);
-				conServer.aSocket.bind(new InetSocketAddress(InetAddress.getByName("localhost"),
-						ApplicationConstant.UDP_CONCORDIA_PORT));
-
-				mcgServer.aSocket = new DatagramSocket(null);
-				mcgServer.aSocket.setReuseAddress(true);
-				mcgServer.aSocket.bind(
-						new InetSocketAddress(InetAddress.getByName("localhost"), ApplicationConstant.UDP_MCGILL_PORT));
-
-				monServer.aSocket = new DatagramSocket(null);
-				monServer.aSocket.setReuseAddress(true);
-				monServer.aSocket.bind(new InetSocketAddress(InetAddress.getByName("localhost"),
-						ApplicationConstant.UDP_MONTREAL_PORT));
-
-			} catch (SocketException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (UnknownHostException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			System.out.println("Before Accessing history Buffer" + historyBuffer.size());
-			// ServerConcordia conServer = new ServerConcordia();
 			if (historyBuffer.size() > 0) {
 				for (int i = 1; i < seqCount; i++) {
 					System.out.println("Accessing history Buffer");
@@ -257,7 +238,6 @@ public class ReplicaManager {
 		String messageReceived = null;
 		try {
 			aSocket = new DatagramSocket(ApplicationConstant.RM_PORT);
-			// aSocket.setSoTimeout(30000);
 			byte[] mes = message.getBytes();
 			InetAddress aHost = InetAddress.getByName("localhost");
 
