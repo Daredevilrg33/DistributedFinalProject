@@ -96,7 +96,8 @@ public class ReplicaManagerImplementation implements RMInterface {
 				Utility.log("Item has been removed successfully !!", logger);
 				reply = ApplicationConstant.MSG_REMOVE_ITEM;
 
-			}
+			} else
+				reply = ApplicationConstant.MSG_ITEM_RETURNED_DOESNOT_EXIST;
 		} else {
 			Utility.log("Quantity is greater than zero.", logger);
 			if (itemHashMap.containsKey(itemId)) {
@@ -113,7 +114,8 @@ public class ReplicaManagerImplementation implements RMInterface {
 					Utility.log("Item quantity has been reduced to : " + value, logger);
 					reply = ApplicationConstant.MSG_REMOVE_ITEM_DECREASED_QUANTITY;
 				}
-			}
+			} else
+				reply = ApplicationConstant.MSG_ITEM_RETURNED_DOESNOT_EXIST;
 		}
 		return reply;
 	}
@@ -128,7 +130,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 		// TODO Auto-generated method stub
 		UserModel userModel = userHashMap.get(managerId);
 		if (userModel != null) {
-			return itemHashMap.toString();
+			return parseData(itemHashMap).toString();
 		} else
 			return ApplicationConstant.MSG_NO_ITEMS_AVAILABLE;
 	}
@@ -163,12 +165,12 @@ public class ReplicaManagerImplementation implements RMInterface {
 					replyMessage = ApplicationConstant.MSG_USER_ADDED_TO_WAITLIST;
 
 				} else {
-					replyMessage = "User has not been added to waitlist.";
+					replyMessage = ApplicationConstant.MSG_USER_WAITLIST_OPT_OUT;
 				}
 			} else {
 				if (userModel != null) {
 					if (userModel.getItemList().contains(itemModel.getItemId())) {
-						replyMessage = "You already have borrowed the Item previously.";
+						replyMessage = ApplicationConstant.MSG_BORROW_USER_ALREADY_HAS_ITEM;
 					} else {
 						int quantity = itemModel.getQuantity() - 1;
 						itemModel.setQuantity(quantity);
@@ -201,7 +203,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 					userHashMap.put(user.getUserId(), user);
 				}
 			} else {
-				replyMessage = "You are not allowed to borrow more than 1 item from other library.";
+				replyMessage = ApplicationConstant.MSG_BORROW_USER_NOT_ALLOWED_TO_BORROW;
 			}
 		}
 		return replyMessage;
@@ -247,9 +249,9 @@ public class ReplicaManagerImplementation implements RMInterface {
 			itemModels.addAll(fetchItemsFromReply(reply6));
 		}
 		if (itemModels.size() > 0) {
-			return itemModels.toString();
+			return parseData(itemModels).toString();
 		} else
-			return "No items available";
+			return ApplicationConstant.MSG_NO_ITEMS_AVAILABLE;
 
 	}
 
@@ -295,7 +297,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 				}
 			}
 		} else
-			replyMessage = ApplicationConstant.ITEM_NOT_BORROWED;
+			replyMessage = ApplicationConstant.MSG_BORROW_ITEM_NOT_BORROWED;
 		return replyMessage;
 	}
 
@@ -601,7 +603,7 @@ public class ReplicaManagerImplementation implements RMInterface {
 				int quantity = itemModel.getQuantity() - 1;
 				itemModel.setQuantity(quantity);
 				itemHashMap.put(itemModel.getItemId(), itemModel);
-				replyMessage = "User has borrowed successfully !!";
+				replyMessage = ApplicationConstant.MSG_BORROW_ITEM_SUCCESSFULLY;
 			}
 		}
 		return replyMessage;
@@ -654,6 +656,26 @@ public class ReplicaManagerImplementation implements RMInterface {
 			}
 		}
 		return isAllowed;
+	}
+
+	public String parseData(HashMap<String, ItemModel> itemModels) {
+		String output = "";
+		for (String key : itemModels.keySet()) {
+			ItemModel itemModel = itemModels.get(key);
+			output = output.concat(
+					itemModel.getItemId() + "," + itemModel.getItemName() + "," + itemModel.getQuantity() + "@");
+		}
+		output = output.substring(0, output.length() - 1);
+		return output;
+	}
+
+	public String parseData(List<ItemModel> itemModels) {
+		String output = "";
+		for (ItemModel itemModel : itemModels)
+			output = output.concat(
+					itemModel.getItemId() + "," + itemModel.getItemName() + "," + itemModel.getQuantity() + "@");
+		output = output.substring(0, output.length() - 1);
+		return output;
 	}
 
 }

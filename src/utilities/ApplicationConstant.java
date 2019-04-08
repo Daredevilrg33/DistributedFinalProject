@@ -51,7 +51,7 @@ public class ApplicationConstant {
 	public static final String IP_ADDRESS_ROOHANI = "132.205.64.142";
 	public static final String IP_ADDRESS_ROHIT = "132.205.45.234";
 
-	public static final String IP_ADDRESS_NANCY = "132.205.46.167";
+	public static final String IP_ADDRESS_NANCY = "132.205.45.221";
 	public static final String IP_ADDRESS_HASTI = "132.205.45.235";
 
 	public static final String DATA_USER_ID = "userId";
@@ -76,17 +76,24 @@ public class ApplicationConstant {
 
 	public static final String MSG_ADD_ITEM_QUANTITY_UPDATED = "Quantity Updated";
 	public static final String MSG_ADD_ITEM_ADDED = "Item Added";
-	public static final String MSG_REMOVE_ITEM = "Item has been removed";
 
-	public static final String MSG_REMOVE_ITEM_INSUFFICIENT_QUANTITY = "Quantity available not sufficient";
+	public static final String MSG_REMOVE_ITEM = "Item has been removed";
 	public static final String MSG_REMOVE_ITEM_DECREASED_QUANTITY = "Item has been decreased with the given quantity";
-	public static final String MSG_NO_ITEMS_AVAILABLE = "No items available";
-	public static final String MSG_USER_ADDED_TO_WAITLIST = "User has been added to the waitList";
-	public static final String MSG_ITEM_EXCHANGE_SUCCESSFULLY = "Item has been exchanged successfully";
-	public static final String MSG_ITEM_EXCHANGE_UNSUCCESSFUL = "Item cannot be exchanged as per one of the operations is failed.";
-	public static final String MSG_ITEM_RETURNED_SUCCESSFULLY = "Item has been returned successfully";
+	public static final String MSG_REMOVE_ITEM_INSUFFICIENT_QUANTITY = "Quantity available not sufficient";
 	public static final String MSG_ITEM_RETURNED_DOESNOT_EXIST = "Item does not exist. You cannot perform this operation";
-	public static final String ITEM_NOT_BORROWED = "Item has not been borrowed by this user.";
+
+	public static final String MSG_NO_ITEMS_AVAILABLE = "No items available";
+
+	public static final String MSG_ITEM_EXCHANGE_SUCCESSFULLY = "Item has been exchanged successfully";
+	public static final String MSG_ITEM_EXCHANGE_UNSUCCESSFUL = "Item cannot be per as one of the operations is failed.";
+	public static final String MSG_ITEM_RETURNED_SUCCESSFULLY = "Item has been returned successfully";
+
+	public static final String MSG_BORROW_ITEM_NOT_BORROWED = "Item has not been borrowed by this user.";
 	public static final String MSG_BORROW_ITEM_SUCCESSFULLY = "User has borrowed successfully !!";
+	public static final String MSG_BORROW_USER_ALREADY_HAS_ITEM = "Item has been already been borrowed by this user";
+	public static final String MSG_BORROW_USER_NOT_ALLOWED_TO_BORROW = "User cannot borrow more than one item from same non local library";
+	public static final String MSG_USER_ADDED_TO_WAITLIST = "User has been added to the waitList";
+	public static final String MSG_USER_ALREADY_IN_WAITLIST = "User has been already been a part of this waitList.";
+	public static final String MSG_USER_WAITLIST_OPT_OUT = "waitlist opt out. Item quantity is less than 1.";
 
 }

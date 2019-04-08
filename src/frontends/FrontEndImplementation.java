@@ -36,7 +36,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 	HashMap<String, String> addressMap = new HashMap();
 	boolean resultFound = false;
 	String failedRM = "";
-	String rmStatus="";
+	String rmStatus = "";
 
 	/**
 	 * @param orb
@@ -55,10 +55,15 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 	@Override
 	public String addItem(String managerId, String itemId, String itemName, int quantity) {
 		// TODO Auto-generated method stub
-		String udpMessage = ApplicationConstant.OP_ADD_ITEM + "," + managerId + "," + itemId + "," + itemName + ","
-				+ String.valueOf(quantity);
-		System.out.println("Add ITEM " + udpMessage);
-		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
+		String output = "";
+		if (validateItem(itemId, managerId)) {
+			String udpMessage = ApplicationConstant.OP_ADD_ITEM + "," + managerId + "," + itemId + "," + itemName + ","
+					+ String.valueOf(quantity);
+			System.out.println("Add ITEM " + udpMessage);
+			output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
+
+		} else
+			output = "User not authorized.";
 		return output;
 
 	}
@@ -72,11 +77,15 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 	@Override
 	public String removeItem(String managerId, String itemId, int quantity) {
 		// TODO Auto-generated method stub
-		String udpMessage = ApplicationConstant.OP_REMOVE_ITEM + "," + managerId + "," + itemId + ","
-				+ String.valueOf(quantity);
-		System.out.println("Remove ITEM " + udpMessage);
+		String output = "";
+		if (validateItem(itemId, managerId)) {
+			String udpMessage = ApplicationConstant.OP_REMOVE_ITEM + "," + managerId + "," + itemId + ","
+					+ String.valueOf(quantity);
+			System.out.println("Remove ITEM " + udpMessage);
 
-		String output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
+			output = sendUDPRequestToSequencer(ApplicationConstant.UDP_SEQUENCER_PORT, udpMessage);
+		} else
+			output = "User not authorized.";
 		return output;
 	}
 
@@ -201,7 +210,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 
 		DatagramSocket aSocket = null;
 
-		String messageReceived = null;
+		String messageReceived = "";
 		try {
 			aSocket = new DatagramSocket(ApplicationConstant.UDP_FRONT_END_PORT);
 			aSocket.setSoTimeout(10000);
@@ -216,7 +225,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 
 			byte[] buffer = new byte[1000];
 			int resultCount = 0;
-			while (resultCount < 3) {
+			while (resultCount < 4) {
 				DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
 				aSocket.receive(reply);
 				messageReceived = "";
@@ -234,11 +243,11 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 			}
 		} catch (SocketTimeoutException e) {
 			System.out.println("Socket Time Out: " + e.getMessage());
-			 sentRecoverRMRequest();
+			sentRecoverRMRequest();
 			// crashingServer(10);
 		} catch (SocketException e1) {
 			System.out.println("Socket: " + e1.getMessage());
-//			sentRecoverRMRequest();
+			// sentRecoverRMRequest();
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -255,10 +264,9 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		response2 = responseMap.get("RM2") == null ? "" : responseMap.get("RM2");
 		response3 = responseMap.get("RM3") == null ? "" : responseMap.get("RM3");
 		response4 = responseMap.get("RM4") == null ? "" : responseMap.get("RM4");
-		messageReceived =resultComparison(response1, response2, response3, response4);
-		if(!rmStatus.isEmpty())
-		{
-			 byzantineNotify() ;
+		messageReceived = resultComparison(response1, response2, response3, response4);
+		if (!rmStatus.isEmpty()) {
+			byzantineNotify();
 		}
 
 		return messageReceived;
@@ -280,7 +288,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		}
 		String udpMessage = ApplicationConstant.OP_CRASH_SERVER + "," + 10;
 		System.out.println("\n\n sentRecoverRMRequest " + udpMessage);
-		sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage,"localhost");
+		sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage, "localhost");
 	}
 
 	private void addResponseToMap(String messageReceived) {
@@ -296,6 +304,8 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		Utility.log("Requesting Port " + serverPort + " message: " + message, logger);
 		DatagramSocket aSocket = null;
 		String messageReceived = null;
+		Utility.log("IP ADDRESS " + ipAddress, logger);
+
 		try {
 			aSocket = new DatagramSocket();
 
@@ -322,7 +332,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 
 	private String resultComparison(String response1, String response2, String response3, String response4) {
 		String output = "";
-
+		rmStatus = "";
 		boolean isRM1AndRM4Equal = false;
 		boolean isRM2AndRM3Equal = false;
 		resultFound = true;
@@ -344,30 +354,30 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		} else if (!isRM1AndRM4Equal && isRM2AndRM3Equal) {
 			if (response1.trim().equalsIgnoreCase(response2.trim())) {
 				resultFound = true;
-				rmStatus="RM4";
+				rmStatus = "RM4";
 				return response1;
 			} else if (response4.trim().equalsIgnoreCase(response2.trim())) {
 				resultFound = true;
-				rmStatus="RM1";
+				rmStatus = "RM1";
 				return response4;
 			} else {
 				resultFound = true;
-				rmStatus="RM4";
+				rmStatus = "RM4";
 				return response2;
 			}
 
 		} else if (!isRM2AndRM3Equal && isRM1AndRM4Equal) {
 			if (response2.trim().equalsIgnoreCase(response1.trim())) {
 				resultFound = true;
-				rmStatus="RM3";
+				rmStatus = "RM3";
 				return response2;
 			} else if (response3.trim().equalsIgnoreCase(response1.trim())) {
 				resultFound = true;
-				rmStatus="RM2";
+				rmStatus = "RM2";
 				return response3;
 			} else {
 				resultFound = true;
-				rmStatus="RM3";
+				rmStatus = "RM3";
 				return response1;
 			}
 
@@ -383,21 +393,32 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 		String udpMessage = ApplicationConstant.OP_CRASH_SERVER + "," + status;
 		System.out.println("CRASH SERVER" + udpMessage);
 
-		response = sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage,"localhost");
+		response = sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage, "localhost");
 
 		return response;
 
 	}
 
-	
 	public String byzantineNotify() {
 		// TODO Auto-generated method stub
 		String response = "";
 		String udpMessage = ApplicationConstant.OP_BYZANTINE;
 		System.out.println("BYZANTINE NOTIFY" + udpMessage);
-		response = sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage,addressMap.get(rmStatus));
+		if (addressMap.get(rmStatus) != null)
+			response = sendUDPRequestForCrashFailure(ApplicationConstant.UDP_REPLICA_MANAGER_PORT, udpMessage,
+					addressMap.get(rmStatus).substring(1, addressMap.get(rmStatus).length()));
 
 		return response;
+
+	}
+
+	public static boolean validateItem(String itemId, String userId) {
+		boolean isValid = false;
+		if (itemId.trim().substring(0, 3).equalsIgnoreCase(userId.trim().substring(0, 3)))
+			isValid = true;
+		else
+			isValid = false;
+		return isValid;
 
 	}
 }

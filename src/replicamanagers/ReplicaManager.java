@@ -34,8 +34,6 @@ public class ReplicaManager {
 	static ServerMontreal monServer;
 	static ServerMcgill mcgServer;
 	private static boolean isCrashed = false;
-	//byzantine
-	private static int byzantineCount=0;
 
 	public static void main(String[] args) {
 		Runnable task = () -> {
@@ -46,8 +44,6 @@ public class ReplicaManager {
 		startingServer();
 
 	}
-
-
 
 	public static void startingServer() {
 		conServer = new ServerConcordia();
@@ -110,60 +106,50 @@ public class ReplicaManager {
 		String[] requestParams = requestData.split(",");
 		String methodName = requestParams[0];
 		System.out.println("methodName" + methodName);
-		if (methodName.trim().equalsIgnoreCase(ApplicationConstant.OP_CRASH_SERVER)) {
+		if (!methodName.trim().equalsIgnoreCase(ApplicationConstant.OP_BYZANTINE)) {
+			if (methodName.trim().equalsIgnoreCase(ApplicationConstant.OP_CRASH_SERVER)) {
 
-			boolean isCrashed = handlingCrashFailure(requestParams[1]);
-			if (isCrashed)
-				outputMessage = "System Crashed";
-			else
-				outputMessage = "System Recovered from crashed";
-		} else {
-			int sequenceNumber = Integer.parseInt(requestParams[0].trim());
-			System.out.println("sequenceNumber" + sequenceNumber);
-			System.out.println("historyBuffer" + historyBuffer);
-			System.out.println("pwaitListQueue" + pwaitListQueue);
-			if (!historyBuffer.containsKey(sequenceNumber)) {
-				pwaitListQueue.add(sequenceNumber);
-				historyBuffer.put(sequenceNumber, requestData);
-				if (!isCrashed) {
-					String action = requestParams[1].trim();
-					String managerId = requestParams[2].trim();
-					int value = seqCount + 1;
-					if (pwaitListQueue.peek() == value) {
-						while (!pwaitListQueue.isEmpty()) {
-							int seqNo = pwaitListQueue.peek();
-							String request = historyBuffer.get(seqNo);
-							String[] requestParams1 = request.split(",");
-							String managerId1 = requestParams1[2].trim();
-							outputMessage = sendUDPRequestToServer(getServerPort(managerId1), request);
+				boolean isCrashed = handlingCrashFailure(requestParams[1]);
+				if (isCrashed)
+					outputMessage = "System Crashed";
+				else
+					outputMessage = "System Recovered from crashed";
+			} else {
+				int sequenceNumber = Integer.parseInt(requestParams[0].trim());
+				System.out.println("sequenceNumber" + sequenceNumber);
+				System.out.println("historyBuffer" + historyBuffer);
+				System.out.println("pwaitListQueue" + pwaitListQueue);
+				if (!historyBuffer.containsKey(sequenceNumber)) {
+					pwaitListQueue.add(sequenceNumber);
+					historyBuffer.put(sequenceNumber, requestData);
+					if (!isCrashed) {
+						String action = requestParams[1].trim();
+						String managerId = requestParams[2].trim();
+						int value = seqCount + 1;
+						if (pwaitListQueue.peek() == value) {
+							while (!pwaitListQueue.isEmpty()) {
+								int seqNo = pwaitListQueue.peek();
+								String request = historyBuffer.get(seqNo);
+								String[] requestParams1 = request.split(",");
+								String managerId1 = requestParams1[2].trim();
+								outputMessage = sendUDPRequestToServer(getServerPort(managerId1), request);
 
-							seqCount = seqCount + 1;
-							pwaitListQueue.poll();
+								seqCount = seqCount + 1;
+								pwaitListQueue.poll();
+							}
+						} else {
+							System.out.println("Waiting for required request");
 						}
-					} else {
-						System.out.println("Waiting for required request");
 					}
+
 				}
 
 			}
 
 		}
-		//byzantine
-		if (methodName.trim().equalsIgnoreCase(ApplicationConstant.OP_BYZANTINE)) {
-			byzantineCount++;
-			if(byzantineCount==3)
-			{
-				handlingByzantineFailure();
-			}
-		}
 
 		return outputMessage;
 
-	}
-	
-	public static boolean handlingByzantineFailure() {
-		
-		return true;
 	}
 
 	public static boolean handlingCrashFailure(String opt) {
