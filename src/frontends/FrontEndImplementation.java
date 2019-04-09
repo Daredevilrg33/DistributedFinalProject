@@ -225,7 +225,7 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 
 			byte[] buffer = new byte[1000];
 			int resultCount = 0;
-			while (resultCount < 4) {
+			while (resultCount < 3) {
 				DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
 				aSocket.receive(reply);
 				messageReceived = "";
@@ -258,16 +258,17 @@ public class FrontEndImplementation extends FrontEndOperationsPOA {
 			if (aSocket != null)
 				aSocket.close();
 		}
-		String response1, response2, response3, response4 = "";
-
-		response1 = responseMap.get("RM1") == null ? "" : responseMap.get("RM1");
-		response2 = responseMap.get("RM2") == null ? "" : responseMap.get("RM2");
-		response3 = responseMap.get("RM3") == null ? "" : responseMap.get("RM3");
-		response4 = responseMap.get("RM4") == null ? "" : responseMap.get("RM4");
-		messageReceived = resultComparison(response1, response2, response3, response4);
-		if (!rmStatus.isEmpty()) {
-			byzantineNotify();
-		}
+		// String response1, response2, response3, response4 = "";
+		//
+		// response1 = responseMap.get("RM1") == null ? "" : responseMap.get("RM1");
+		// response2 = responseMap.get("RM2") == null ? "" : responseMap.get("RM2");
+		// response3 = responseMap.get("RM3") == null ? "" : responseMap.get("RM3");
+		// response4 = responseMap.get("RM4") == null ? "" : responseMap.get("RM4");
+		// messageReceived = resultComparison(response1, response2, response3,
+		// response4);
+		// if (!rmStatus.isEmpty()) {
+		// byzantineNotify();
+		// }
 
 		return messageReceived;
 	}

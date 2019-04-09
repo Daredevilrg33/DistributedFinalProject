@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package replicamanagers;
 
 import java.io.File;
@@ -313,53 +311,84 @@ public class ReplicaManagerImplementation implements RMInterface {
 		String replyMessage = "";
 
 		int noOfDays = 4;
-		UserModel userModel = userHashMap.get(userId);
-		String newItemValue = newItemId.substring(0, 3);
-		if (userModel.getItemList().contains(oldItemId)) {
-			ItemModel itemModel = itemHashMap.get(newItemId);
-			if (itemModel != null) {
-				if (itemModel.getQuantity() > 0) {
-					int quantity = itemModel.getQuantity();
-					quantity--;
-					itemModel.setQuantity(quantity);
-					userModel.addItem(itemModel.getItemId());
-					itemHashMap.put(itemModel.getItemId(), itemModel);
-					userHashMap.put(userModel.getUserId(), userModel);
 
-					String itemReturned = returnItem(userId, oldItemId);
-					if (itemReturned.equalsIgnoreCase("Item has been returned successfully"))
-						replyMessage = ApplicationConstant.MSG_ITEM_EXCHANGE_SUCCESSFULLY;
-					else
-						replyMessage = ApplicationConstant.MSG_ITEM_EXCHANGE_UNSUCCESSFUL;
-				}
-			} else {
-				if (newItemValue.equalsIgnoreCase(ApplicationConstant.CONCORDIA_SERVER)) {
-					replyMessage = sendUDPRequest(ApplicationConstant.UDP_CON_SERVER,
-							"Borrow" + "," + userId + "," + newItemId + "," + noOfDays + "," + false);
-				} else if (newItemValue.equalsIgnoreCase(ApplicationConstant.MCGILL_SERVER)) {
-					replyMessage = sendUDPRequest(ApplicationConstant.UDP_MCG_SERVER,
-							"Borrow" + "," + userId + "," + newItemId + "," + noOfDays + "," + false);
+		boolean isAllowed = checkifExchangeIsAllowed(userId, newItemId, oldItemId);
+		if (isAllowed) {
+			UserModel userModel = userHashMap.get(userId);
+			String newItemValue = newItemId.substring(0, 3);
+			if (userModel.getItemList().contains(oldItemId)) {
+				ItemModel itemModel = itemHashMap.get(newItemId);
+				if (itemModel != null) {
+					if (itemModel.getQuantity() > 0) {
+						int quantity = itemModel.getQuantity();
+						quantity--;
+						itemModel.setQuantity(quantity);
+						userModel.addItem(itemModel.getItemId());
+						itemHashMap.put(itemModel.getItemId(), itemModel);
+						userHashMap.put(userModel.getUserId(), userModel);
+
+						String itemReturned = returnItem(userId, oldItemId);
+						if (itemReturned.equalsIgnoreCase("Item has been returned successfully"))
+							replyMessage = ApplicationConstant.MSG_ITEM_EXCHANGE_SUCCESSFULLY;
+						else
+							replyMessage = ApplicationConstant.MSG_ITEM_EXCHANGE_UNSUCCESSFUL;
+					}
 				} else {
-					replyMessage = sendUDPRequest(ApplicationConstant.UDP_MON_SERVER,
-							"Borrow" + "," + userId + "," + newItemId + "," + noOfDays + "," + false);
-				}
-				if (replyMessage.trim().equalsIgnoreCase("User has borrowed successfully !!")) {
-					UserModel user = userHashMap.get(userId);
-					user.addItem(newItemId);
-					userHashMap.put(user.getUserId(), user);
-					String itemReturned = returnItem(userId, oldItemId);
-					if (itemReturned.equalsIgnoreCase("Item has been returned successfully"))
-						replyMessage = ApplicationConstant.MSG_ITEM_EXCHANGE_SUCCESSFULLY;
-					else
+					if (newItemValue.equalsIgnoreCase(ApplicationConstant.CONCORDIA_SERVER)) {
+						replyMessage = sendUDPRequest(ApplicationConstant.UDP_CON_SERVER,
+								"Borrow" + "," + userId + "," + newItemId + "," + noOfDays + "," + false);
+					} else if (newItemValue.equalsIgnoreCase(ApplicationConstant.MCGILL_SERVER)) {
+						replyMessage = sendUDPRequest(ApplicationConstant.UDP_MCG_SERVER,
+								"Borrow" + "," + userId + "," + newItemId + "," + noOfDays + "," + false);
+					} else {
+						replyMessage = sendUDPRequest(ApplicationConstant.UDP_MON_SERVER,
+								"Borrow" + "," + userId + "," + newItemId + "," + noOfDays + "," + false);
+					}
+					if (replyMessage.trim().equalsIgnoreCase("User has borrowed successfully !!")) {
+						UserModel user = userHashMap.get(userId);
+						user.addItem(newItemId);
+						userHashMap.put(user.getUserId(), user);
+						String itemReturned = returnItem(userId, oldItemId);
+						if (itemReturned.equalsIgnoreCase("Item has been returned successfully"))
+							replyMessage = ApplicationConstant.MSG_ITEM_EXCHANGE_SUCCESSFULLY;
+						else
+							replyMessage = ApplicationConstant.MSG_ITEM_EXCHANGE_UNSUCCESSFUL;
+					} else {
+						System.out.println(replyMessage);
 						replyMessage = ApplicationConstant.MSG_ITEM_EXCHANGE_UNSUCCESSFUL;
-				} else {
-					System.out.println(replyMessage);
-					replyMessage = ApplicationConstant.MSG_ITEM_EXCHANGE_UNSUCCESSFUL;
+					}
 				}
-			}
-		} else
-			replyMessage = ApplicationConstant.MSG_ITEM_EXCHANGE_UNSUCCESSFUL;
+			} else
+				replyMessage = ApplicationConstant.MSG_ITEM_EXCHANGE_UNSUCCESSFUL;
+
+		} else {
+			replyMessage = ApplicationConstant.MSG_BORROW_USER_NOT_ALLOWED_TO_BORROW;
+		}
+
 		return replyMessage;
+	}
+
+	private boolean checkifExchangeIsAllowed(String userId, String newItemId, String oldItemId) {
+		// TODO Auto-generated method stub
+		boolean isAllowed = false;
+		ItemModel itemModel = itemHashMap.get(newItemId.trim());
+		UserModel userModel = userHashMap.get(userId);
+		String newItem = newItemId.substring(0, 3);
+		int count = 0;
+		if (itemModel != null)
+			return true;
+		else {
+			for (String item : userModel.getItemList()) {
+				if (item.substring(0, 3).equalsIgnoreCase(newItem)) {
+					count++;
+				}
+
+			}
+			if (count == 2 && oldItemId.substring(0, 3).equalsIgnoreCase(newItem)) {
+				return true;
+			} else
+				return false;
+		}
 	}
 
 	/**

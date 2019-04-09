@@ -35,6 +35,8 @@ public class ReplicaManager {
 	static ServerMcgill mcgServer;
 	private static boolean isCrashed = false;
 
+	private static int crashedSequenceNo = 0;
+
 	public static void main(String[] args) {
 		Runnable task = () -> {
 			recieveMessage();
@@ -110,9 +112,12 @@ public class ReplicaManager {
 			if (methodName.trim().equalsIgnoreCase(ApplicationConstant.OP_CRASH_SERVER)) {
 
 				boolean isCrashed = handlingCrashFailure(requestParams[1]);
-				if (isCrashed)
+				if (isCrashed) {
+
+					crashedSequenceNo = seqCount + 1;
 					outputMessage = "System Crashed";
-				else
+
+				} else
 					outputMessage = "System Recovered from crashed";
 			} else {
 				int sequenceNumber = Integer.parseInt(requestParams[0].trim());
@@ -164,7 +169,7 @@ public class ReplicaManager {
 			System.out.println("Crash Recovery Code Running");
 			System.out.println("Before Accessing history Buffer" + historyBuffer.size());
 			if (historyBuffer.size() > 0) {
-				for (int i = 1; i < seqCount; i++) {
+				for (int i = crashedSequenceNo; i < seqCount; i++) {
 					System.out.println("Accessing history Buffer");
 					String request = historyBuffer.get(i);
 					System.out.println("Accessing history Buffer request " + request);
